@@ -3,18 +3,18 @@
 <hibernate-configuration>
   <session-factory>
     <property name="dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>
-    <property name="connection.url">jdbc:derby:Sudoku;create=true</property>
+    <property name="connection.url">jdbc:derby:SudokuDB;create=true</property>
     <!--<property name="connection.url">jdbc:derby://localhost:1527/eleaveDB;create=true</property>-->
     <property name="connection.username">sudoku</property>
     <property name="connection.password">sudoku</property>
     <property name="connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
     <!--<property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>-->
     <property name="show_sql">true</property>
-    <mapping class="sudokudb.Users"/>
-    <mapping class="sudokudb.Block"/>
-    <mapping class="sudokudb.Game"/>
-    <mapping class="sudokudb.Hard"/>
-    <mapping class="sudokudb.Easy"/>
-    <mapping class="sudokudb.Medium"/>
+    <mapping class="sudoku.Users"/>
+    <mapping class="sudoku.Block"/>
+    <mapping class="sudoku.Game"/>
+    <mapping class="sudoku.Hard"/>
+    <mapping class="sudoku.Easy"/>
+    <mapping class="sudoku.Medium"/>
   </session-factory>
 </hibernate-configuration>

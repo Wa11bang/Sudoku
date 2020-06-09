@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import sudoku.handlers.GameHandler;
+import sudoku.handlers.GameHandlerExec;
 import sudoku.handlers.UserHandler;
 import sudoku.handlers.UserHandlerExec;
 
@@ -27,13 +29,14 @@ public class Sudoku {
         
         MVCTest();
         
-        UserHandler uh = new UserHandlerExec();
-        //Users usr = new Users("Waldie", "password123");
+        //UserHandler uh = new UserHandlerExec();
+        //GameHandler gh = new GameHandlerExec();
+        //Users usr = new Users("Waldo", "password123");
         
         //uh.addUser(usr);
 
         
-        //Users user = uh.login("Waldie", "password123");
+        //Users user = uh.login("Waldo", "password123");
         
         List<Block> blocks = new ArrayList();
         
@@ -56,6 +59,8 @@ public class Sudoku {
         //Game game = GameFactory.create(Difficulty.Medium);
         //game.setBlocks(blocks);
         //game.setUser(user);
+        
+        //gh.addGame(game);
         
         //Game game = new Hard(user, blocks);
         
