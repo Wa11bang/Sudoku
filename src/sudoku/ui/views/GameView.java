@@ -13,17 +13,13 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import sudoku.Block;
+import sudoku.ControlButton;
 import sudoku.Game;
 import sudoku.GameBlockText;
 import sudoku.RoundedPanel;
@@ -36,10 +32,9 @@ import sudoku.ui.controllers.GameController;
 public class GameView extends JPanel implements Observer {
     private List<JTextField> grid;
     private JPanel gamePanel = new JPanel();
-    private JButton check = new JButton();
+    private ControlButton check = new ControlButton();
     private JButton save = new JButton();
     private JButton back = new JButton();  
-    private SwingWorker<Void, String> worker;
     private Color statusCol;
     
     public GameView()
@@ -51,21 +46,16 @@ public class GameView extends JPanel implements Observer {
         gamePanel.setLayout(experimentLayout);
         gamePanel.setBorder(new EmptyBorder(30,30,15,30));
         
-        /*
-        this.setLayout(experimentLayout);
-        this.setBorder(new EmptyBorder(15,15,15,15));
-        */      
-        
         JPanel controls = new JPanel();
         controls.setBorder(new EmptyBorder(15,30,15,30));
         
-        check = new JButton("Check Solution");
+        check = new ControlButton("Check Solution");
         check.setActionCommand("check");
         
-        save = new JButton("Save Progress");
+        save = new ControlButton("Save Progress");
         save.setActionCommand("save");
         
-        back = new JButton("Back");
+        back = new ControlButton("Back");
         back.setActionCommand("back");
 
         controls.add(back);
@@ -145,14 +135,14 @@ public class GameView extends JPanel implements Observer {
     
     public void gameStatus()
     {        
-        worker = new SwingWorker<Void, String>(){
-
+        new SwingWorker<Void, String>(){
             @Override
             protected Void doInBackground() throws Exception {
                 
                 for(int i = 0; i < 81; ++i)
                 {
-                    grid.get(i).setBackground(statusCol);
+                    grid.get(i).setEditable(false);
+                    grid.get(i).setBackground(statusCol);                    
                     Thread.sleep(10);
                 }
                 
@@ -160,42 +150,10 @@ public class GameView extends JPanel implements Observer {
                 {
                     grid.get(i).setBackground(Color.decode("#F6F0ED"));
                     Thread.sleep(10);
-                }
-                this.cancel(true);
-                
+                }                
                 return null;
             }
-
-            @Override
-            protected void process(List<String> res){
-                for(String text : res){
-                }
-            }
-
-        };
-        worker.execute();
-        /*new Runnable(){
-            @Override
-            public void run() {                
-                System.out.println("LOL");
-                 
-                try {
-                    for(int i = 0; i < 81; ++i)
-                {
-                    grid.get(i).setBackground(statusCol);
-                }
-                    Thread.sleep(1000);
-                    for(int i = 0; i < 81; ++i)
-                {
-                    grid.get(i).setBackground(Color.decode("#F6F0ED"));
-                } 
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(GameView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }            
-        }.run();*/
-        //l.run();
+        }.execute();
     }
     
     @Override

@@ -103,7 +103,7 @@ public class View extends JFrame implements Observer {
         //Display Window
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
-        setUndecorated(true);
+        //setUndecorated(true);
         setVisible(true);
         setBackground(new Color(232, 240, 255, 220));       
         
