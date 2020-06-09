@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.controllers;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
-import sudoku.View;
+import sudoku.Model;
 import sudoku.ui.models.StartModel;
 import sudoku.ui.views.StartView;
 
@@ -18,6 +13,7 @@ import sudoku.ui.views.StartView;
  * @author Waldo
  */
 public class StartController implements ActionListener {
+    private Model appModel;
     private StartModel model;
     private StartView view;
     private JPanel mainView;
@@ -32,6 +28,11 @@ public class StartController implements ActionListener {
         System.out.println("StartController: Adding StartModel");
         this.model = m;
     }
+    
+    public void addAppModel(Model m) {
+        System.out.println("StartController: Adding StartModel");
+        this.appModel = m;
+    }
 
     public void addView(StartView v) {
         System.out.println("StartController: Adding StartView");
@@ -41,7 +42,6 @@ public class StartController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("StartController(): Acting on StartModel()");
-        
         CardLayout cl = (CardLayout)(mainView.getLayout());        
         System.out.println(e.getActionCommand());
 
@@ -51,6 +51,8 @@ public class StartController implements ActionListener {
         else
         {
             cl.show(mainView, (String)e.getActionCommand());
-        }                      
+        }     
+        
+        //this.appModel.changePane(e.getActionCommand());                 
     }
 }

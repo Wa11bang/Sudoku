@@ -13,25 +13,14 @@ import sudoku.handlers.UserHandlerExec;
  *
  * @author Waldo
  */
-public class Model extends Observable {
-    UserHandler uh = new UserHandlerExec();
-    Users user;
-    Game game;
-    
+public class Model extends Observable {    
     public Model() {
         System.out.println("AppModel()");
-    }
+    }    
     
-    public void createNewGame(Difficulty d)
+    public void changePane(String panel)
     {
         this.setChanged();
-        this.notifyObservers(GameFactory.create(d));
-    }
-    
-    public void login(String username, String password)
-    {
-        this.user = uh.login(username, password);
-        this.setChanged();
-        this.notifyObservers(this.user);
+        this.notifyObservers(panel);
     }
 }

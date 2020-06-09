@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import sudoku.Block;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.views.GameView;
 
@@ -39,15 +38,34 @@ public class GameController implements ActionListener {
         System.out.println("Clicked");
         System.out.println("GameController(): Acting on GameModel()");
         if (e.getActionCommand().equals("check")) {
-            model.checkGame(val);
-        } else
+            model.checkGame();
+        } else if(e.getActionCommand().equals("save"))
         {
+            model.setBlocks(replaceBlockValue(model.getBlocks(), view.getBlocks()));
+            model.saveGame();
+        } else {
             if(val){
                 val = false;
             } else {
                 val = true;
             }
         }
+    }
+    
+    public List<Block> replaceBlockValue(List<Block> source, List<Block> newSet)
+    {
+        ListIterator li = newSet.listIterator();
+        List<Block> blocks = new ArrayList();
+        
+        int count = 0;
+        
+        while(li.hasNext())
+        {
+            source.get(count).setValue(((Block)li.next()).getValue());
+            count++;
+        }
+        
+        return source;
     }
     
 }

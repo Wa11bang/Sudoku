@@ -89,10 +89,14 @@ public class GameView extends JPanel implements Observer {
             ((GameBlockText) li.next()).setText(blocks.get((li.nextIndex() - 1)).getValue() + "");
         }
         
-        this.getSections((Game)game);
+        this.getSections();
     }
     
-    public void getSections(Game game)
+    /**
+     * Group a 3x3 section and draw a really nice background
+     * @param game 
+     */
+    public void getSections()
     {
         int secColStart = 0;
         int secColEnd = 3;
@@ -118,13 +122,10 @@ public class GameView extends JPanel implements Observer {
             {
                 for(int j = secRowStart; j < secRowEnd; ++j)
                 {
-                    System.out.print(" ["+game.getBlocks().get((i * 9)+j).getValue()+"] ");
                     p.add(grid.get((i * 9)+j));
                 }
-                System.out.println("\n");
             }
             gamePanel.add(p);
-            System.out.println("SECTION SEPERATION");
             secRowStart += 3;
             secRowEnd += 3;
         }
@@ -133,7 +134,7 @@ public class GameView extends JPanel implements Observer {
         }
     }
     
-    public void gameStatus()
+    public void gameStatus(boolean status)
     {        
         new SwingWorker<Void, String>(){
             @Override
@@ -141,19 +142,42 @@ public class GameView extends JPanel implements Observer {
                 
                 for(int i = 0; i < 81; ++i)
                 {
-                    grid.get(i).setEditable(false);
+                    if(status)
+                    {
+                        grid.get(i).setEditable(false);
+                    }
                     grid.get(i).setBackground(statusCol);                    
-                    Thread.sleep(10);
+                    Thread.sleep(2);
                 }
                 
                 for(int i = 0; i < 81; ++i)
                 {
                     grid.get(i).setBackground(Color.decode("#F6F0ED"));
-                    Thread.sleep(10);
+                    Thread.sleep(2);
                 }                
                 return null;
             }
         }.execute();
+    }
+    
+    public List<Block> getBlocks()
+    {
+        ListIterator li = grid.listIterator();
+        List<Block> blocks = new ArrayList();
+        
+        while(li.hasNext())
+        {
+            try
+            {
+            blocks.add(new Block(Integer.parseInt(((GameBlockText) li.next()).getText())));
+            } catch (NumberFormatException ex)
+            {
+                statusCol = Color.red;
+                this.gameStatus(false);
+            }
+        }
+        
+        return blocks;
     }
     
     @Override
@@ -173,7 +197,7 @@ public class GameView extends JPanel implements Observer {
             statusCol = Color.red;
         }
         System.out.println("GOT THAT UPDATE BOISSSS");
-        this.gameStatus();
+        this.gameStatus((boolean)arg);
         }
     }  
     

@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import sudoku.handlers.GameHandler;
@@ -22,9 +13,11 @@ import sudoku.handlers.UserHandler;
 import sudoku.handlers.UserHandlerExec;
 import sudoku.ui.controllers.GameController;
 import sudoku.ui.controllers.StartController;
+import sudoku.ui.controllers.UserController;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.models.StartModel;
 import sudoku.ui.views.GameView;
+import sudoku.ui.views.LoginView;
 import sudoku.ui.views.StartView;
 
 /**
@@ -35,12 +28,14 @@ public class View extends JFrame implements Observer {
     private JPanel cards = new JPanel(new CardLayout());
     private StartView startView = new StartView();
     private GameView gameView = new GameView();
+    private LoginView loginView = new LoginView();
 
     
     public View()
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 600);
+        this.setTitle("Sudoku");
         
         //NOT PRODUCTION       
         
@@ -48,22 +43,10 @@ public class View extends JFrame implements Observer {
         GameHandler gh = new GameHandlerExec();
         
         Users u = uh.login("Waldo", "password123");
-        Game g = gh.getGameByID(1);      
+        Game g = gh.getGameByID(1);              
         
-        GameModel gm = new GameModel();
-        gameView.initComponents();        
-        
-        gm.addObserver(gameView);
-        
-        GameController gc = new GameController();                  
-        gc.addModel(gm);
-        gc.addView(gameView);
-        
-        gameView.addController(gc);   
-        
-        gm.setGame(g);
-        gm.initGame();
-        
+        gameView.initComponents();            
+         
         //NOT PRODUCTION      
         
         
@@ -72,29 +55,34 @@ public class View extends JFrame implements Observer {
         
         //MODELS
         StartModel sm = new StartModel();
+        GameModel gm = new GameModel();
         
         //CONTROLLERS
         StartController sc = new StartController(cards);
+        GameController gc = new GameController();
+        UserController uc = new UserController();
         
         sc.addModel(sm);
+        //sc.addAppModel(m);
         sc.addView(startView);        
         startView.addController(sc);  
+        
+        gc.addModel(gm);
+        gc.addView(gameView);
+        gm.addObserver(gameView);
+        gameView.addController(gc);   
         //VIEW INIT
         
-        
+        gm.setGame(g);
+        gm.initGame();
 
         
         cards.add(startView, "start");
-        cards.add(gameView, "login");
-        //cards.add(startView, "login"); //Gets user to login
+        cards.add(loginView, "login");
+        cards.add(gameView, "view_scoreboard");       
         
         cards.setBackground(new Color(232, 240, 255));
         cards.setOpaque(false);
-
-        
-        
-        //Where the GUI is assembled:
-        //Put the JComboBox in a JPanel to get a nicer look.
 
         add(cards, BorderLayout.CENTER);
         getContentPane().validate();
@@ -107,6 +95,7 @@ public class View extends JFrame implements Observer {
         setVisible(true);
         setBackground(new Color(232, 240, 255, 220));       
         
+        //Handle Shutdown of Application
         Runtime.getRuntime().addShutdownHook(new Thread()
         {
             @Override
@@ -114,8 +103,7 @@ public class View extends JFrame implements Observer {
             {
                 HibernateUtils.shutdown();
             }
-
-            });
+        });
     }
 
     @Override
