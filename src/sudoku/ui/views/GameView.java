@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -24,6 +26,7 @@ import javax.swing.border.EmptyBorder;
 import sudoku.Block;
 import sudoku.Game;
 import sudoku.GameBlockText;
+import sudoku.RoundedPanel;
 import sudoku.ui.controllers.GameController;
 
 /**
@@ -41,7 +44,7 @@ public class GameView extends JPanel implements Observer {
     
     public GameView()
     {
-        GridLayout experimentLayout = new GridLayout(9,9);
+        GridLayout experimentLayout = new GridLayout(3,3);
         experimentLayout.setHgap(15);
         experimentLayout.setVgap(15);
         
@@ -73,31 +76,7 @@ public class GameView extends JPanel implements Observer {
         this.setLayout(new BorderLayout());
         
         add(gamePanel, BorderLayout.CENTER);
-        add(controls, BorderLayout.PAGE_END);
-        
-        
-        worker = new SwingWorker<Void, String>(){
-
-            @Override
-            protected Void doInBackground() throws Exception {
-                for(int i = 0; i < 81; ++i)
-                {
-                    grid.get(i).setBackground(statusCol);
-                    Thread.sleep(5);
-                }   
-                
-                this.cancel(true);
-                
-                return null;
-            }
-
-            @Override
-            protected void process(List<String> res){
-                for(String text : res){
-                }
-            }
-
-        };
+        add(controls, BorderLayout.PAGE_END);               
     }
     
     public void initComponents()
@@ -106,7 +85,7 @@ public class GameView extends JPanel implements Observer {
         for(int i = 0; i < 81; ++i)
         {
             grid.add(new GameBlockText());
-            gamePanel.add(grid.get(i));
+            //gamePanel.add(grid.get(i));
         }      
     }
     
@@ -119,12 +98,115 @@ public class GameView extends JPanel implements Observer {
         {
             ((GameBlockText) li.next()).setText(blocks.get((li.nextIndex() - 1)).getValue() + "");
         }
+        
+        this.getSections((Game)game);
+    }
+    
+    public void getSections(Game game)
+    {
+        int secColStart = 0;
+        int secColEnd = 3;
+        int secRowStart = 0;
+        int secRowEnd = 3;
+        
+        for(int a = 0; a < 3; ++a)
+        {
+            secRowStart = 0;
+            secRowEnd = 3;
+        for(int k = 0; k < 3; ++k)
+        {
+            GridLayout experimentLayout = new GridLayout(3,3);
+            JPanel p = new RoundedPanel();
+            experimentLayout.setHgap(5);
+            experimentLayout.setVgap(5);
+            p.setOpaque(false);
+            p.setLayout(experimentLayout);
+            p.setBackground(Color.decode("#e0d5b1"));
+            p.setBorder(new EmptyBorder(10,10,10,10));
+            
+            for(int i = secColStart; i < secColEnd; ++i)
+            {
+                for(int j = secRowStart; j < secRowEnd; ++j)
+                {
+                    System.out.print(" ["+game.getBlocks().get((i * 9)+j).getValue()+"] ");
+                    p.add(grid.get((i * 9)+j));
+                }
+                System.out.println("\n");
+            }
+            gamePanel.add(p);
+            System.out.println("SECTION SEPERATION");
+            secRowStart += 3;
+            secRowEnd += 3;
+        }
+            secColStart += 3;
+            secColEnd += 3;
+        }
+    }
+    
+    public void gameStatus()
+    {        
+        worker = new SwingWorker<Void, String>(){
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                
+                for(int i = 0; i < 81; ++i)
+                {
+                    grid.get(i).setBackground(statusCol);
+                    Thread.sleep(10);
+                }
+                
+                for(int i = 0; i < 81; ++i)
+                {
+                    grid.get(i).setBackground(Color.decode("#F6F0ED"));
+                    Thread.sleep(10);
+                }
+                this.cancel(true);
+                
+                return null;
+            }
+
+            @Override
+            protected void process(List<String> res){
+                for(String text : res){
+                }
+            }
+
+        };
+        worker.execute();
+        /*new Runnable(){
+            @Override
+            public void run() {                
+                System.out.println("LOL");
+                 
+                try {
+                    for(int i = 0; i < 81; ++i)
+                {
+                    grid.get(i).setBackground(statusCol);
+                }
+                    Thread.sleep(1000);
+                    for(int i = 0; i < 81; ++i)
+                {
+                    grid.get(i).setBackground(Color.decode("#F6F0ED"));
+                } 
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GameView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }            
+        }.run();*/
+        //l.run();
     }
     
     @Override
     public void update(Observable o, Object arg) {
-        loadGame(arg);
-        /*if((boolean) arg)
+        
+        if(arg instanceof Game)
+        {
+            loadGame(arg);
+        }
+        else {
+        if((boolean) arg)
         {
             statusCol = Color.green;
         }
@@ -133,7 +215,8 @@ public class GameView extends JPanel implements Observer {
             statusCol = Color.red;
         }
         System.out.println("GOT THAT UPDATE BOISSSS");
-        worker.execute();*/
+        this.gameStatus();
+        }
     }  
     
     public void addController(GameController controller) {

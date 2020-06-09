@@ -17,6 +17,7 @@ import sudoku.ui.views.GameView;
 public class GameController implements ActionListener {
     private GameModel model;
     private GameView view;
+    private boolean val;
     
     public GameController()
     {
@@ -38,7 +39,14 @@ public class GameController implements ActionListener {
         System.out.println("Clicked");
         System.out.println("GameController(): Acting on GameModel()");
         if (e.getActionCommand().equals("check")) {
-            model.checkGame();
+            model.checkGame(val);
+        } else
+        {
+            if(val){
+                val = false;
+            } else {
+                val = true;
+            }
         }
     }
     

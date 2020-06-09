@@ -48,9 +48,9 @@ public class GameModel extends Observable {
         this.game = game;        
     }
     
-    public void checkGame()
+    public void checkGame(boolean lol)
     {
         this.setChanged();
-        this.notifyObservers(true);
+        this.notifyObservers(lol);
     }
 }
