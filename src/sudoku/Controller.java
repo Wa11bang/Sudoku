@@ -18,35 +18,23 @@ public class Controller implements ActionListener {
     View view;
 
     Controller() {
-        System.out.println("Controller()");
+        System.out.println("AppController()");
     }
 
     //invoked when a button is pressed
     @Override
     public void actionPerformed(ActionEvent e) {
-        CardLayout cl = (CardLayout)(view.getCardLayout().getLayout());
-        
-        System.out.println(e.getActionCommand());
-
-        if (e.getActionCommand().equals("exit")) {
-            System.exit(0);
-        }
-        else
-        {
-            cl.show(view.getCardLayout(), (String)e.getActionCommand());
-        }
-        
-        System.out.println("Controller: acting on Model");
+        System.out.println("AppController(): Acting on AppModel()");
         //model.login("Waldo", "password123");
     }
 
     public void addModel(Model m) {
-        System.out.println("Controller: adding model");
+        System.out.println("AppController: Adding AppModel");
         this.model = m;
     }
 
     public void addView(View v) {
-        System.out.println("Controller: adding view");
+        System.out.println("AppController: Adding AppView");
         this.view = v;
     }
 }

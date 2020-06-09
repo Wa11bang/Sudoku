@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import sudoku.Controller;
 import sudoku.MenuButton;
+import sudoku.ui.controllers.StartController;
 
 /**
  *
@@ -82,7 +83,7 @@ public class StartView extends JPanel {
         add(startButtons);
     }
     
-    public void addController(Controller controller)
+    public void addController(StartController controller)
     {
         this.login.addActionListener(controller);
         this.cnu.addActionListener(controller);

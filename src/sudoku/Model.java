@@ -19,7 +19,7 @@ public class Model extends Observable {
     Game game;
     
     public Model() {
-        System.out.println("Model()");
+        System.out.println("AppModel()");
     }
     
     public void createNewGame(Difficulty d)

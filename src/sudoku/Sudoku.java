@@ -120,7 +120,7 @@ public class Sudoku {
         //pass the reference of model and view to the controllor
         myController.addModel(myModel);
         myController.addView(myView);
-        myView.addController(myController);
+        //myView.addController(myController);
     }
     
     public static void exportDatabase() {

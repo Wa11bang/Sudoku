@@ -19,10 +19,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import sudoku.Block;
 import sudoku.Game;
 import sudoku.GameBlockText;
+import sudoku.ui.controllers.GameController;
 
 /**
  *
@@ -31,6 +33,11 @@ import sudoku.GameBlockText;
 public class GameView extends JPanel implements Observer {
     private List<JTextField> grid;
     private JPanel gamePanel = new JPanel();
+    private JButton check = new JButton();
+    private JButton save = new JButton();
+    private JButton back = new JButton();  
+    private SwingWorker<Void, String> worker;
+    private Color statusCol;
     
     public GameView()
     {
@@ -49,9 +56,14 @@ public class GameView extends JPanel implements Observer {
         JPanel controls = new JPanel();
         controls.setBorder(new EmptyBorder(15,30,15,30));
         
-        JButton check = new JButton("Check Solution");
-        JButton save = new JButton("Save Progress");
-        JButton back = new JButton("Back");
+        check = new JButton("Check Solution");
+        check.setActionCommand("check");
+        
+        save = new JButton("Save Progress");
+        save.setActionCommand("save");
+        
+        back = new JButton("Back");
+        back.setActionCommand("back");
 
         controls.add(back);
         controls.add(check);
@@ -62,7 +74,30 @@ public class GameView extends JPanel implements Observer {
         
         add(gamePanel, BorderLayout.CENTER);
         add(controls, BorderLayout.PAGE_END);
+        
+        
+        worker = new SwingWorker<Void, String>(){
 
+            @Override
+            protected Void doInBackground() throws Exception {
+                for(int i = 0; i < 81; ++i)
+                {
+                    grid.get(i).setBackground(statusCol);
+                    Thread.sleep(5);
+                }   
+                
+                this.cancel(true);
+                
+                return null;
+            }
+
+            @Override
+            protected void process(List<String> res){
+                for(String text : res){
+                }
+            }
+
+        };
     }
     
     public void initComponents()
@@ -72,9 +107,7 @@ public class GameView extends JPanel implements Observer {
         {
             grid.add(new GameBlockText());
             gamePanel.add(grid.get(i));
-        }
-        
-        
+        }      
     }
     
     public void loadGame(Object game)
@@ -91,5 +124,22 @@ public class GameView extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         loadGame(arg);
+        /*if((boolean) arg)
+        {
+            statusCol = Color.green;
+        }
+        else
+        {
+            statusCol = Color.red;
+        }
+        System.out.println("GOT THAT UPDATE BOISSSS");
+        worker.execute();*/
     }  
+    
+    public void addController(GameController controller) {
+        System.out.println("GameView: Adding GameController");
+        check.addActionListener(controller);
+        save.addActionListener(controller);
+        back.addActionListener(controller);
+    } 
 }
