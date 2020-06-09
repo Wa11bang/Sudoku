@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import sudoku.Block;
+import sudoku.Model;
+import sudoku.View;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.views.GameView;
 
@@ -14,9 +16,9 @@ import sudoku.ui.views.GameView;
  * @author Waldo
  */
 public class GameController implements ActionListener {
+    private View appView;
     private GameModel model;
     private GameView view;
-    private boolean val;
     
     public GameController()
     {
@@ -27,6 +29,11 @@ public class GameController implements ActionListener {
         System.out.println("GameController: Adding GameModel");
         this.model = m;
     }
+    
+    public void addAppView(View v) {
+        System.out.println("GameController: Adding AppView");
+        this.appView = v;
+    }
 
     public void addView(GameView v) {
         System.out.println("GameController: Adding GameView");
@@ -34,21 +41,19 @@ public class GameController implements ActionListener {
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Clicked");
-        System.out.println("GameController(): Acting on GameModel()");
+    public void actionPerformed(ActionEvent e) {        
         if (e.getActionCommand().equals("check")) {
+            System.out.println("GameController(): Acting on GameModel()");
             model.checkGame();
         } else if(e.getActionCommand().equals("save"))
         {
-            model.setBlocks(replaceBlockValue(model.getBlocks(), view.getBlocks()));
+            System.out.println("GameController(): Acting on GameModel()");
+            model.setBlocks(replaceBlockValue(model.getBlocks(), view.parseBlocks()));
             model.saveGame();
-        } else {
-            if(val){
-                val = false;
-            } else {
-                val = true;
-            }
+        } else if(e.getActionCommand().equals("back_users"))
+        {
+            System.out.println("GameController(): Acting on AppView()");
+            appView.setCurrentPane("start");
         }
     }
     

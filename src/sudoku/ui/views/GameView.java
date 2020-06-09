@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.views;
 
 import java.awt.BorderLayout;
@@ -19,10 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import sudoku.Block;
-import sudoku.ControlButton;
+import sudoku.ui.elements.ControlButton;
 import sudoku.Game;
-import sudoku.GameBlockText;
-import sudoku.RoundedPanel;
+import sudoku.ui.elements.GameBlockText;
+import sudoku.ui.elements.RoundedPanel;
 import sudoku.ui.controllers.GameController;
 
 /**
@@ -56,7 +51,7 @@ public class GameView extends JPanel implements Observer {
         save.setActionCommand("save");
         
         back = new ControlButton("Back");
-        back.setActionCommand("back");
+        back.setActionCommand("back_users");
 
         controls.add(back);
         controls.add(check);
@@ -89,14 +84,14 @@ public class GameView extends JPanel implements Observer {
             ((GameBlockText) li.next()).setText(blocks.get((li.nextIndex() - 1)).getValue() + "");
         }
         
-        this.getSections();
+        this.drawSections();
     }
     
     /**
      * Group a 3x3 section and draw a really nice background
      * @param game 
      */
-    public void getSections()
+    public void drawSections()
     {
         int secColStart = 0;
         int secColEnd = 3;
@@ -160,7 +155,7 @@ public class GameView extends JPanel implements Observer {
         }.execute();
     }
     
-    public List<Block> getBlocks()
+    public List<Block> parseBlocks()
     {
         ListIterator li = grid.listIterator();
         List<Block> blocks = new ArrayList();
@@ -196,7 +191,7 @@ public class GameView extends JPanel implements Observer {
         {
             statusCol = Color.red;
         }
-        System.out.println("GOT THAT UPDATE BOISSSS");
+        System.out.println("GameView():  Update received from GameModel()");
         this.gameStatus((boolean)arg);
         }
     }  

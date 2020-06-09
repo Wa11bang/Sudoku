@@ -18,7 +18,7 @@ import sudoku.handlers.GameHandlerExec;
  */
 public class GameModel extends Observable {
     private Game game;
-    private final GameHandler gh = new GameHandlerExec();
+    private final GameHandler gh = new GameHandlerExec(); //Business Layer
     
     public GameModel()
     {
@@ -60,52 +60,23 @@ public class GameModel extends Observable {
     }
     
     public void checkGame()
-    {      
+    {              
         this.setChanged();
-        this.notifyObservers(false);
+        this.notifyObservers(check());
     }
     
-    /**
-     * Checks to see if a number re-occurs in the same row
-     * @param row
-     * @param randVal
-     * @param origCol
-     * @return
-     */
-    /*public boolean checkRow(int row, int randVal, int origCol)
+    public boolean check()
     {
-        for(int i = 0; i < 9; ++i)
+        for(int i = 1; i < 10; ++i)
         {
-            if(blocks[row][i].getValue() == randVal && (i != origCol))
+            if(!this.gh.checkSolution1(this.game, 5, i))
             {
-                //System.out.println("FAIL ROW same value at row: " + row + " col: " + i);
                 return false;
             }
         }
         
         return true;
-    }*/
-    
-    /**
-     * Checks to see if a number re-occurs in the same column
-     * @param col
-     * @param randVal
-     * @param origRow
-     * @return
-     */
-    /*public boolean checkColumn(int col, int randVal, int origRow)
-    {
-        for(int i = 0; i < 9; ++i)
-        {
-            if(blocks[i][col].getValue() == randVal && (i != origRow))
-            {
-                //System.out.println("FAIL COL");
-                return false;
-            }
-        }
-        
-        return true;
-    }*/
+    }
     
     /*public boolean check()
     {

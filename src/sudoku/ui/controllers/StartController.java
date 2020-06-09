@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import sudoku.Model;
+import sudoku.View;
 import sudoku.ui.models.StartModel;
 import sudoku.ui.views.StartView;
 
@@ -13,15 +14,13 @@ import sudoku.ui.views.StartView;
  * @author Waldo
  */
 public class StartController implements ActionListener {
-    private Model appModel;
+    private View appView;
     private StartModel model;
     private StartView view;
-    private JPanel mainView;
     
-    public StartController(JPanel mainView)
+    public StartController()
     {
         System.out.println("StartController()");
-        this.mainView = mainView;
     }
     
     public void addModel(StartModel m) {
@@ -29,9 +28,9 @@ public class StartController implements ActionListener {
         this.model = m;
     }
     
-    public void addAppModel(Model m) {
-        System.out.println("StartController: Adding StartModel");
-        this.appModel = m;
+    public void addAppView(View v) {
+        System.out.println("StartController: Adding AppView");
+        this.appView = v;
     }
 
     public void addView(StartView v) {
@@ -41,18 +40,14 @@ public class StartController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("StartController(): Acting on StartModel()");
-        CardLayout cl = (CardLayout)(mainView.getLayout());        
-        System.out.println(e.getActionCommand());
+        System.out.println("StartController(): Acting on AppView()");
 
         if (e.getActionCommand().equals("exit")) {
             System.exit(0);
         }
         else
         {
-            cl.show(mainView, (String)e.getActionCommand());
-        }     
-        
-        //this.appModel.changePane(e.getActionCommand());                 
+            appView.setCurrentPane(e.getActionCommand());
+        }             
     }
 }

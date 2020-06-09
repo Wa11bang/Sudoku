@@ -5,6 +5,7 @@
  */
 package sudoku;
 
+import sudoku.misc.HibernateUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.cfg.Configuration;

@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import sudoku.Controller;
-import sudoku.MenuButton;
+import sudoku.ui.elements.MenuButton;
 import sudoku.ui.controllers.StartController;
 
 /**
@@ -43,15 +43,7 @@ public class StartView extends JPanel {
         }   
         
         cnu = new MenuButton("Create New User");
-        //cnu.setBackground(new Color(104, 116, 232).brighter());
-        cnu.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        cnu.setForeground(new Color(232, 240, 255));
-        cnu.setHoverBackgroundColor(new Color(104, 116, 232).darker());
-        cnu.setPressedBackgroundColor(new Color(247, 172, 207).darker());
-        cnu.setBorderPainted(false);
-        cnu.setFocusPainted(false);
         cnu.setActionCommand("create_user");
-        cnu.setHorizontalAlignment(JLabel.CENTER);
         
         login = new MenuButton("Login");
         login.setActionCommand("login");

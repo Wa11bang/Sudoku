@@ -1,4 +1,4 @@
-package sudoku;
+package sudoku.misc;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

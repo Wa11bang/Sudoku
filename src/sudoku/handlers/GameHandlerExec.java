@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import sudoku.Game;
-import sudoku.HibernateUtils;
+import sudoku.misc.HibernateUtils;
 import sudoku.Users;
 
 /**
@@ -144,6 +144,40 @@ public class GameHandlerExec implements GameHandler {
         }
         
         return gameList;
+    }
+
+    @Override
+    public boolean checkSolution(Game game, int row, int checkVal) {
+        int count = 0;
+            for(int i = 0; i < 9; ++i)
+            {
+                if(checkVal == game.getBlocks().get(i + (9 * row)).getValue())
+                {
+                    count++;
+                }
+            }            
+        if(count == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean checkSolution1(Game game, int col, int checkVal) {
+        int count = 0;
+            for(int i = 0; i < 9; ++i)
+            {
+                if(checkVal == game.getBlocks().get((i * 9) + col).getValue())
+                {
+                    count++;
+                }
+            }
+        if(count == 1)
+        {
+            return true;
+        }
+        return false;
     }
 
 }

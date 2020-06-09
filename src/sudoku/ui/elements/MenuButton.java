@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sudoku;
+package sudoku.ui.elements;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,23 +14,27 @@ import javax.swing.JButton;
  *
  * @author Waldo
  */
-public class ControlButton extends JButton {
+public class MenuButton extends JButton {
+    
     private Color hoverBackgroundColor;
     private Color pressedBackgroundColor;
-    
-    public ControlButton() {
+
+    public MenuButton() {
         this(null);
     }
 
-    public ControlButton(String buttonText) {
+    public MenuButton(String buttonText) {
         super(buttonText);
         super.setContentAreaFilled(false);
-        setHoverBackgroundColor(Color.decode("#e0d5b1"));
-        setPressedBackgroundColor(Color.decode("#e0d5b1").darker());
+        setBackground(new Color(232, 240, 255).darker());
+        setFont(new Font("Sans Serif", Font.PLAIN, 20));
+        setForeground(new Color(232, 240, 255));
+        setHoverBackgroundColor(new Color(104, 116, 232).darker());
+        setPressedBackgroundColor(new Color(247, 172, 207).darker());
         setBorderPainted(false);
         setFocusPainted(false);
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         if (getModel().isPressed()) {
@@ -40,10 +44,10 @@ public class ControlButton extends JButton {
         } else {
             g.setColor(getBackground());
         }
-        g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+        g.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(g);
     }
-    
+
     public Color getHoverBackgroundColor() {
         return hoverBackgroundColor;
     }

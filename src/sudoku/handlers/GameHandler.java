@@ -38,4 +38,11 @@ public interface GameHandler {
      * Retrieve all existing Users
      */
     public List<Game> retrieveAllUserGames(Users user);
+    
+    /**
+     * Check solution of existing Game
+     */
+    public boolean checkSolution(Game game, int row, int checkVal);
+    
+    public boolean checkSolution1(Game game, int col, int checkVal);
 }

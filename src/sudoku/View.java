@@ -1,5 +1,6 @@
 package sudoku;
 
+import sudoku.misc.HibernateUtils;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -17,8 +18,8 @@ import sudoku.ui.controllers.UserController;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.models.StartModel;
 import sudoku.ui.views.GameView;
-import sudoku.ui.views.LoginView;
 import sudoku.ui.views.StartView;
+import sudoku.ui.views.UserView;
 
 /**
  *
@@ -28,7 +29,10 @@ public class View extends JFrame implements Observer {
     private JPanel cards = new JPanel(new CardLayout());
     private StartView startView = new StartView();
     private GameView gameView = new GameView();
-    private LoginView loginView = new LoginView();
+    private UserView userView = new UserView();
+    private StartController sc = new StartController();
+    private GameController gc = new GameController();
+    private UserController uc = new UserController();
 
     
     public View()
@@ -58,19 +62,21 @@ public class View extends JFrame implements Observer {
         GameModel gm = new GameModel();
         
         //CONTROLLERS
-        StartController sc = new StartController(cards);
-        GameController gc = new GameController();
-        UserController uc = new UserController();
+        sc = new StartController();
+        gc = new GameController();
+        uc = new UserController();
         
-        sc.addModel(sm);
-        //sc.addAppModel(m);
-        sc.addView(startView);        
+        sc.addModel(sm);        
+        sc.addView(startView); 
         startView.addController(sc);  
         
         gc.addModel(gm);
-        gc.addView(gameView);
+        gc.addView(gameView);        
         gm.addObserver(gameView);
         gameView.addController(gc);   
+        
+        initExtControllers();
+        
         //VIEW INIT
         
         gm.setGame(g);
@@ -78,7 +84,8 @@ public class View extends JFrame implements Observer {
 
         
         cards.add(startView, "start");
-        cards.add(loginView, "login");
+        cards.add(userView.create(), "create_user");
+        cards.add(userView.login(), "login");
         cards.add(gameView, "view_scoreboard");       
         
         cards.setBackground(new Color(232, 240, 255));
@@ -105,9 +112,21 @@ public class View extends JFrame implements Observer {
             }
         });
     }
+    
+    public void initExtControllers()
+    {
+        sc.addAppView(this);
+        gc.addAppView(this);
+    }
+    
+    public void setCurrentPane(String pane)
+    {
+        ((CardLayout)cards.getLayout()).show(cards, pane);
+    }
 
     @Override
     public void update(Observable obs, Object obj) {
-       ((CardLayout)cards.getLayout()).show(cards, (String)obj);
+        System.out.println("Update received!");
+        setCurrentPane((String) obj);
     }
 }

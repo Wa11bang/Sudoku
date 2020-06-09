@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sudoku;
+package sudoku.ui.elements;
 
 import java.awt.Graphics;
 import javax.swing.JPanel;
