@@ -40,12 +40,12 @@ public class LoginView extends JPanel implements Observer {
         gbc2.anchor = GridBagConstraints.NORTH;
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;        
-        
+
         loginForm.setLayout(new GridBagLayout());
         loginForm.setOpaque(false);       
         
         loginBtn.setActionCommand("user_login");
-        backBtn.setActionCommand("login"); //Current Panel (Used for Back-tracking)
+        backBtn.setActionCommand("back"); //Current Panel (Used for Back-tracking) login
         
         tU.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
         tU.setPlaceholder("Username");

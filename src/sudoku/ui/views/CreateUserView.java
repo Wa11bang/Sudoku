@@ -45,7 +45,7 @@ public class CreateUserView extends JPanel  implements Observer {
         createForm.setOpaque(false);
         
         createBtn.setActionCommand("user_create");
-        backBtn.setActionCommand("create_user"); //Current Panel (Used for Back-tracking)
+        backBtn.setActionCommand("back"); //Current Panel (Used for Back-tracking) create_user
         
         cU = new LoginText();
         cP = new LoginText();

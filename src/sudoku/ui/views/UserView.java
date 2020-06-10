@@ -64,7 +64,7 @@ public class UserView extends JPanel implements Observer {
         uncompletedGamesBtn.setActionCommand("uncompleted_games");
         completedGamesBtn.setActionCommand("completed_games");
         viewScoreboardBtn.setActionCommand("scoreboard");
-        logoutBtn.setActionCommand("user");//Current Panel (Used for Back-tracking)
+        logoutBtn.setActionCommand("back");//Current Panel (Used for Back-tracking) user
 
         
         userMenu.add(userWelcome, gbc);
