@@ -2,7 +2,6 @@ package sudoku;
 
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * Hard object that extends Game, uses Difficulty.Hard enumerator

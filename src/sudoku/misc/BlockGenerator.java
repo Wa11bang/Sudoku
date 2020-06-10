@@ -1,5 +1,6 @@
 /*
  * TODO: PERMUTATION ALGORITHM
+ * Store PREDOKUs in Database
  */
 package sudoku.misc;
 

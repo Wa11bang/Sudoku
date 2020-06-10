@@ -5,7 +5,7 @@ package sudoku;
  * @author Waldo Theron 18033655
  */
 public enum Difficulty {
-    Easy(6),
+    Easy(16),
     Medium(24),
     Hard(32);
 

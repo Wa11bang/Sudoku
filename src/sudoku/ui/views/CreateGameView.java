@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.views;
 
 import java.awt.Font;
@@ -17,7 +12,6 @@ import javax.swing.border.EmptyBorder;
 import sudoku.Difficulty;
 import sudoku.Users;
 import sudoku.ui.controllers.GameController;
-import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
 
 /**
@@ -26,7 +20,6 @@ import sudoku.ui.elements.MenuButton;
  */
 public class CreateGameView extends JPanel implements Observer {
     private JPanel gameSelection = new JPanel();
-    private JPanel btnPanel = new JPanel();
     private GridBagConstraints gbc = new GridBagConstraints();
     private MenuButton easyBtn = new MenuButton("Easy ("+Difficulty.Easy.getValue()+")");
     private MenuButton mediumBtn = new MenuButton("Medium ("+Difficulty.Medium.getValue()+")");

@@ -1,27 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
-import sudoku.AppColour;
 import sudoku.Users;
 import sudoku.ui.controllers.UserController;
-import sudoku.ui.elements.LoginText;
 import sudoku.ui.elements.MenuButton;
 
 /**
@@ -51,7 +40,6 @@ public class UserView extends JPanel implements Observer {
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;        
         
-        //userMenu.setLayout(new GridLayout(0, 1));
         userMenu.setLayout(new GridBagLayout());
         userMenu.setOpaque(false);  
         userWelcome.setOpaque(false);

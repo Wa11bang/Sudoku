@@ -19,12 +19,14 @@ public class GameBlock extends JTextField implements FocusListener {
         this.setOpaque(false);
         this.setFont(new Font("Sans Serif", Font.BOLD, 25));
         setBackground(AppColour.GAME_B_BACK);
-        //this.setBorder(new RoundedCornerBorder());
-        //Border roundedBorder = new LineBorder(Color.WHITE, 15, true);
         this.setBorder(null);
         this.setHorizontalAlignment(JTextField.CENTER);
         this.addFocusListener(this);
-        //this.setBorder(BorderFactory.createLineBorder(Color.black));
+    }
+    
+    public GameBlock()
+    {
+        this(null);
     }
     
     public void focusGained(java.awt.event.FocusEvent focusEvent) {
@@ -32,7 +34,7 @@ public class GameBlock extends JTextField implements FocusListener {
             JTextField src = (JTextField)focusEvent.getSource();
             src.setBackground(AppColour.GAME_B_FOCUS);
         } catch (ClassCastException ignored) {
-            /* I only listen to JTextFields */
+            /* oofies, I only care about dem sweet JTextTitties */
         }
     }
     
@@ -43,12 +45,7 @@ public class GameBlock extends JTextField implements FocusListener {
         g.setColor(getBackground());
         g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 30, 30);
         super.paintComponent(g);
-    }
-    
-    public GameBlock()
-    {
-        this(null);
-    }
+    }   
 
     @Override
     public void focusLost(FocusEvent e) {
@@ -56,7 +53,7 @@ public class GameBlock extends JTextField implements FocusListener {
             JTextField src = (JTextField)e.getSource();
             src.setBackground(AppColour.GAME_B_BACK);
         } catch (ClassCastException ignored) {
-            /* I only listen to JTextFields */
+            /* oofies, I only care about dem sweet JTextTitties */
         }
     }
 }

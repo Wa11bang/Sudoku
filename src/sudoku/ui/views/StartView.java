@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.views;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import sudoku.ControllerOld;
 import sudoku.ui.elements.MenuButton;
 import sudoku.ui.controllers.StartController;
 
@@ -55,11 +47,9 @@ public class StartView extends JPanel {
         exit.setActionCommand("exit");
         
         setBorder(new EmptyBorder(45, 10, 10, 10));
-        //startMenu.setLayout(new BoxLayout(startMenu, BoxLayout.Y_AXIS));
         setLayout(new FlowLayout(FlowLayout.CENTER));
         
         JPanel startButtons = new JPanel();
-        //startButtons.setLayout(new BoxLayout(startButtons, BoxLayout.Y_AXIS));
         startButtons.setLayout(new GridLayout(0,1));
         startButtons.setOpaque(false);
         startButtons.add(cnu);
@@ -70,7 +60,6 @@ public class StartView extends JPanel {
         startButtons.add(Box.createVerticalStrut(15));
         startButtons.add(exit);
         
-        //startMenu.setBackground(new Color(232, 240, 255));
         setOpaque(false);
         add(startButtons);
     }
