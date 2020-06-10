@@ -16,6 +16,8 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import sudoku.AppColour;
+import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.LoginText;
 import sudoku.ui.elements.MenuButton;
 
@@ -27,6 +29,10 @@ public class UserView extends JPanel implements Observer {
     private JPanel loginForm = new JPanel();
     private JPanel createForm = new JPanel();
     private GridBagConstraints gbc = new GridBagConstraints();
+    private LoginText tU = new LoginText();
+    private LoginText tP = new LoginText(); //CHANGE to JPasswordField 
+    private MenuButton backBtn = new MenuButton("Back");
+    private MenuButton loginBtn = new MenuButton("Login");
     
     public UserView()
     {
@@ -43,9 +49,10 @@ public class UserView extends JPanel implements Observer {
         
         //loginForm.setLayout(new GridLayout(0,1));
         loginForm.setLayout(new GridBagLayout());
-        loginForm.setOpaque(false);
-        LoginText tU = new LoginText();
-        LoginText tP = new LoginText();
+        loginForm.setOpaque(false);       
+        
+        loginBtn.setActionCommand("user_login");
+        backBtn.setActionCommand("start");
         
         tU.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
         tU.setPlaceholder("Username");
@@ -62,8 +69,8 @@ public class UserView extends JPanel implements Observer {
         loginForm.add(tU, gbc);
         loginForm.add(tP, gbc);
         loginForm.add(Box.createVerticalStrut(25), gbc);
-        loginForm.add(new MenuButton("Back"), gbc2);
-        loginForm.add(new MenuButton("Login"), gbc2);
+        loginForm.add(backBtn, gbc2);
+        loginForm.add(loginBtn, gbc2);
         
         //CREATE
         
@@ -108,9 +115,36 @@ public class UserView extends JPanel implements Observer {
         return this;
     }
     
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getLoginUsername()
+    {
+        return this.tU.getText();
     }
     
+    public String getLoginPassword()
+    {
+        return this.tP.getText();
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("UserView():  Update received from UserModel()");
+        if(!(boolean)arg)
+        {
+            loginBtn.setBackground(AppColour.ERROR);
+        }
+        else
+        {
+            loginBtn.setBackground(AppColour.MENU_BACK);
+            tU.setText("");
+            tP.setText("");
+        }
+        tU.setText("");
+        tP.setText("");
+    }
+    
+    public void addController(UserController controller) {
+        System.out.println("UserView: Adding UserController");
+        backBtn.addActionListener(controller);
+        loginBtn.addActionListener(controller);
+    } 
 }

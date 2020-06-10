@@ -1,0 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sudoku;
+
+import java.awt.Color;
+
+/**
+ *
+ * @author Waldo
+ */
+public class AppColour {
+    public static final Color ERROR = Color.RED;
+    public static final Color MENU_FORE = new Color(232, 240, 255);
+    public static final Color MENU_BACK = new Color(232, 240, 255).darker();
+    public static final Color MENU_HOVER = new Color(104, 116, 232).darker();
+    public static final Color MENU_PRESS = new Color(247, 172, 207).darker();
+    public static final Color GAME_SECTION = Color.decode("#e0d5b1");
+}

@@ -5,7 +5,9 @@
  */
 package sudoku.ui.controllers;
 
-import sudoku.Model;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import sudoku.View;
 import sudoku.ui.models.UserModel;
 import sudoku.ui.views.UserView;
 
@@ -13,8 +15,8 @@ import sudoku.ui.views.UserView;
  *
  * @author Waldo
  */
-public class UserController {   
-    private Model appModel;
+public class UserController implements ActionListener {   
+    private View appView;
     private UserModel model;
     private UserView view;
     
@@ -28,13 +30,29 @@ public class UserController {
         this.model = m;
     }
     
-    public void addAppModel(Model m) {
-        System.out.println("UserController: Adding AppModel");
-        this.appModel = m;
+    public void addAppView(View v) {
+        System.out.println("GameController: Adding AppView");
+        this.appView = v;
     }
 
     public void addView(UserView v) {
         System.out.println("UserController: Adding UserView");
         this.view = v;
+    }    
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("user_login")) {
+            System.out.println("UserController(): Acting on UserModel()");
+            if(model.login(view.getLoginUsername(), view.getLoginPassword()))
+            {
+                System.out.println("UserController(): Acting on AppView()");
+                appView.setCurrentPane("start");
+            }
+        } else if(e.getActionCommand().equals("start"))
+        {
+            System.out.println("UserController(): Acting on AppView()");
+            appView.setCurrentPane("start");
+        }
     }
 }

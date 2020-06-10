@@ -19,7 +19,7 @@ import sudoku.handlers.UserHandlerExec;
  *
  * @author Waldo
  */
-public class Sudoku {
+public class Sudoku {  
 
     /**
      * @param args the command line arguments

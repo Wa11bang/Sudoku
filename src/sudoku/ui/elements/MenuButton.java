@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JButton;
+import sudoku.AppColour;
 
 /**
  *
@@ -26,11 +27,11 @@ public class MenuButton extends JButton {
     public MenuButton(String buttonText) {
         super(buttonText);
         super.setContentAreaFilled(false);
-        setBackground(new Color(232, 240, 255).darker());
+        setBackground(AppColour.MENU_BACK);
         setFont(new Font("Sans Serif", Font.PLAIN, 20));
-        setForeground(new Color(232, 240, 255));
-        setHoverBackgroundColor(new Color(104, 116, 232).darker());
-        setPressedBackgroundColor(new Color(247, 172, 207).darker());
+        setForeground(AppColour.MENU_FORE);
+        setHoverBackgroundColor(AppColour.MENU_HOVER);
+        setPressedBackgroundColor(AppColour.MENU_PRESS);
         setBorderPainted(false);
         setFocusPainted(false);
     }

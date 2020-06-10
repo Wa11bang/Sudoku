@@ -17,6 +17,7 @@ import sudoku.ui.controllers.StartController;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.models.StartModel;
+import sudoku.ui.models.UserModel;
 import sudoku.ui.views.GameView;
 import sudoku.ui.views.StartView;
 import sudoku.ui.views.UserView;
@@ -60,6 +61,7 @@ public class View extends JFrame implements Observer {
         //MODELS
         StartModel sm = new StartModel();
         GameModel gm = new GameModel();
+        UserModel um = new UserModel();
         
         //CONTROLLERS
         sc = new StartController();
@@ -75,6 +77,11 @@ public class View extends JFrame implements Observer {
         gm.addObserver(gameView);
         gameView.addController(gc);   
         
+        uc.addModel(um);
+        uc.addView(userView);        
+        um.addObserver(userView);
+        userView.addController(uc);   
+        
         initExtControllers();
         
         //VIEW INIT
@@ -84,8 +91,8 @@ public class View extends JFrame implements Observer {
 
         
         cards.add(startView, "start");
-        cards.add(userView.create(), "create_user");
         cards.add(userView.login(), "login");
+        //cards.add(userView.create(), "create_user");              ADD FIX TO THIS~~~~
         cards.add(gameView, "view_scoreboard");       
         
         cards.setBackground(new Color(232, 240, 255));
@@ -117,6 +124,7 @@ public class View extends JFrame implements Observer {
     {
         sc.addAppView(this);
         gc.addAppView(this);
+        uc.addAppView(this);
     }
     
     public void setCurrentPane(String pane)

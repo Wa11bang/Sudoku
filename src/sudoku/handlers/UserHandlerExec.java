@@ -158,14 +158,11 @@ public class UserHandlerExec implements UserHandler {
             crit.setMaxResults(1);
             List<Users> results = crit.list();
             
-            /*String hql = "select a from Users as a where a.loginName =:loginName and a.password =:password";
-            Query query = session.createQuery(hql);
-            query.setString("username", username);
-            query.setString("password", password);
-            query.setMaxResults(1);*/
-            
             tx = session.beginTransaction();
-            user = (Users) results.get(0);
+            if(results.size() > 0)
+            {
+                user = (Users) results.get(0);
+            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

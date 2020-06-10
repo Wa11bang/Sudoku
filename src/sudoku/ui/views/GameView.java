@@ -13,10 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
+import sudoku.AppColour;
 import sudoku.Block;
 import sudoku.ui.elements.ControlButton;
 import sudoku.Game;
-import sudoku.ui.elements.GameBlockText;
+import sudoku.ui.elements.GameBlock;
 import sudoku.ui.elements.RoundedPanel;
 import sudoku.ui.controllers.GameController;
 
@@ -25,7 +26,7 @@ import sudoku.ui.controllers.GameController;
  * @author Waldo
  */
 public class GameView extends JPanel implements Observer {
-    private List<JTextField> grid;
+    private List<GameBlock> grid;
     private JPanel gamePanel = new JPanel();
     private ControlButton check = new ControlButton();
     private JButton save = new JButton();
@@ -69,7 +70,7 @@ public class GameView extends JPanel implements Observer {
         grid = new ArrayList();
         for(int i = 0; i < 81; ++i)
         {
-            grid.add(new GameBlockText());
+            grid.add(new GameBlock());
             //gamePanel.add(grid.get(i));
         }      
     }
@@ -81,7 +82,7 @@ public class GameView extends JPanel implements Observer {
         
         while(li.hasNext())
         {
-            ((GameBlockText) li.next()).setText(blocks.get((li.nextIndex() - 1)).getValue() + "");
+            ((GameBlock) li.next()).setText(blocks.get((li.nextIndex() - 1)).getValue() + "");
         }
         
         this.drawSections();
@@ -110,7 +111,7 @@ public class GameView extends JPanel implements Observer {
             experimentLayout.setVgap(5);
             p.setOpaque(false);
             p.setLayout(experimentLayout);
-            p.setBackground(Color.decode("#e0d5b1"));
+            p.setBackground(AppColour.GAME_SECTION);
             p.setBorder(new EmptyBorder(10,10,10,10));
             
             for(int i = secColStart; i < secColEnd; ++i)
@@ -164,7 +165,7 @@ public class GameView extends JPanel implements Observer {
         {
             try
             {
-            blocks.add(new Block(Integer.parseInt(((GameBlockText) li.next()).getText())));
+            blocks.add(new Block(Integer.parseInt(((GameBlock) li.next()).getText())));
             } catch (NumberFormatException ex)
             {
                 statusCol = Color.red;

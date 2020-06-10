@@ -28,9 +28,9 @@ import javax.swing.border.LineBorder;
  *
  * @author Waldo
  */
-public class GameBlockText extends JTextField implements FocusListener {
+public class GameBlock extends JTextField implements FocusListener {
     
-    public GameBlockText(String inputText)
+    public GameBlock(String inputText)
     {
         super(inputText);    
         this.setOpaque(false);
@@ -62,7 +62,7 @@ public class GameBlockText extends JTextField implements FocusListener {
         super.paintComponent(g);
     }
     
-    public GameBlockText()
+    public GameBlock()
     {
         this(null);
     }
