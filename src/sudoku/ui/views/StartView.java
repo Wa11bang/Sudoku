@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import sudoku.Controller;
+import sudoku.ControllerOld;
 import sudoku.ui.elements.MenuButton;
 import sudoku.ui.controllers.StartController;
 
@@ -49,7 +49,7 @@ public class StartView extends JPanel {
         login.setActionCommand("login");
         
         vsb = new MenuButton("View Scoreboard");
-        vsb.setActionCommand("view_scoreboard");
+        vsb.setActionCommand("scoreboard");
         
         exit = new MenuButton("Exit");
         exit.setActionCommand("exit");

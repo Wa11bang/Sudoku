@@ -13,8 +13,8 @@ import sudoku.handlers.UserHandlerExec;
  *
  * @author Waldo
  */
-public class Model extends Observable {    
-    public Model() {
+public class ModelOld extends Observable {    
+    public ModelOld() {
         System.out.println("AppModel()");
     }    
     

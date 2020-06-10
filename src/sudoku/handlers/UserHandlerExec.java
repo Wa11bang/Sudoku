@@ -7,7 +7,6 @@ package sudoku.handlers;
 
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -121,15 +120,8 @@ public class UserHandlerExec implements UserHandler {
 
         try {
             Criteria crit = session.createCriteria(Users.class);
-            //crit.setMaxResults(1);
             List<Users> results = crit.list();
-            
-            /*String hql = "select a from Users as a where a.loginName =:loginName and a.password =:password";
-            Query query = session.createQuery(hql);
-            query.setString("username", username);
-            query.setString("password", password);
-            query.setMaxResults(1);*/
-            
+
             tx = session.beginTransaction();
             usersList = results;
             tx.commit();
@@ -170,6 +162,8 @@ public class UserHandlerExec implements UserHandler {
             }
             e.printStackTrace();
         }
+        
+        System.out.println(user);
         
         return user;
     }

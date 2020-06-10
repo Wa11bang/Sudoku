@@ -8,7 +8,10 @@ package sudoku.ui.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import sudoku.View;
+import sudoku.ViewEvent;
 import sudoku.ui.models.UserModel;
+import sudoku.ui.views.CreateUserView;
+import sudoku.ui.views.LoginView;
 import sudoku.ui.views.UserView;
 
 /**
@@ -19,6 +22,8 @@ public class UserController implements ActionListener {
     private View appView;
     private UserModel model;
     private UserView view;
+    private LoginView loginView;
+    private CreateUserView createUserView;
     
     public UserController()
     {
@@ -35,6 +40,16 @@ public class UserController implements ActionListener {
         this.appView = v;
     }
 
+    public void addLoginView(LoginView v)
+    {
+        this.loginView = v;
+    }
+    
+    public void addCreateUserView(CreateUserView v)
+    {
+        this.createUserView = v;
+    }
+    
     public void addView(UserView v) {
         System.out.println("UserController: Adding UserView");
         this.view = v;
@@ -43,16 +58,26 @@ public class UserController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("user_login")) {
+            
             System.out.println("UserController(): Acting on UserModel()");
-            if(model.login(view.getLoginUsername(), view.getLoginPassword()))
+            if(model.login(loginView.getLoginUsername(), loginView.getLoginPassword()))
             {
                 System.out.println("UserController(): Acting on AppView()");
-                appView.setCurrentPane("start");
+                appView.changePane(new ViewEvent("start", "user"));
             }
-        } else if(e.getActionCommand().equals("start"))
-        {
+        } else if (e.getActionCommand().equals("user_create")) {            
+            System.out.println("UserController(): Acting on UserModel()");            
+            if(model.createUser(createUserView.getLoginUsername(), createUserView.getLoginPassword()))
+            {
+                System.out.println("UserController(): Acting on AppView()");
+                appView.changePane(new ViewEvent("start", "user"));
+            }
+        } else {
+            //EXIT ALL USER VIEWS
+            System.out.println("UserController(): Acting on UserView()");
+            model.logout();
             System.out.println("UserController(): Acting on AppView()");
-            appView.setCurrentPane("start");
+            appView.changePane(new ViewEvent(e.getActionCommand(), "start"));
         }
     }
 }

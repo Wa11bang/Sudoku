@@ -13,11 +13,11 @@ import java.awt.event.ActionListener;
  *
  * @author Waldo
  */
-public class Controller implements ActionListener {
-    Model model;
+public class ControllerOld implements ActionListener {
+    ModelOld model;
     View view;
 
-    Controller() {
+    ControllerOld() {
         System.out.println("AppController()");
     }
 
@@ -28,7 +28,7 @@ public class Controller implements ActionListener {
         //model.login("Waldo", "password123");
     }
 
-    public void addModel(Model m) {
+    public void addModel(ModelOld m) {
         System.out.println("AppController: Adding AppModel");
         this.model = m;
     }

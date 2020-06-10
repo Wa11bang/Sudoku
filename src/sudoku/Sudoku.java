@@ -37,7 +37,7 @@ public class Sudoku {
         //uh.addUser(usr);
 
         
-        //Users user = uh.login("Waldo", "password123");
+        //Users user = uh.login("Waldo", "waldo01");
         
         List<Block> blocks = new ArrayList();
         
@@ -113,14 +113,14 @@ public class Sudoku {
     }
     
     public static void MVCTest() {
-        Model myModel = new Model();
+        //Model myModel = new Model();
         View myView = new View();
-        myModel.addObserver(myView);
+        //myModel.addObserver(myView);
         
-        Controller myController = new Controller();
+        //Controller myController = new Controller();
         //pass the reference of model and view to the controllor
-        myController.addModel(myModel);
-        myController.addView(myView);
+        //myController.addModel(myModel);
+        //myController.addView(myView);
         //myView.addController(myController);
     }
     

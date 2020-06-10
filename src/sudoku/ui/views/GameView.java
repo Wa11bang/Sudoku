@@ -16,6 +16,7 @@ import sudoku.AppColour;
 import sudoku.Block;
 import sudoku.ui.elements.ControlButton;
 import sudoku.Game;
+import sudoku.GameEvent;
 import sudoku.ui.elements.GameBlock;
 import sudoku.ui.elements.RoundedPanel;
 import sudoku.ui.controllers.GameController;
@@ -51,7 +52,7 @@ public class GameView extends JPanel implements Observer {
         save.setActionCommand("save");
         
         back = new ControlButton("Back");
-        back.setActionCommand("back_users");
+        back.setActionCommand("back");
 
         controls.add(back);
         controls.add(check);
@@ -127,7 +128,7 @@ public class GameView extends JPanel implements Observer {
         }
     }
     
-    public void gameStatus(boolean status)
+    public void gameStatus(GameEvent e)
     {        
         new SwingWorker<Void, String>(){
             @Override
@@ -135,14 +136,18 @@ public class GameView extends JPanel implements Observer {
                 
                 for(int i = 0; i < 81; ++i)
                 {
-                    if(status)
+                    if(e.getSaved())
+                    {
+                        grid.get(i).setBackground(AppColour.SAVED);      
+                    } 
+                    else if(e.getSolved())
                     {
                         grid.get(i).setEditable(false);
-                        grid.get(i).setBackground(AppColour.SAVED);      
+                        grid.get(i).setBackground(AppColour.CORRECT);   
                     }
                     else
                     {
-                        grid.get(i).setBackground(AppColour.INCORRECT);      
+                        grid.get(i).setBackground(AppColour.ERROR);      
                     }
                                   
                     Thread.sleep(2);
@@ -150,7 +155,7 @@ public class GameView extends JPanel implements Observer {
                 
                 for(int i = 0; i < 81; ++i)
                 {
-                    grid.get(i).setBackground(Color.decode("#F6F0ED"));
+                    grid.get(i).setBackground(AppColour.GAME_B_BACK);
                     Thread.sleep(2);
                 }                
                 return null;
@@ -170,13 +175,20 @@ public class GameView extends JPanel implements Observer {
             blocks.add(new Block(Integer.parseInt(((GameBlock) li.next()).getText())));
             } catch (NumberFormatException ex)
             {
-                this.gameStatus(false);
+                this.gameStatus(new GameEvent());
                 return null;
             }
         }
         
         return blocks;
-    }
+    }    
+       
+    public void addController(GameController controller) {
+        System.out.println("GameView: Adding GameController");
+        check.addActionListener(controller);
+        save.addActionListener(controller);
+        back.addActionListener(controller);
+    } 
     
     @Override
     public void update(Observable o, Object arg) {
@@ -187,14 +199,7 @@ public class GameView extends JPanel implements Observer {
         }
         else {
         
-        this.gameStatus((boolean)arg);
+        this.gameStatus((GameEvent)arg);
         }
     }  
-    
-    public void addController(GameController controller) {
-        System.out.println("GameView: Adding GameController");
-        check.addActionListener(controller);
-        save.addActionListener(controller);
-        back.addActionListener(controller);
-    } 
 }

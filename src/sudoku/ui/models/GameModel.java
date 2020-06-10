@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Observable;
 import sudoku.Block;
 import sudoku.Game;
+import sudoku.GameEvent;
 import sudoku.handlers.GameHandler;
 import sudoku.handlers.GameHandlerExec;
 
@@ -25,13 +26,15 @@ public class GameModel extends Observable {
         System.out.println("GameModel()");
     }
     
-    public void saveGame()
+    public void saveGame(boolean notify)
     {
         if(null != this.game)
         {
-        
-        this.setChanged();
-        this.notifyObservers(gh.modifyGame(game));
+            if(notify)
+            {   
+                this.setChanged();
+                this.notifyObservers(new GameEvent(gh.modifyGame(game), false));
+            }
         }
     }
     
@@ -62,7 +65,7 @@ public class GameModel extends Observable {
     public void checkGame()
     {              
         this.setChanged();
-        this.notifyObservers(check());
+        this.notifyObservers(new GameEvent(false, check()));
     }
     
     public boolean check()
@@ -75,7 +78,7 @@ public class GameModel extends Observable {
             }
         }
         
-        this.saveGame();
+        this.saveGame(false);
         
         return true;
     }

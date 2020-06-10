@@ -30,15 +30,43 @@ public class UserModel extends Observable {
     
     public boolean login(String username, String password)
     {
+        this.setChanged();
         boolean status = false;
         Users tempUser = uh.login(username, password);
         if(null != tempUser)
         {
+            System.out.println("Correct Baby!");
             user = tempUser;
             status = true;
-        }        
+            this.notifyObservers(user);
+        }       
         
+        this.notifyObservers(status);
+        
+        return status;
+    }
+    
+    public void logout()
+    {
+        this.user = null;
+    }
+    
+    public boolean createUser(String username, String password)
+    {
+        boolean status = false;
+        Users tempUser = new Users(username, password);
         this.setChanged();
+        
+        System.out.println(username + " " + password);
+        
+        if(uh.addUser(tempUser))
+        {
+            user = uh.login(username, password);  
+            System.out.println(tempUser + "  " + user);
+            this.notifyObservers(user);
+            status = true;
+        }       
+        
         this.notifyObservers(status);
         
         return status;
