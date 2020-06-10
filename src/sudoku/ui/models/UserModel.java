@@ -51,6 +51,11 @@ public class UserModel extends Observable {
         this.user = null;
     }
     
+    public Users getUser()
+    {
+        return this.user;
+    }
+    
     public boolean createUser(String username, String password)
     {
         boolean status = false;

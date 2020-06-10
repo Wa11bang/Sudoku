@@ -76,8 +76,13 @@ public class GameController implements ActionListener {
         } else if(e.getActionCommand().equals("back"))
         {
             System.out.println("GameController(): Acting on AppView()");
-            //appView.setCurrentPane("start");
             appView.changePane(new ViewEvent("game", "user"));
+        } else if(e.getActionCommand().contains("create"))
+        {            
+            model.create(e.getActionCommand().replace("_create", ""));            
+            System.out.println("GameController(): Acting on AppView()");
+            appView.changePane(new ViewEvent("create_game", "game"));
+            
         }
     }    
 }

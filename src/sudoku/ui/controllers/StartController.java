@@ -1,10 +1,7 @@
 package sudoku.ui.controllers;
 
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
-import sudoku.ModelOld;
 import sudoku.View;
 import sudoku.ViewEvent;
 import sudoku.ui.models.StartModel;
@@ -49,7 +46,6 @@ public class StartController implements ActionListener {
         else
         {
             appView.changePane(new ViewEvent("start", e.getActionCommand()));
-            //appView.setCurrentPane(e.getActionCommand());
         }             
     }
 }

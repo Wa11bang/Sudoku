@@ -1,7 +1,6 @@
 package sudoku.ui.views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,6 @@ public class GameView extends JPanel implements Observer {
     private ControlButton check = new ControlButton();
     private JButton save = new JButton();
     private JButton back = new JButton();  
-    private Color statusCol;
     
     public GameView()
     {
@@ -70,7 +68,8 @@ public class GameView extends JPanel implements Observer {
         for(int i = 0; i < 81; ++i)
         {
             grid.add(new GameBlock());
-        }      
+        }     
+        this.drawSections();
     }
     
     public void loadGame(Object game)
@@ -81,9 +80,7 @@ public class GameView extends JPanel implements Observer {
         while(li.hasNext())
         {
             ((GameBlock) li.next()).setText(blocks.get((li.nextIndex() - 1)).getValue() + "");
-        }
-        
-        this.drawSections();
+        }       
     }
     
     /**

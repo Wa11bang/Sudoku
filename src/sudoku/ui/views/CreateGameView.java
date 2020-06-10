@@ -14,7 +14,9 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import sudoku.Difficulty;
 import sudoku.Users;
+import sudoku.ui.controllers.GameController;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
 
@@ -23,14 +25,13 @@ import sudoku.ui.elements.MenuButton;
  * @author Waldo
  */
 public class CreateGameView extends JPanel implements Observer {
-    private JPanel userMenu = new JPanel();
+    private JPanel gameSelection = new JPanel();
+    private JPanel btnPanel = new JPanel();
     private GridBagConstraints gbc = new GridBagConstraints();
-    private MenuButton easyBtn = new MenuButton("Create a new Game");
-    private MenuButton mediumBtn = new MenuButton("View Uncompleted Games");
-    private MenuButton hardBtn = new MenuButton("View Completed Games");
-    private MenuButton createBtn = new MenuButton("View Scoreboard");
-    private MenuButton backBtn = new MenuButton("Logout");
-    private JTextField gameName = new JTextField();
+    private MenuButton easyBtn = new MenuButton("Easy ("+Difficulty.Easy.getValue()+")");
+    private MenuButton mediumBtn = new MenuButton("Medium ("+Difficulty.Medium.getValue()+")");
+    private MenuButton hardBtn = new MenuButton("Hard ("+Difficulty.Hard.getValue()+")");
+    private MenuButton backBtn = new MenuButton("Back");
     private JTextField gameSelect = new JTextField();
     
     public CreateGameView()
@@ -47,36 +48,33 @@ public class CreateGameView extends JPanel implements Observer {
         gbc2.weighty = 1.0;        
         
         //userMenu.setLayout(new GridLayout(0, 1));
-        userMenu.setLayout(new GridBagLayout());
-        userMenu.setOpaque(false);  
+        gameSelection.setLayout(new GridBagLayout());
+        gameSelection.setOpaque(false);        
+              
+        
         gameSelect.setOpaque(false);
         gameSelect.setBorder(null);
         gameSelect.setEditable(false);
         gameSelect.setHorizontalAlignment(JTextField.CENTER);
         gameSelect.setFont(new Font("Helvetica", Font.PLAIN, 25));
+        gameSelect.setText("Please select a Game Difficulty");
         
-        easyBtn.setActionCommand("easy_game");
-        mediumBtn.setActionCommand("medium_game");
-        hardBtn.setActionCommand("hard_game");
-        createBtn.setActionCommand("create");
+        easyBtn.setActionCommand("easy_create");
+        mediumBtn.setActionCommand("medium_create");
+        hardBtn.setActionCommand("hard_create");
         backBtn.setActionCommand("back");//Current Panel (Used for Back-tracking) user
 
-        
-        userMenu.add(gameSelect, gbc);
-        userMenu.add(Box.createVerticalStrut(50), gbc);
-        userMenu.add(easyBtn, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(mediumBtn, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(hardBtn, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(gameName, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(createBtn, gbc);      
-        userMenu.add(backBtn, gbc);   
+        gameSelection.add(Box.createVerticalStrut(25), gbc);
+        gameSelection.add(easyBtn, gbc);
+        gameSelection.add(Box.createVerticalStrut(10), gbc);
+        gameSelection.add(mediumBtn, gbc);
+        gameSelection.add(Box.createVerticalStrut(10), gbc);
+        gameSelection.add(hardBtn, gbc);
+        gameSelection.add(Box.createVerticalStrut(50), gbc);
+        gameSelection.add(backBtn);   
 
-        
-        add(userMenu, gbc);
+        add(gameSelect, gbc);
+        add(gameSelection, gbc);
         
         setOpaque(false);
         
@@ -90,12 +88,11 @@ public class CreateGameView extends JPanel implements Observer {
         }
     }
     
-    public void addController(UserController controller) {
-        System.out.println("UserView: Adding UserController");
+    public void addController(GameController controller) {
+        System.out.println("CreateGameView: Adding GameController");
         easyBtn.addActionListener(controller);
         mediumBtn.addActionListener(controller);
         hardBtn.addActionListener(controller);
-        createBtn.addActionListener(controller);
         backBtn.addActionListener(controller);
     } 
 }

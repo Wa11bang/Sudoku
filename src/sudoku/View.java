@@ -49,11 +49,11 @@ public class View extends JFrame implements Observer {
         
         //NOT PRODUCTION       
         
-        UserHandler uh = new UserHandlerExec();
-        GameHandler gh = new GameHandlerExec();
+        //UserHandler uh = new UserHandlerExec();
+        //GameHandler gh = new GameHandlerExec();
         
-        Users u = uh.login("Waldo", "password123");
-        Game g = gh.getGameByID(1);              
+        //Users u = uh.login("Waldo", "password123");
+        //Game g = gh.getGameByID(1);              
         
         gameView.initComponents();            
          
@@ -79,6 +79,7 @@ public class View extends JFrame implements Observer {
         gc.addModel(gm);
         gc.addView(gameView);        
         gm.addObserver(gameView);
+        gm.addUserModel(um);
         gameView.addController(gc);   
         
         uc.addModel(um);
@@ -88,28 +89,30 @@ public class View extends JFrame implements Observer {
         um.addObserver(userView);
         um.addObserver(loginView);
         um.addObserver(createUserView);
+        
         userView.addController(uc);   
         loginView.addController(uc);
         createUserView.addController(uc);
+        createGameView.addController(gc);
         
         initExtControllers();
         
         //VIEW INIT
         
         //TESTING CODE
-        gm.setGame(g);
-        gm.initGame();
+        //gm.setGame(g);
+        //gm.initGame();
         //TESTING CODE
         
         cards.add(startView, "start");
         cards.add(loginView, "login");
         cards.add(createUserView, "create_user");
-        cards.add(gameView, "scoreboard");   //scoreboardView    
+        cards.add(scoreboardView, "scoreboard");   //scoreboardView    
         cards.add(userView, "user");
         cards.add(completedGameView, "completed_games");
         cards.add(uncompletedGameView, "uncompleted_games");      
         cards.add(createGameView, "create_game");
-        //cards.add(gameView, "game"); 
+        cards.add(gameView, "game"); 
        
         cards.setBackground(new Color(232, 240, 255));
         cards.setOpaque(false);
