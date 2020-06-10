@@ -8,10 +8,6 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import sudoku.handlers.GameHandler;
-import sudoku.handlers.GameHandlerExec;
-import sudoku.handlers.UserHandler;
-import sudoku.handlers.UserHandlerExec;
 import sudoku.ui.controllers.*;
 import sudoku.ui.models.*;
 import sudoku.ui.views.*;
@@ -23,6 +19,7 @@ import sudoku.ui.views.*;
 public class View extends JFrame implements Observer {
     private String currentPane;
     private String prevPane;
+    
     private JPanel cards = new JPanel(new CardLayout());
     
     private StartView startView = new StartView();
@@ -45,19 +42,9 @@ public class View extends JFrame implements Observer {
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 600);
-        this.setTitle("Sudoku");
+        this.setTitle("Sudoku");             
         
-        //NOT PRODUCTION       
-        
-        //UserHandler uh = new UserHandlerExec();
-        //GameHandler gh = new GameHandlerExec();
-        
-        //Users u = uh.login("Waldo", "password123");
-        //Game g = gh.getGameByID(1);              
-        
-        gameView.initComponents();            
-         
-        //NOT PRODUCTION           
+        gameView.initComponents();                 
              
         //MODELS
         StartModel sm = new StartModel();
@@ -95,19 +82,12 @@ public class View extends JFrame implements Observer {
         createUserView.addController(uc);
         createGameView.addController(gc);
         
-        initExtControllers();
-        
-        //VIEW INIT
-        
-        //TESTING CODE
-        //gm.setGame(g);
-        //gm.initGame();
-        //TESTING CODE
+        initExtControllers();       
         
         cards.add(startView, "start");
         cards.add(loginView, "login");
         cards.add(createUserView, "create_user");
-        cards.add(scoreboardView, "scoreboard");   //scoreboardView    
+        cards.add(scoreboardView, "scoreboard");
         cards.add(userView, "user");
         cards.add(completedGameView, "completed_games");
         cards.add(uncompletedGameView, "uncompleted_games");      

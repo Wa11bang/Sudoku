@@ -36,7 +36,7 @@ public class GameModel extends Observable {
         type = type.substring(0, 1).toUpperCase() + type.substring(1);
         
         Game tempGame = GameFactory.create(Difficulty.valueOf(type));
-        tempGame.setBlocks(BlockGenerator.generate());
+        tempGame.setBlocks(BlockGenerator.generate(tempGame.getDifficulty()));
         tempGame.setUser(userModel.getUser());
         gh.addGame(tempGame);
         
@@ -57,6 +57,10 @@ public class GameModel extends Observable {
             {   
                 this.setChanged();
                 this.notifyObservers(new GameEvent(gh.modifyGame(game), false));
+            }
+            else
+            {
+                gh.modifyGame(game);
             }
         }
     }
@@ -86,7 +90,7 @@ public class GameModel extends Observable {
     }
     
     public void checkGame()
-    {              
+    {             
         this.setChanged();
         this.notifyObservers(new GameEvent(false, check()));
     }
@@ -95,12 +99,16 @@ public class GameModel extends Observable {
     {
         for(int i = 1; i < 10; ++i)
         {
-            if(!this.gh.checkSolution1(this.game, 5, i))
+            for(int c = 0; c < 9; ++c)
+            {
+            if(!this.gh.checkSolution1(this.game, c, i) || !this.gh.checkSolution(this.game, c, i))
             {
                 return false;
             }
+            }
         }
         
+        this.game.setComplete(true);
         this.saveGame(false);
         
         return true;

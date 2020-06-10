@@ -70,8 +70,8 @@ public class GameController implements ActionListener {
         {            
             if(null != view.parseBlocks())
             {
-            model.setBlocks(replaceBlockValue(model.getBlocks(), view.parseBlocks()));
-            model.saveGame(true);
+                model.setBlocks(replaceBlockValue(model.getBlocks(), view.parseBlocks()));
+                model.saveGame(true);
             }
         } else if(e.getActionCommand().equals("back"))
         {

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TODO: PERMUTATION ALGORITHM
  */
 package sudoku.misc;
 
@@ -9,14 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import sudoku.Block;
+import sudoku.Difficulty;
 
 /**
  *
  * @author Waldo
  */
 public class BlockGenerator {   
+    private static Random rand = new Random(); 
     
-    public static List<Block> generate()
+    public static List<Block> generate(Difficulty d)
     {
         List<int[]> preDokus = new ArrayList();
         List<Block> blocks = new ArrayList();
@@ -35,16 +35,34 @@ public class BlockGenerator {
             for(int j = 0; j < 9; ++j)
             {
                 blocks.add(new Block(selected[counter]));
+                System.out.print(selected[counter]);
                 counter++;
             }
         }
+        
+        removeNBlocks(blocks, d.getValue());
         
         return blocks;
     }
     
     public static int[] getRandomElement(List<int[]> list) 
     { 
-        Random rand = new Random(); 
+        
         return list.get(rand.nextInt(list.size())); 
     } 
+    
+    public static void removeNBlocks(List<Block> blocks, int n)
+    {
+        int counter = 0;
+        while(counter < n)
+        {
+            int block = (rand.nextInt(81));
+            
+            if(blocks.get(block).getValue() != 0)
+            {
+                blocks.get(block).setValue(0);                     
+                counter++;
+            }
+        }
+    }    
 }

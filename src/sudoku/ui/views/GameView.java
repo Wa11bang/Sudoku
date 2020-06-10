@@ -77,9 +77,21 @@ public class GameView extends JPanel implements Observer {
         ListIterator li = grid.listIterator();
         List<Block> blocks = ((Game) game).getBlocks();
         
+        System.out.println(blocks.size());
+        
         while(li.hasNext())
         {
-            ((GameBlock) li.next()).setText(blocks.get((li.nextIndex() - 1)).getValue() + "");
+            int block_val = blocks.get((li.nextIndex())).getValue();
+            System.out.print(block_val);
+            if(block_val != 0)
+            {
+                ((GameBlock) li.next()).setText(block_val + "");
+                //grid.get(li.nextIndex()).setEditable(true);
+            }
+            else
+            {
+                ((GameBlock) li.next()).setText("");
+            }
         }       
     }
     
@@ -139,7 +151,7 @@ public class GameView extends JPanel implements Observer {
                     } 
                     else if(e.getSolved())
                     {
-                        grid.get(i).setEditable(false);
+                        //grid.get(i).setEditable(false);
                         grid.get(i).setBackground(AppColour.CORRECT);   
                     }
                     else
@@ -167,13 +179,13 @@ public class GameView extends JPanel implements Observer {
         
         while(li.hasNext())
         {
-            try
+            GameBlock gb = ((GameBlock) li.next());
+                
+            if(isInteger(gb.getText()))
+                blocks.add(new Block(Integer.parseInt(gb.getText())));
+            else
             {
-            blocks.add(new Block(Integer.parseInt(((GameBlock) li.next()).getText())));
-            } catch (NumberFormatException ex)
-            {
-                this.gameStatus(new GameEvent());
-                return null;
+                blocks.add(new Block(0));
             }
         }
         
@@ -199,4 +211,17 @@ public class GameView extends JPanel implements Observer {
         this.gameStatus((GameEvent)arg);
         }
     }  
+    
+    public static boolean isInteger(String str) {
+               
+        for(char c : str.toCharArray())
+        {
+            if(!Character.isDigit(c))
+            {
+                return false;
+            }
+        }
+        
+        return true && !str.isEmpty();
+    }
 }
