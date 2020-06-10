@@ -41,15 +41,22 @@ public class GameController implements ActionListener {
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {        
+    public void actionPerformed(ActionEvent e) {   
+        System.out.println("GameController(): Acting on GameModel()");
         if (e.getActionCommand().equals("check")) {
-            System.out.println("GameController(): Acting on GameModel()");
-            model.checkGame();
+            if(null != view.parseBlocks())
+            {
+                model.setBlocks(replaceBlockValue(model.getBlocks(), view.parseBlocks()));
+                model.checkGame();
+            }
+            
         } else if(e.getActionCommand().equals("save"))
-        {
-            System.out.println("GameController(): Acting on GameModel()");
+        {            
+            if(null != view.parseBlocks())
+            {
             model.setBlocks(replaceBlockValue(model.getBlocks(), view.parseBlocks()));
             model.saveGame();
+            }
         } else if(e.getActionCommand().equals("back_users"))
         {
             System.out.println("GameController(): Acting on AppView()");

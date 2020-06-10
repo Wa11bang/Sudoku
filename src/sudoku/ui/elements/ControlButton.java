@@ -6,9 +6,9 @@
 package sudoku.ui.elements;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JButton;
+import sudoku.AppColour;
 
 /**
  *
@@ -25,8 +25,8 @@ public class ControlButton extends JButton {
     public ControlButton(String buttonText) {
         super(buttonText);
         super.setContentAreaFilled(false);
-        setHoverBackgroundColor(Color.decode("#e0d5b1"));
-        setPressedBackgroundColor(Color.decode("#e0d5b1").darker());
+        setHoverBackgroundColor(AppColour.CONTROL_HOVER);
+        setPressedBackgroundColor(AppColour.CONTROL_PRESS);
         setBorderPainted(false);
         setFocusPainted(false);
     }

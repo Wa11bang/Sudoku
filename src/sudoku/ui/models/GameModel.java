@@ -75,32 +75,8 @@ public class GameModel extends Observable {
             }
         }
         
-        return true;
-    }
-    
-    /*public boolean check()
-    {
-        for(int i = 0; i < 9; ++i)
-        {
-            for(int j = 0; j < 9; ++j)
-            {
-                if(blocks[i][j].getValue() == 0)
-                {
-                    //System.out.println("Row: " + i + " Col: " + j + " ZERO VALUE");
-                    return false;
-                }
-                
-                if(!(checkRow(i, blocks[i][j].getValue(), j) && checkColumn(j, blocks[i][j].getValue(), i)))
-                {
-                    if(i != j)
-                    {
-                    //System.out.println("Row: " + i + " Col: " + j + " FAIL CHECK");
-                    return false;
-                    }
-                }
-            }
-        }
+        this.saveGame();
         
         return true;
-    }*/
+    }
 }

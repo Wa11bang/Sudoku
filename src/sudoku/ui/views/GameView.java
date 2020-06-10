@@ -10,7 +10,6 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import sudoku.AppColour;
@@ -58,8 +57,7 @@ public class GameView extends JPanel implements Observer {
         controls.add(check);
         controls.add(save);        
         
-        //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
         
         add(gamePanel, BorderLayout.CENTER);
         add(controls, BorderLayout.PAGE_END);               
@@ -71,7 +69,6 @@ public class GameView extends JPanel implements Observer {
         for(int i = 0; i < 81; ++i)
         {
             grid.add(new GameBlock());
-            //gamePanel.add(grid.get(i));
         }      
     }
     
@@ -141,8 +138,13 @@ public class GameView extends JPanel implements Observer {
                     if(status)
                     {
                         grid.get(i).setEditable(false);
+                        grid.get(i).setBackground(AppColour.SAVED);      
                     }
-                    grid.get(i).setBackground(statusCol);                    
+                    else
+                    {
+                        grid.get(i).setBackground(AppColour.INCORRECT);      
+                    }
+                                  
                     Thread.sleep(2);
                 }
                 
@@ -168,8 +170,8 @@ public class GameView extends JPanel implements Observer {
             blocks.add(new Block(Integer.parseInt(((GameBlock) li.next()).getText())));
             } catch (NumberFormatException ex)
             {
-                statusCol = Color.red;
                 this.gameStatus(false);
+                return null;
             }
         }
         
@@ -178,21 +180,13 @@ public class GameView extends JPanel implements Observer {
     
     @Override
     public void update(Observable o, Object arg) {
-        
+        System.out.println("GameView():  Update received from GameModel()");
         if(arg instanceof Game)
         {
             loadGame(arg);
         }
         else {
-        if((boolean) arg)
-        {
-            statusCol = Color.green;
-        }
-        else
-        {
-            statusCol = Color.red;
-        }
-        System.out.println("GameView():  Update received from GameModel()");
+        
         this.gameStatus((boolean)arg);
         }
     }  
