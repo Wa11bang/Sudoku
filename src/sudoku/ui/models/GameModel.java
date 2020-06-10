@@ -13,9 +13,9 @@ import sudoku.Difficulty;
 import sudoku.Game;
 import sudoku.GameEvent;
 import sudoku.GameFactory;
-import sudoku.Users;
 import sudoku.handlers.GameHandler;
 import sudoku.handlers.GameHandlerExec;
+import sudoku.misc.BlockGenerator;
 
 /**
  *
@@ -34,17 +34,11 @@ public class GameModel extends Observable {
     public void create(String type)
     {
         type = type.substring(0, 1).toUpperCase() + type.substring(1);
-        List<Block> bl = new ArrayList();
-        
-        for(int i = 0; i < 81; ++i)
-        {
-            bl.add(new Block(0));
-        }        
         
         Game tempGame = GameFactory.create(Difficulty.valueOf(type));
-        tempGame.setBlocks(bl);
+        tempGame.setBlocks(BlockGenerator.generate());
         tempGame.setUser(userModel.getUser());
-        //gh.addGame(tempGame);
+        gh.addGame(tempGame);
         
         this.game = tempGame;
         initGame();
