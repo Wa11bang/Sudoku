@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import sudoku.Sudoku;
 import sudoku.ui.elements.MenuButton;
 import sudoku.ui.controllers.StartController;
 
@@ -18,31 +19,25 @@ import sudoku.ui.controllers.StartController;
  * @author Waldo
  */
 public class StartView extends JPanel {
-    private MenuButton login;
-    private MenuButton cnu;
-    private MenuButton vsb;
-    private MenuButton exit;
+    private JPanel startButtons = new JPanel();
+    private MenuButton login = new MenuButton("Login");
+    private MenuButton cnu = new MenuButton("Create New User");
+    private MenuButton vsb = new MenuButton("View Scoreboard");
+    private MenuButton exit = new MenuButton("Exit");
     
     public StartView()
     {
-        loadLogo("/sudoku/res/logo.png");
-        
-        cnu = new MenuButton("Create New User");
-        cnu.setActionCommand("create_user");
-        
-        login = new MenuButton("Login");
-        login.setActionCommand("login");
-        
-        vsb = new MenuButton("View Scoreboard");
-        vsb.setActionCommand("scoreboard");
-        
-        exit = new MenuButton("Exit");
-        exit.setActionCommand("exit");
-        
         setBorder(new EmptyBorder(45, 10, 10, 10));
         setLayout(new FlowLayout(FlowLayout.CENTER));
+        setOpaque(false);
         
-        JPanel startButtons = new JPanel();
+        loadLogo(Sudoku.LOGO_PATH);
+ 
+        cnu.setActionCommand("create_user");    
+        login.setActionCommand("login");      
+        vsb.setActionCommand("scoreboard");        
+        exit.setActionCommand("exit");               
+                
         startButtons.setLayout(new GridLayout(0,1));
         startButtons.setOpaque(false);
         startButtons.add(cnu);
@@ -51,9 +46,8 @@ public class StartView extends JPanel {
         startButtons.add(Box.createVerticalStrut(15));
         startButtons.add(vsb);
         startButtons.add(Box.createVerticalStrut(15));
-        startButtons.add(exit);
+        startButtons.add(exit);        
         
-        setOpaque(false);
         add(startButtons);
     }
     
@@ -66,9 +60,7 @@ public class StartView extends JPanel {
     }
     
     public void loadLogo(String path)
-    {
-        System.out.println(path);
-        
+    {       
         try {
             BufferedImage logo = ImageIO.read(getClass().getResource(path));
             JLabel logoLbl = new JLabel(new ImageIcon(logo));

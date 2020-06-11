@@ -9,15 +9,15 @@ import sudoku.AppColour;
  *
  * @author Waldo
  */
-public class ControlButton extends JButton {
+public class GameButton extends JButton {
     private Color hoverBackgroundColor;
     private Color pressedBackgroundColor;
     
-    public ControlButton() {
+    public GameButton() {
         this(null);
     }
 
-    public ControlButton(String buttonText) {
+    public GameButton(String buttonText) {
         super(buttonText);
         super.setContentAreaFilled(false);
         setHoverBackgroundColor(AppColour.CONTROL_HOVER);

@@ -21,7 +21,7 @@ public class Block implements Serializable {
     @Column(name="block_id")
     private int block_id;
     
-    @Column(name="value")
+    @Column(name="block_value")
     private int value;
 
     public Block(int value)

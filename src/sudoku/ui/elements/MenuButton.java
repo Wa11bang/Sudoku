@@ -22,13 +22,16 @@ public class MenuButton extends JButton {
     public MenuButton(String buttonText) {
         super(buttonText);
         super.setContentAreaFilled(false);
-        setBackground(AppColour.MENU_BACK);
-        setFont(new Font("Sans Serif", Font.PLAIN, 20));
+        
+        setBackground(AppColour.MENU_BACK);        
         setForeground(AppColour.MENU_FORE);
         setHoverBackgroundColor(AppColour.MENU_HOVER);
         setPressedBackgroundColor(AppColour.MENU_PRESS);
+        
         setBorderPainted(false);
         setFocusPainted(false);
+        
+        setFont(new Font("Helvetica", Font.PLAIN, 20));
     }
 
     @Override
@@ -40,7 +43,7 @@ public class MenuButton extends JButton {
         } else {
             g.setColor(getBackground());
         }
-        g.fillRect(0, 0, getWidth(), getHeight());
+        g.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
         super.paintComponent(g);
     }
 

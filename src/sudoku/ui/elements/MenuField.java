@@ -11,21 +11,19 @@ import javax.swing.JTextField;
  *
  * @author Waldo
  */
-public class LoginText extends JTextField {
+public class MenuField extends JTextField {
     
     private String placeholder;
-    private String passwordU;
-    private boolean mask;
     
-    public LoginText() {
+    public MenuField() {
         this(null);
     }
 
-    public LoginText(String inputText) {
+    public MenuField(String inputText) {
         super(inputText);
     }
     
-    public LoginText(String inputText, String placeholder) {
+    public MenuField(String inputText, String placeholder) {
         super(inputText);
         this.placeholder = placeholder;
     }

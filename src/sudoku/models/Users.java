@@ -1,9 +1,5 @@
 package sudoku.models;
 
-/**
- *
- * @author Waldo
- */
 import java.io.Serializable;
 import javax.persistence.*;
 

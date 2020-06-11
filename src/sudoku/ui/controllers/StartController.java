@@ -21,30 +21,32 @@ public class StartController implements ActionListener {
         System.out.println("StartController()");
     }
     
-    public void addModel(StartModel m) {
+    public void addModel(StartModel m) 
+    {
         System.out.println("StartController: Adding StartModel");
         this.model = m;
     }
     
-    public void addAppView(View v) {
+    public void addAppView(View v) 
+    {
         System.out.println("StartController: Adding AppView");
         this.appView = v;
     }
 
-    public void addView(StartView v) {
+    public void addView(StartView v) 
+    {
         System.out.println("StartController: Adding StartView");
         this.view = v;
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) 
+    {
         System.out.println("StartController(): Acting on AppView()");
 
         if (e.getActionCommand().equals("exit")) {
             System.exit(0);
-        }
-        else
-        {
+        } else {
             appView.changePane(new ViewEvent("start", e.getActionCommand()));
         }             
     }

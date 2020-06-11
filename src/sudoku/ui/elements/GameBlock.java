@@ -11,18 +11,19 @@ import sudoku.AppColour;
  *
  * @author Waldo
  */
-public class GameBlock extends JTextField implements FocusListener {
+public class GameBlock extends JTextField {
     
     public GameBlock(String inputText)
     {
         super(inputText);    
-        this.setOpaque(false);
-        this.setFont(new Font("Sans Serif", Font.BOLD, 25));
+        setOpaque(false);
+        setFont(new Font("Sans Serif", Font.BOLD, 25));
         setBackground(AppColour.GAME_B_BACK);
-        this.setBorder(null);
-        this.setHorizontalAlignment(JTextField.CENTER);
-        this.addFocusListener(this);
-        this.setDocument(new TextLimitDocument(1));
+        setBorder(null);
+        setHorizontalAlignment(JTextField.CENTER);
+        setDocument(new TextLimitDocument(1));
+        
+        initFocusListener();
     }
     
     public GameBlock()
@@ -30,15 +31,31 @@ public class GameBlock extends JTextField implements FocusListener {
         this(null);
     }
     
-    public void focusGained(java.awt.event.FocusEvent focusEvent) {
-        try {
-            JTextField src = (JTextField)focusEvent.getSource();
-            src.setBackground(AppColour.GAME_B_FOCUS);
-        } catch (ClassCastException ignored) {
-            /* oofies, I only care about dem sweet JTextTitties */
-        }
+    public void initFocusListener()
+    {
+        addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                try {
+                    JTextField src = (JTextField)e.getSource();
+                    src.setBackground(AppColour.GAME_B_FOCUS);
+                } catch (ClassCastException ignored) {
+                    /* oofies, I only care about dem sweet JTextTitties */
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                try {
+                    JTextField src = (JTextField)e.getSource();
+                    src.setBackground(AppColour.GAME_B_BACK);
+                } catch (ClassCastException ignored) {
+                    /* oofies, I only care about dem sweet JTextTitties */
+                }
+            }
+        });
     }
-    
+
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -47,14 +64,4 @@ public class GameBlock extends JTextField implements FocusListener {
         g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 30, 30);
         super.paintComponent(g);
     }   
-
-    @Override
-    public void focusLost(FocusEvent e) {
-        try {
-            JTextField src = (JTextField)e.getSource();
-            src.setBackground(AppColour.GAME_B_BACK);
-        } catch (ClassCastException ignored) {
-            /* oofies, I only care about dem sweet JTextTitties */
-        }
-    }
 }

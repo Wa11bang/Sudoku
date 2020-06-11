@@ -43,7 +43,6 @@ public class GameController implements ActionListener {
     public List<Block> replaceBlockValue(List<Block> source, List<Block> newSet)
     {
         ListIterator li = newSet.listIterator();
-        List<Block> blocks = new ArrayList();
         
         int count = 0;
         
@@ -51,8 +50,7 @@ public class GameController implements ActionListener {
         {
             source.get(count).setValue(((Block)li.next()).getValue());
             count++;
-        }
-        
+        }        
         return source;
     }
     

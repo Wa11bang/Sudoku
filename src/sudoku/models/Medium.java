@@ -25,6 +25,6 @@ public class Medium extends Game {
     
     public Medium()
     {
-        this.setDifficulty(Difficulty.Medium);
+        super.setDifficulty(Difficulty.Medium);
     }
 }

@@ -24,7 +24,7 @@ public class View extends JFrame implements Observer {
     private String currentPane;
     private String prevPane;
     
-    private JPanel cards = new JPanel(new CardLayout());
+    private JPanel cards = new JPanel(new CardLayout());    
     
     private StartView startView = new StartView();
     private GameView gameView = new GameView();
@@ -43,9 +43,9 @@ public class View extends JFrame implements Observer {
 
     public View()
     {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 600);
-        this.setTitle("Sudoku");             
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600, 600);
+        setTitle("Sudoku");             
         
         gameView.initComponents();                 
              
@@ -61,7 +61,7 @@ public class View extends JFrame implements Observer {
         uc = new UserController();
         sbc = new ScoreboardController();
         
-        
+        //INIT
         sc.addModel(sm);        
         sc.addView(startView); 
         startView.addController(sc);  
@@ -115,7 +115,9 @@ public class View extends JFrame implements Observer {
         setLocationRelativeTo(null);
         setUndecorated(true);
         setVisible(true);
-        setBackground(new Color(232, 240, 255, 220));       
+        setBackground(new Color(232, 240, 255, 220));   
+        getContentPane().setBackground(AppColour.APP_BACK);
+
         
         //Handle Shutdown of Application
         Runtime.getRuntime().addShutdownHook(new Thread()

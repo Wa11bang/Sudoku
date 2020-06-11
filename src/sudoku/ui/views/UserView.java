@@ -19,8 +19,7 @@ import sudoku.ui.elements.MenuButton;
  * @author Waldo
  */
 public class UserView extends JPanel implements Observer {
-    private JPanel userMenu = new JPanel();
-    private GridBagConstraints gbc = new GridBagConstraints();
+    private JPanel userMenu = new JPanel();    
     private MenuButton createGameBtn = new MenuButton("Create a new Game");
     private MenuButton uncompletedGamesBtn = new MenuButton("View Uncompleted Games");
     private MenuButton completedGamesBtn = new MenuButton("View Completed Games");
@@ -31,12 +30,15 @@ public class UserView extends JPanel implements Observer {
     public UserView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());        
+        setLayout(new GridBagLayout());     
+        setOpaque(false);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc2 = new GridBagConstraints();
         
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;        
         
-        GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.anchor = GridBagConstraints.NORTH;
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;        
@@ -53,8 +55,7 @@ public class UserView extends JPanel implements Observer {
         uncompletedGamesBtn.setActionCommand("uncompleted_games");
         completedGamesBtn.setActionCommand("completed_games");
         viewScoreboardBtn.setActionCommand("scoreboard");
-        logoutBtn.setActionCommand("back");//Current Panel (Used for Back-tracking) user
-
+        logoutBtn.setActionCommand("back");
         
         userMenu.add(userWelcome, gbc);
         userMenu.add(Box.createVerticalStrut(50), gbc);
@@ -66,14 +67,9 @@ public class UserView extends JPanel implements Observer {
         userMenu.add(Box.createVerticalStrut(25), gbc);
         userMenu.add(viewScoreboardBtn, gbc);
         userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(logoutBtn, gbc);      
-        
+        userMenu.add(logoutBtn, gbc);             
 
-        
-        add(userMenu, gbc);
-        
-        setOpaque(false);
-        
+        add(userMenu, gbc);       
     }
     
     public void loadUser(Users user)

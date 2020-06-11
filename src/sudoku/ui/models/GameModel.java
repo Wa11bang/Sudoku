@@ -20,7 +20,7 @@ import sudoku.models.Score;
 public class GameModel extends Observable {
     private Game game;
     private UserModel userModel;
-    private final GameHandler gh = new GameHandlerExec(); //Business Layer
+    private final GameHandler gh = new GameHandlerExec();
     private double timer;
     
     public GameModel()
@@ -30,15 +30,20 @@ public class GameModel extends Observable {
     
     public void create(String type)
     {
-        type = type.substring(0, 1).toUpperCase() + type.substring(1);
+        type = type.substring(0, 1).toUpperCase() + type.substring(1);               
+        game = makeGame(type);
         
+        gh.addGame(game);
+        initGame();
+    }
+    
+    public Game makeGame(String type)
+    {
         Game tempGame = GameFactory.create(Difficulty.valueOf(type));
         tempGame.setBlocks(BlockGenerator.generate(tempGame.getDifficulty()));
         tempGame.setUser(userModel.getUser());
-        gh.addGame(tempGame);
         
-        this.game = tempGame;
-        initGame();
+        return tempGame;
     }
     
     public void addUserModel(UserModel m)
@@ -48,10 +53,9 @@ public class GameModel extends Observable {
     
     public void saveGame(boolean notify)
     {
-        if(null != this.game)
+        if(null != game)
         {
-            double newTime = game.getTime() + ((System.currentTimeMillis() - timer)/1000);
-            game.setTime(newTime);
+            calculateTime();
             if(notify)
             {   
                 this.setChanged();
@@ -64,12 +68,18 @@ public class GameModel extends Observable {
         }
     }
     
+    public void calculateTime()
+    {
+        double newTime = game.getTime() + ((System.currentTimeMillis() - timer)/1000);
+        game.setTime(newTime);
+    }
+    
     public void initGame()
     {
-        if(null != this.game)
+        if(null != game)
         {
-            this.setChanged();
-            this.notifyObservers(game);
+            setChanged();
+            notifyObservers(game);
             timer = System.currentTimeMillis();
         }
     }
@@ -95,23 +105,28 @@ public class GameModel extends Observable {
         this.notifyObservers(new GameEvent(false, check()));
     }
     
+    public void addScore()
+    {
+        Score score = new Score(game);        
+        new ScoreHandlerExec().addScore(score);
+    }
+    
     public boolean check()
     {
         for(int i = 1; i < 10; ++i)
         {
             for(int c = 0; c < 9; ++c)
             {
-            if(!this.gh.checkSolution1(this.game, c, i) || !this.gh.checkSolution(this.game, c, i))
+            if(!gh.checkSolution1(game, c, i) || !gh.checkSolution(game, c, i))
             {
                 return false;
             }
             }
         }
         
-        this.game.setComplete(true);
-        this.saveGame(false);
-        Score score = new Score(game);
-        new ScoreHandlerExec().addScore(score);
+        game.setComplete(true);
+        saveGame(false); 
+        addScore();
         
         return true;
     }

@@ -1,6 +1,5 @@
 package sudoku.models;
 
-import sudoku.models.Users;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ abstract public class Game implements Serializable {
     @Column(name="game_id")
     private int game_id;
     
-    @Column(name="time")
+    @Column(name="game_time")
     private double game_time;
     
     @Column(name="isComplete")

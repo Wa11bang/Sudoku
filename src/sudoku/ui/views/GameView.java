@@ -13,7 +13,7 @@ import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import sudoku.AppColour;
 import sudoku.models.Block;
-import sudoku.ui.elements.ControlButton;
+import sudoku.ui.elements.GameButton;
 import sudoku.models.Game;
 import sudoku.events.GameEvent;
 import sudoku.ui.elements.GameBlock;
@@ -24,39 +24,39 @@ import sudoku.ui.controllers.GameController;
  *
  * @author Waldo
  */
-public class GameView extends JPanel implements Observer {
-    private List<GameBlock> grid;
+public class GameView extends JPanel implements Observer {    
     private JPanel gamePanel = new JPanel();
-    private ControlButton check = new ControlButton();
+    private JPanel controls = new JPanel();
+    private List<GameBlock> grid = new ArrayList();;
+    private GameButton check = new GameButton();
     private JButton save = new JButton();
     private JButton back = new JButton();  
         
     public GameView()
     {
-        GridLayout experimentLayout = new GridLayout(3,3);
-        experimentLayout.setHgap(15);
-        experimentLayout.setVgap(15);
+        setLayout(new BorderLayout());
         
-        gamePanel.setLayout(experimentLayout);
-        gamePanel.setBorder(new EmptyBorder(30,30,15,30));
+        GridLayout gamePanelLayout = new GridLayout(3,3);
+        gamePanelLayout.setHgap(15);
+        gamePanelLayout.setVgap(15);
         
-        JPanel controls = new JPanel();
+        
+        gamePanel.setLayout(gamePanelLayout);
+        gamePanel.setBorder(new EmptyBorder(30,30,15,30));             
         controls.setBorder(new EmptyBorder(15,30,15,30));
         
-        check = new ControlButton("Check Solution");
+        check = new GameButton("Check Solution");
         check.setActionCommand("check");
         
-        save = new ControlButton("Save Progress");
+        save = new GameButton("Save Progress");
         save.setActionCommand("save");
         
-        back = new ControlButton("Back");
+        back = new GameButton("Back");
         back.setActionCommand("back");
 
         controls.add(back);
         controls.add(check);
-        controls.add(save);        
-        
-        setLayout(new BorderLayout());
+        controls.add(save);                   
         
         add(gamePanel, BorderLayout.CENTER);
         add(controls, BorderLayout.PAGE_END);               
@@ -64,76 +64,55 @@ public class GameView extends JPanel implements Observer {
     
     public void initComponents()
     {
-        grid = new ArrayList();
         for(int i = 0; i < 81; ++i)
         {
             grid.add(new GameBlock());
         }     
-        this.drawSections();
-    }
-    
-    public void loadGame(Object game)
-    {
-        ListIterator li = grid.listIterator();
-        List<Block> blocks = ((Game) game).getBlocks();
-        
-        System.out.println(blocks.size());
-        
-        while(li.hasNext())
-        {
-            int block_val = blocks.get((li.nextIndex())).getValue();
-            System.out.print(block_val);
-            if(block_val != 0)
-            {
-                ((GameBlock) li.next()).setText(block_val + "");
-                //grid.get(li.nextIndex()).setEditable(true);
-            }
-            else
-            {
-                ((GameBlock) li.next()).setText("");
-            }
-        }       
+        drawSections();
     }
     
     /**
      * Group a 3x3 section and draw a really nice background
-     * @param game 
      */
     public void drawSections()
     {
-        int secColStart = 0;
-        int secColEnd = 3;
-        int secRowStart = 0;
-        int secRowEnd = 3;
+        int sectionColumnStart = 0;
+        int sectionColumnEnd = 3;
+        int gridSize = 3;
         
-        for(int a = 0; a < 3; ++a)
+        int sectionRowStart,sectionRowEnd;
+        
+        for(int x = 0; x < gridSize; ++x)
         {
-            secRowStart = 0;
-            secRowEnd = 3;
-        for(int k = 0; k < 3; ++k)
-        {
-            GridLayout experimentLayout = new GridLayout(3,3);
-            JPanel p = new RoundedPanel();
-            experimentLayout.setHgap(5);
-            experimentLayout.setVgap(5);
-            p.setOpaque(false);
-            p.setLayout(experimentLayout);
-            p.setBackground(AppColour.GAME_SECTION);
-            p.setBorder(new EmptyBorder(10,10,10,10));
-            
-            for(int i = secColStart; i < secColEnd; ++i)
+            sectionRowStart = 0;
+            sectionRowEnd = 3;
+            for(int y = 0; y < gridSize; ++y)
             {
-                for(int j = secRowStart; j < secRowEnd; ++j)
+                GridLayout gameSectionLayout = new GridLayout(3,3);
+                gameSectionLayout.setHgap(5);
+                gameSectionLayout.setVgap(5);
+
+                JPanel p = new RoundedPanel(30);
+
+                p.setOpaque(false);
+                p.setLayout(gameSectionLayout);
+                p.setBackground(AppColour.GAME_SECTION);
+                p.setBorder(new EmptyBorder(10,10,10,10));
+
+                for(int i = sectionColumnStart; i < sectionColumnEnd; ++i)
                 {
-                    p.add(grid.get((i * 9)+j));
+                    for(int j = sectionRowStart; j < sectionRowEnd; ++j)
+                    {
+                        p.add(grid.get((i * 9)+j));
+                    }
                 }
+
+                gamePanel.add(p);
+                sectionRowStart += 3;
+                sectionRowEnd += 3;
             }
-            gamePanel.add(p);
-            secRowStart += 3;
-            secRowEnd += 3;
-        }
-            secColStart += 3;
-            secColEnd += 3;
+            sectionColumnStart += 3;
+            sectionColumnEnd += 3;
         }
     }
     
@@ -151,14 +130,12 @@ public class GameView extends JPanel implements Observer {
                     } 
                     else if(e.getSolved())
                     {
-                        //grid.get(i).setEditable(false);
                         grid.get(i).setBackground(AppColour.CORRECT);   
                     }
                     else
                     {
                         grid.get(i).setBackground(AppColour.ERROR);      
-                    }
-                                  
+                    }                                  
                     Thread.sleep(2);
                 }
                 
@@ -172,17 +149,37 @@ public class GameView extends JPanel implements Observer {
         }.execute();
     }
     
+    public void loadGame(Object game)
+    {
+        ListIterator<GameBlock> li = grid.listIterator();
+        List<Block> blocks = ((Game) game).getBlocks();        
+        
+        while(li.hasNext())
+        {
+            int block_val = blocks.get((li.nextIndex())).getValue();
+            if(block_val != 0)
+            {
+                (li.next()).setText(Integer.toString(block_val));
+            }
+            else
+            {
+                (li.next()).setText("");
+            }
+        }       
+    }
+    
     public List<Block> parseBlocks()
     {
-        ListIterator li = grid.listIterator();
+        ListIterator<GameBlock> li = grid.listIterator();
         List<Block> blocks = new ArrayList();
         
         while(li.hasNext())
         {
-            GameBlock gb = ((GameBlock) li.next());
+            GameBlock gb = li.next();
                 
-            if(isInteger(gb.getText()))
+            if(isInteger(gb.getText())){
                 blocks.add(new Block(Integer.parseInt(gb.getText())));
+            } 
             else
             {
                 blocks.add(new Block(0));
@@ -202,26 +199,21 @@ public class GameView extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("GameView():  Update received from GameModel()");
-        if(arg instanceof Game)
-        {
+        if(arg instanceof Game) {
             loadGame(arg);
-        }
-        else {
-        
-        this.gameStatus((GameEvent)arg);
+        } else {        
+            gameStatus((GameEvent)arg);
         }
     }  
     
-    public static boolean isInteger(String str) {
-               
+    public static boolean isInteger(String str) {               
         for(char c : str.toCharArray())
         {
             if(!Character.isDigit(c))
             {
                 return false;
             }
-        }
-        
-        return true && !str.isEmpty();
+        }        
+        return (true && !str.isEmpty());
     }
 }

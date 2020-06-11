@@ -13,7 +13,7 @@ import sudoku.events.ScoreEvent;
 import sudoku.models.Score;
 import sudoku.ui.controllers.ScoreboardController;
 import sudoku.ui.elements.MenuButton;
-import sudoku.ui.elements.ScoreText;
+import sudoku.ui.elements.ScoreLabel;
 
 /**
  *
@@ -22,20 +22,22 @@ import sudoku.ui.elements.ScoreText;
 public class ScoreboardView extends JPanel implements Observer {
     private JPanel scoreboardPanel = new JPanel();
     private JPanel board = new JPanel();
-    private List<ScoreText> scoreList = new ArrayList();
-    private GridBagConstraints gbc = new GridBagConstraints();
+    private List<ScoreLabel> scoreList = new ArrayList();    
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton refreshBtn = new MenuButton("Refresh "+"\uD83D\uDDD8");
+    private GridBagConstraints gbc = new GridBagConstraints();
     
     public ScoreboardView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
         setLayout(new GridBagLayout());        
-        
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        setOpaque(false);        
         
         GridBagConstraints gbc2 = new GridBagConstraints();
+        
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;        
+        
         gbc2.anchor = GridBagConstraints.NORTH;
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;        
@@ -43,7 +45,7 @@ public class ScoreboardView extends JPanel implements Observer {
         scoreboardPanel.setLayout(new GridBagLayout());
         scoreboardPanel.setOpaque(false);       
 
-        backBtn.setActionCommand("back"); //Current Panel (Used for Back-tracking) login     
+        backBtn.setActionCommand("back");
         refreshBtn.setActionCommand("refresh");
 
         scoreboardPanel.add(board, gbc);
@@ -52,12 +54,9 @@ public class ScoreboardView extends JPanel implements Observer {
         scoreboardPanel.add(refreshBtn, gbc2);
         
         board.setLayout(new GridBagLayout());
-        board.setOpaque(false);
+        board.setOpaque(false);        
         
-        
-        add(scoreboardPanel, gbc);
-        setOpaque(false);
-        
+        add(scoreboardPanel, gbc);                
     }
     
     public void populate(List<Score> scores)
@@ -67,7 +66,7 @@ public class ScoreboardView extends JPanel implements Observer {
         scoreList.clear();
         for(Score score : scores)
         {
-            scoreList.add(new ScoreText(score.toString()));
+            scoreList.add(new ScoreLabel(score.toString()));
             
         }
         
@@ -76,12 +75,12 @@ public class ScoreboardView extends JPanel implements Observer {
     
     public void initComponents()
     {
-        for(ScoreText st : scoreList)
+        for(ScoreLabel st : scoreList)
         {
             board.add(st, gbc);
             board.add(Box.createVerticalStrut(5), gbc);
         }
-        this.updateUI();
+        updateUI();
     }
     
     @Override

@@ -12,7 +12,7 @@ import sudoku.handlers.UserHandlerExec;
  */
 public class UserModel extends Observable {
     private Users user;
-    private final UserHandler uh = new UserHandlerExec(); //Business Layer
+    private final UserHandler uh = new UserHandlerExec();
     
     public UserModel()
     {
@@ -21,12 +21,12 @@ public class UserModel extends Observable {
     
     public String getUsername()
     {
-        return this.user.getUsername();
+        return user.getUsername();
     }
     
     public boolean login(String username, String password)
     {
-        this.setChanged();
+        setChanged();
         Users tempUser = uh.login(username, password);
         if(null != tempUser)
         {
@@ -35,27 +35,27 @@ public class UserModel extends Observable {
             return true;
         }       
         
-        this.notifyObservers(new UserEvent(false,true));        
+        notifyObservers(new UserEvent(false,true));        
         return false;
     }
     
     public void logout()
     {
-        this.user = null;
+        user = null;
         System.out.println("UserModel(): Logged Out of User");
     }
     
     public Users getUser()
     {
-        return this.user;
+        return user;
     }
     
     public boolean createUser(String username, String password)
     {
-        this.setChanged();
+        setChanged();
         if(username.isEmpty() || password.isEmpty() || username.length() > 12)
         {
-            this.notifyObservers(new UserEvent(false, true));
+            notifyObservers(new UserEvent(false, true));
             return false;
         }
         
@@ -66,12 +66,12 @@ public class UserModel extends Observable {
             if(uh.addUser(tempUser))
             {
                 user = uh.login(username, password);           
-                this.notifyObservers(new UserEvent(user));
+                notifyObservers(new UserEvent(user));
                 return true;
             }               
         }
         
-        this.notifyObservers(new UserEvent(true,false));
+        notifyObservers(new UserEvent(true,false));
         return false;
     }
 

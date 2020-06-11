@@ -13,7 +13,7 @@ import sudoku.models.Score;
  */
 public class ScoreboardModel extends Observable {
     private List<Score> scores;
-    private final ScoreHandler sh = new ScoreHandlerExec(); //Business Layer
+    private final ScoreHandler sh = new ScoreHandlerExec();
     
     public ScoreboardModel()
     {
@@ -23,8 +23,8 @@ public class ScoreboardModel extends Observable {
     
     public void loadScores()
     {
-        this.scores = sh.retrieveAllScores();
-        this.setChanged();
-        this.notifyObservers(new ScoreEvent(scores));
+        scores = sh.retrieveAllScores();
+        setChanged();
+        notifyObservers(new ScoreEvent(scores));
     }
 }

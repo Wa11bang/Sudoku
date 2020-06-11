@@ -43,8 +43,7 @@ public class ScoreboardController implements ActionListener {
             System.out.println("ScoreboardController(): Acting on ScoreboardModel()");
             model.loadScores();
         }
-        if(e.getActionCommand().equals("back"))
-        {
+        if(e.getActionCommand().equals("back")) {
             System.out.println("ScoreboardController(): Acting on AppView()");
             appView.changePane(new ViewEvent("scoreboard", appView.getPrevPane()));
         }

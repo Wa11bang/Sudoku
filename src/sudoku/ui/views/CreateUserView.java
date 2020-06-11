@@ -14,7 +14,7 @@ import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
 import sudoku.events.UserEvent;
 import sudoku.ui.controllers.UserController;
-import sudoku.ui.elements.LoginText;
+import sudoku.ui.elements.MenuField;
 import sudoku.ui.elements.MenuButton;
 
 /**
@@ -23,21 +23,23 @@ import sudoku.ui.elements.MenuButton;
  */
 public class CreateUserView extends JPanel  implements Observer {
     private JPanel createForm = new JPanel();
-    private GridBagConstraints gbc = new GridBagConstraints();
-    private LoginText cU = new LoginText();
-    private LoginText cP = new LoginText(); //CHANGE to JPasswordField 
+    private MenuField createUsername = new MenuField();
+    private MenuField createPassword = new MenuField(); //CHANGE to JPasswordField 
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton createBtn = new MenuButton("Create");
     
     public CreateUserView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());        
+        setLayout(new GridBagLayout());      
+        setOpaque(false);      
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc2 = new GridBagConstraints();
         
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        
-        GridBagConstraints gbc2 = new GridBagConstraints();
+                
         gbc2.anchor = GridBagConstraints.NORTH;
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;      
@@ -46,42 +48,37 @@ public class CreateUserView extends JPanel  implements Observer {
         createForm.setOpaque(false);
         
         createBtn.setActionCommand("user_create");
-        backBtn.setActionCommand("back"); //Current Panel (Used for Back-tracking) create_user
+        backBtn.setActionCommand("back");
+
+        createUsername.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
+        createUsername.setPlaceholder("Username (Max 12 Character)");
+        createUsername.setOpaque(false);
+        createUsername.setPreferredSize(new Dimension(200, 75));
+        createUsername.setFont(new Font("Sans Serif", Font.PLAIN, 24));
         
-        cU = new LoginText();
-        cP = new LoginText();
+        createPassword.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
+        createPassword.setPlaceholder("Password");
+        createPassword.setOpaque(false);
+        createPassword.setPreferredSize(new Dimension(200, 75));
+        createPassword.setFont(new Font("Sans Serif", Font.PLAIN, 24));
         
-        cU.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
-        cU.setPlaceholder("Username (Max 12 Character)");
-        cU.setOpaque(false);
-        cU.setPreferredSize(new Dimension(200, 75));
-        cU.setFont(new Font("Sans Serif", Font.PLAIN, 24));
-        
-        cP.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
-        cP.setPlaceholder("Password");
-        cP.setOpaque(false);
-        cP.setPreferredSize(new Dimension(200, 75));
-        cP.setFont(new Font("Sans Serif", Font.PLAIN, 24));
-        
-        createForm.add(cU, gbc);
-        createForm.add(cP, gbc);
+        createForm.add(createUsername, gbc);
+        createForm.add(createPassword, gbc);
         createForm.add(Box.createVerticalStrut(25), gbc);
         createForm.add(backBtn, gbc2);
         createForm.add(createBtn, gbc2);
         
-        add(createForm, gbc);
-
-        setOpaque(false);        
+        add(createForm, gbc);          
     }
     
     public String getLoginUsername()
     {
-        return this.cU.getText();
+        return createUsername.getText();
     }
     
     public String getLoginPassword()
     {
-        return this.cP.getText();
+        return createPassword.getText();
     }
     
     @Override
@@ -95,12 +92,12 @@ public class CreateUserView extends JPanel  implements Observer {
                 createBtn.setBackground(AppColour.ERROR);
             }
             else if (((UserEvent) arg).isUserExists()) {
-                cU.setPlaceholder("User exists");
-                cU.updateUI();
-                System.out.println("PLACEHOLDER CHANGED");
+                createUsername.setPlaceholder("User exists");
+                createUsername.updateUI();
             }
             else
             {
+                createUsername.setPlaceholder("Username (Max 12 Character)");
                 createBtn.setBackground(AppColour.MENU_BACK);
             }
         }
@@ -115,7 +112,7 @@ public class CreateUserView extends JPanel  implements Observer {
     
     public void resetText()
     {
-        cU.setText("");
-        cP.setText("");
+        createUsername.setText("");
+        createPassword.setText("");
     }
 }

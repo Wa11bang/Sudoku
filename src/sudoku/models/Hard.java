@@ -1,8 +1,5 @@
 package sudoku.models;
 
-import sudoku.models.Block;
-import sudoku.models.Game;
-import sudoku.models.Users;
 import java.util.List;
 import javax.persistence.Entity;
 import sudoku.Difficulty;
@@ -25,6 +22,6 @@ public class Hard extends Game {
     
     public Hard()
     {
-        this.setDifficulty(Difficulty.Hard);
+        super.setDifficulty(Difficulty.Hard);
     }
 }

@@ -19,8 +19,7 @@ import sudoku.ui.elements.MenuButton;
  * @author Waldo
  */
 public class CreateGameView extends JPanel implements Observer {
-    private JPanel gameSelection = new JPanel();
-    private GridBagConstraints gbc = new GridBagConstraints();
+    private JPanel gameSelection = new JPanel();    
     private MenuButton easyBtn = new MenuButton("Easy ("+Difficulty.Easy.getValue()+")");
     private MenuButton mediumBtn = new MenuButton("Medium ("+Difficulty.Medium.getValue()+")");
     private MenuButton hardBtn = new MenuButton("Hard ("+Difficulty.Hard.getValue()+")");
@@ -31,20 +30,21 @@ public class CreateGameView extends JPanel implements Observer {
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
         setLayout(new GridBagLayout());        
+        setOpaque(false);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc2 = new GridBagConstraints();
         
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;        
         
-        GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.anchor = GridBagConstraints.NORTH;
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;        
-        
-        //userMenu.setLayout(new GridLayout(0, 1));
+
         gameSelection.setLayout(new GridBagLayout());
-        gameSelection.setOpaque(false);        
-              
-        
+        gameSelection.setOpaque(false);     
+           
         gameSelect.setOpaque(false);
         gameSelect.setBorder(null);
         gameSelect.setEditable(false);
@@ -55,7 +55,7 @@ public class CreateGameView extends JPanel implements Observer {
         easyBtn.setActionCommand("easy_create");
         mediumBtn.setActionCommand("medium_create");
         hardBtn.setActionCommand("hard_create");
-        backBtn.setActionCommand("back");//Current Panel (Used for Back-tracking) user
+        backBtn.setActionCommand("back");
 
         gameSelection.add(Box.createVerticalStrut(25), gbc);
         gameSelection.add(easyBtn, gbc);
@@ -67,10 +67,7 @@ public class CreateGameView extends JPanel implements Observer {
         gameSelection.add(backBtn);   
 
         add(gameSelect, gbc);
-        add(gameSelection, gbc);
-        
-        setOpaque(false);
-        
+        add(gameSelection, gbc); 
     }
     
     @Override

@@ -14,7 +14,7 @@ import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
 import sudoku.events.UserEvent;
 import sudoku.ui.controllers.UserController;
-import sudoku.ui.elements.LoginText;
+import sudoku.ui.elements.MenuField;
 import sudoku.ui.elements.MenuButton;
 
 /**
@@ -23,9 +23,8 @@ import sudoku.ui.elements.MenuButton;
  */
 public class LoginView extends JPanel implements Observer {
     private JPanel loginForm = new JPanel();
-    private GridBagConstraints gbc = new GridBagConstraints();
-    private LoginText tU = new LoginText();
-    private LoginText tP = new LoginText(); //CHANGE to JPasswordField 
+    private MenuField loginUsername = new MenuField();
+    private MenuField loginPassword = new MenuField();
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton loginBtn = new MenuButton("Login");
     
@@ -33,11 +32,14 @@ public class LoginView extends JPanel implements Observer {
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
         setLayout(new GridBagLayout());        
+        setOpaque(false);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc2 = new GridBagConstraints();
         
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;        
         
-        GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.anchor = GridBagConstraints.NORTH;
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;        
@@ -46,40 +48,37 @@ public class LoginView extends JPanel implements Observer {
         loginForm.setOpaque(false);       
         
         loginBtn.setActionCommand("user_login");
-        backBtn.setActionCommand("back"); //Current Panel (Used for Back-tracking) login
+        backBtn.setActionCommand("back");
         
-        tU.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
-        tU.setPlaceholder("Username");
-        tU.setOpaque(false);
-        tU.setPreferredSize(new Dimension(200, 75));
-        tU.setFont(new Font("Sans Serif", Font.PLAIN, 24));
+        loginUsername.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
+        loginUsername.setPlaceholder("Username");
+        loginUsername.setOpaque(false);
+        loginUsername.setPreferredSize(new Dimension(200, 75));
+        loginUsername.setFont(new Font("Sans Serif", Font.PLAIN, 24));
         
-        tP.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
-        tP.setPlaceholder("Password");
-        tP.setOpaque(false);
-        tP.setPreferredSize(new Dimension(200, 75));
-        tP.setFont(new Font("Sans Serif", Font.PLAIN, 24));
+        loginPassword.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
+        loginPassword.setPlaceholder("Password");
+        loginPassword.setOpaque(false);
+        loginPassword.setPreferredSize(new Dimension(200, 75));
+        loginPassword.setFont(new Font("Sans Serif", Font.PLAIN, 24));
         
-        loginForm.add(tU, gbc);
-        loginForm.add(tP, gbc);
+        loginForm.add(loginUsername, gbc);
+        loginForm.add(loginPassword, gbc);
         loginForm.add(Box.createVerticalStrut(25), gbc);
         loginForm.add(backBtn, gbc2);
         loginForm.add(loginBtn, gbc2);
         
         add(loginForm, gbc);
-
-        setOpaque(false);
-        
     }
     
     public String getLoginUsername()
     {
-        return this.tU.getText();
+        return loginUsername.getText();
     }
     
     public String getLoginPassword()
     {
-        return this.tP.getText();
+        return loginPassword.getText();
     }
     
     @Override
@@ -109,7 +108,7 @@ public class LoginView extends JPanel implements Observer {
     
     public void resetText()
     {
-        this.tU.setText("");
-        this.tP.setText("");
+        loginUsername.setText("");
+        loginPassword.setText("");
     }
 }
