@@ -3,12 +3,7 @@ package sudoku.ui.views;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -72,14 +67,10 @@ public class StartView extends JPanel {
     
     public void loadLogo(String path)
     {
-        URI logoPath = null;
+        System.out.println(path);
+        
         try {
-            logoPath = getClass().getResource(path).toURI();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(StartView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            BufferedImage logo = ImageIO.read(new File(logoPath));
+            BufferedImage logo = ImageIO.read(getClass().getResource(path));
             JLabel logoLbl = new JLabel(new ImageIcon(logo));
             add(logoLbl);
         } catch (IOException ex) {
