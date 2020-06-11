@@ -26,7 +26,7 @@ public interface UserHandler {
     /**
      * Retrieve user by user_id
      */
-    public Users getUserByID(int user_id);
+    public Users getUserByID(String username);
     
     /**
      * Retrieve all existing Users

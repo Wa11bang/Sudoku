@@ -6,6 +6,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import sudoku.ui.controllers.*;
@@ -117,6 +120,15 @@ public class View extends JFrame implements Observer {
                 HibernateUtils.shutdown();
             }
         });
+        
+        new Runnable(){
+            @Override
+            public void run() {
+                sound();
+            }
+            
+        }.run();
+        
     }
     
     public void initExtControllers()
@@ -151,4 +163,17 @@ public class View extends JFrame implements Observer {
         System.out.println("Update received!");
         setCurrentPane((String) obj);
     }
+
+    public void sound() {
+    try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("sound.wav"));
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+        // If you want the sound to loop infinitely, then put: clip.loop(Clip.LOOP_CONTINUOUSLY); 
+        // If you want to stop the sound, then use clip.stop();
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
 }

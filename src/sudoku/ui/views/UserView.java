@@ -9,6 +9,7 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import sudoku.UserEvent;
 import sudoku.Users;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
@@ -83,9 +84,13 @@ public class UserView extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("UserView():  Update received from UserModel()");
-        if(arg instanceof Users)
-        {
-            loadUser((Users)arg);
+        if(arg instanceof UserEvent)
+        {           
+            if(null != ((UserEvent) arg).getUser())
+            {
+                System.out.println("UserView():  Loading User from UserModel()");
+                loadUser(((UserEvent) arg).getUser());
+            }
         }
     }
     

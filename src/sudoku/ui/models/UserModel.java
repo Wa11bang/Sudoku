@@ -1,6 +1,7 @@
 package sudoku.ui.models;
 
 import java.util.Observable;
+import sudoku.UserEvent;
 import sudoku.Users;
 import sudoku.handlers.UserHandler;
 import sudoku.handlers.UserHandlerExec;
@@ -26,24 +27,22 @@ public class UserModel extends Observable {
     public boolean login(String username, String password)
     {
         this.setChanged();
-        boolean status = false;
         Users tempUser = uh.login(username, password);
         if(null != tempUser)
         {
-            System.out.println("Correct Baby!");
             user = tempUser;
-            status = true;
-            this.notifyObservers(user);
+            this.notifyObservers(new UserEvent(user));
+            return true;
         }       
         
-        this.notifyObservers(status);
-        
-        return status;
+        this.notifyObservers(new UserEvent(false,true));        
+        return false;
     }
     
     public void logout()
     {
         this.user = null;
+        System.out.println("UserModel(): Logged Out of User");
     }
     
     public Users getUser()
@@ -53,23 +52,27 @@ public class UserModel extends Observable {
     
     public boolean createUser(String username, String password)
     {
-        boolean status = false;
-        Users tempUser = new Users(username, password);
         this.setChanged();
-        
-        System.out.println(username + " " + password);
-        
-        if(uh.addUser(tempUser))
+        if(username.isEmpty() || password.isEmpty())
         {
-            user = uh.login(username, password);  
-            System.out.println(tempUser + "  " + user);
-            this.notifyObservers(user);
-            status = true;
-        }       
+            this.notifyObservers(new UserEvent(false, true));
+            return false;
+        }
         
-        this.notifyObservers(status);
+        Users tempUser = new Users(username, password);        
         
-        return status;
+        if(null == (uh.getUserByID(username))){
+            
+            if(uh.addUser(tempUser))
+            {
+                user = uh.login(username, password);           
+                this.notifyObservers(new UserEvent(user));
+                return true;
+            }               
+        }
+        
+        this.notifyObservers(new UserEvent(true,false));
+        return false;
     }
 
 }

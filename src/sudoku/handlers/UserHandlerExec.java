@@ -84,16 +84,24 @@ public class UserHandlerExec implements UserHandler {
     }
 
     @Override
-    public Users getUserByID(int user_id) {
+    public Users getUserByID(String username) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         
         Transaction tx = null;
         Users user = null;
-        
+
         try {
+            Criteria crit = session.createCriteria(Users.class);
+            crit.add(Restrictions.eq("username", username));
+            crit.setMaxResults(1);
+            List<Users> results = crit.list();
+            
             tx = session.beginTransaction();
-            user = (Users) session.load(Users.class, user_id);
+            if(results.size() > 0)
+            {
+                user = (Users) results.get(0);
+            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -157,8 +165,6 @@ public class UserHandlerExec implements UserHandler {
             }
             e.printStackTrace();
         }
-        
-        System.out.println(user);
         
         return user;
     }

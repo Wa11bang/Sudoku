@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
+import sudoku.UserEvent;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.LoginText;
 import sudoku.ui.elements.MenuButton;
@@ -84,18 +85,20 @@ public class LoginView extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("LoginView():  Update received from UserModel()");
-        if(arg instanceof Boolean && !(boolean)arg)
+        if(arg instanceof UserEvent)
         {
-            loginBtn.setBackground(AppColour.ERROR);
+            System.out.println("LoginView():  Checking Login Details from UserModel()");
+            if(((UserEvent) arg).isInvalidDetails())
+            {
+                loginBtn.setBackground(AppColour.ERROR);
+            }
+            else
+            {
+                loginBtn.setBackground(AppColour.MENU_BACK);
+            }
         }
-        else
-        {
-            loginBtn.setBackground(AppColour.MENU_BACK);
-            tU.setText("");
-            tP.setText("");
-        }
-        tU.setText("");
-        tP.setText("");
+        
+        resetText();
     }
     
     public void addController(UserController controller) {
@@ -103,4 +106,10 @@ public class LoginView extends JPanel implements Observer {
         backBtn.addActionListener(controller);
         loginBtn.addActionListener(controller);
     } 
+    
+    public void resetText()
+    {
+        this.tU.setText("");
+        this.tP.setText("");
+    }
 }

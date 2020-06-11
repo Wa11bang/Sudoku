@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
+import sudoku.UserEvent;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.LoginText;
 import sudoku.ui.elements.MenuButton;
@@ -86,18 +87,24 @@ public class CreateUserView extends JPanel  implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("CreateUserView():  Update received from UserModel()");
-        if(arg instanceof Boolean && !(boolean)arg)
+        if(arg instanceof UserEvent)
         {
-            createBtn.setBackground(AppColour.ERROR);
+            System.out.println("CreateUserView():  Checking User Details from UserModel()");
+            if(((UserEvent) arg).isInvalidDetails())
+            {
+                createBtn.setBackground(AppColour.ERROR);
+            }
+            else if (((UserEvent) arg).isUserExists()) {
+                cU.setPlaceholder("User exists");
+                cU.updateUI();
+                System.out.println("PLACEHOLDER CHANGED");
+            }
+            else
+            {
+                createBtn.setBackground(AppColour.MENU_BACK);
+            }
         }
-        else
-        {
-            createBtn.setBackground(AppColour.MENU_BACK);
-            cU.setText("");
-            cP.setText("");
-        }
-        cU.setText("");
-        cP.setText("");
+        resetText();
     }
     
     public void addController(UserController controller) {
@@ -105,4 +112,10 @@ public class CreateUserView extends JPanel  implements Observer {
         backBtn.addActionListener(controller);
         createBtn.addActionListener(controller);
     } 
+    
+    public void resetText()
+    {
+        cU.setText("");
+        cP.setText("");
+    }
 }

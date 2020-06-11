@@ -22,6 +22,7 @@ public class GameBlock extends JTextField implements FocusListener {
         this.setBorder(null);
         this.setHorizontalAlignment(JTextField.CENTER);
         this.addFocusListener(this);
+        this.setDocument(new TextLimitDocument(1));
     }
     
     public GameBlock()
