@@ -11,11 +11,11 @@
     <!--<property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>-->
     <property name="show_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="sudoku.Users"/>
-    <mapping class="sudoku.Block"/>
-    <mapping class="sudoku.Game"/>
-    <mapping class="sudoku.Hard"/>
-    <mapping class="sudoku.Easy"/>
-    <mapping class="sudoku.Medium"/>
+    <mapping class="sudoku.models.Users"/>
+    <mapping class="sudoku.models.Block"/>
+    <mapping class="sudoku.models.Game"/>
+    <mapping class="sudoku.models.Hard"/>
+    <mapping class="sudoku.models.Easy"/>
+    <mapping class="sudoku.models.Medium"/>
   </session-factory>
 </hibernate-configuration>

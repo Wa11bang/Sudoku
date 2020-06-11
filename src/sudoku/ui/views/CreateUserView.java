@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
-import sudoku.UserEvent;
+import sudoku.events.UserEvent;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.LoginText;
 import sudoku.ui.elements.MenuButton;

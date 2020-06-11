@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import sudoku.Block;
+import sudoku.models.Block;
 import sudoku.View;
-import sudoku.ViewEvent;
+import sudoku.events.ViewEvent;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.views.GameView;
 

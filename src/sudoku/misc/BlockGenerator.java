@@ -7,7 +7,7 @@ package sudoku.misc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import sudoku.Block;
+import sudoku.models.Block;
 import sudoku.Difficulty;
 
 /**

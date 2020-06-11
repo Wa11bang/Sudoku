@@ -2,11 +2,11 @@ package sudoku.ui.models;
 
 import java.util.List;
 import java.util.Observable;
-import sudoku.Block;
+import sudoku.models.Block;
 import sudoku.Difficulty;
-import sudoku.Game;
-import sudoku.GameEvent;
-import sudoku.GameFactory;
+import sudoku.models.Game;
+import sudoku.events.GameEvent;
+import sudoku.models.GameFactory;
 import sudoku.handlers.GameHandler;
 import sudoku.handlers.GameHandlerExec;
 import sudoku.misc.BlockGenerator;

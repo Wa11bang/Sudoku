@@ -1,5 +1,6 @@
 package sudoku;
 
+import sudoku.events.ViewEvent;
 import sudoku.misc.HibernateUtils;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -148,8 +149,8 @@ public class View extends JFrame implements Observer {
     {        
         prevPane = e.getCurrentPane();
         currentPane = e.getTargetPane();
-        System.out.println(prevPane);
-        System.out.println(currentPane);
+        System.out.println("\nPrevious View: " +prevPane);
+        System.out.println("Current View: "+currentPane);
         ((CardLayout)cards.getLayout()).show(cards, e.getTargetPane());
     }
     
@@ -166,10 +167,11 @@ public class View extends JFrame implements Observer {
 
     public void sound() {
     try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("sound.wav"));
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/sudoku/res/sound.wav"));
         Clip clip = AudioSystem.getClip();
         clip.open(audioInputStream);
         clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
         // If you want the sound to loop infinitely, then put: clip.loop(Clip.LOOP_CONTINUOUSLY); 
         // If you want to stop the sound, then use clip.stop();
     } catch (Exception ex) {

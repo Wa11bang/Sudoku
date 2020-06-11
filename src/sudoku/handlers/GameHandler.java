@@ -1,8 +1,8 @@
 package sudoku.handlers;
 
 import java.util.List;
-import sudoku.Game;
-import sudoku.Users;
+import sudoku.models.Game;
+import sudoku.models.Users;
 
 /**
  *

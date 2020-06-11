@@ -9,8 +9,8 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import sudoku.UserEvent;
-import sudoku.Users;
+import sudoku.events.UserEvent;
+import sudoku.models.Users;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
 

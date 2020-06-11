@@ -1,11 +1,13 @@
-package sudoku;
+package sudoku.models;
 
+import sudoku.models.Users;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import sudoku.Difficulty;
 
 /**
  *

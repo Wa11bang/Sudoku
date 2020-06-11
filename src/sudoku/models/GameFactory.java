@@ -1,4 +1,10 @@
-package sudoku;
+package sudoku.models;
+
+import sudoku.Difficulty;
+import sudoku.models.Medium;
+import sudoku.models.Hard;
+import sudoku.models.Easy;
+import sudoku.models.Game;
 
 /**
  *

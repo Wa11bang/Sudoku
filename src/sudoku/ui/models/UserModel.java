@@ -1,8 +1,8 @@
 package sudoku.ui.models;
 
 import java.util.Observable;
-import sudoku.UserEvent;
-import sudoku.Users;
+import sudoku.events.UserEvent;
+import sudoku.models.Users;
 import sudoku.handlers.UserHandler;
 import sudoku.handlers.UserHandlerExec;
 

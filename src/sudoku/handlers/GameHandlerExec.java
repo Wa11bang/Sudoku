@@ -7,9 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import sudoku.Game;
+import sudoku.models.Game;
 import sudoku.misc.HibernateUtils;
-import sudoku.Users;
+import sudoku.models.Users;
 
 /**
  *

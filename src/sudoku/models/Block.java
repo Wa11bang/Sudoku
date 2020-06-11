@@ -1,4 +1,4 @@
-package sudoku;
+package sudoku.models;
 
 import java.io.Serializable;
 import javax.persistence.Column;

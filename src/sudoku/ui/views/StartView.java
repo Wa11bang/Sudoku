@@ -5,6 +5,10 @@ import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -26,13 +30,7 @@ public class StartView extends JPanel {
     
     public StartView()
     {
-        try {
-            BufferedImage myPicture = ImageIO.read(new File("./src/sudoku/res/logo.png"));
-            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-            add(picLabel);
-        } catch (IOException ex) {
-            System.out.println("File not found!");
-        }   
+        loadLogo("/sudoku/res/logo.png");
         
         cnu = new MenuButton("Create New User");
         cnu.setActionCommand("create_user");
@@ -70,5 +68,22 @@ public class StartView extends JPanel {
         this.cnu.addActionListener(controller);
         this.vsb.addActionListener(controller);
         this.exit.addActionListener(controller);
+    }
+    
+    public void loadLogo(String path)
+    {
+        URI logoPath = null;
+        try {
+            logoPath = getClass().getResource(path).toURI();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(StartView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            BufferedImage logo = ImageIO.read(new File(logoPath));
+            JLabel logoLbl = new JLabel(new ImageIcon(logo));
+            add(logoLbl);
+        } catch (IOException ex) {
+            System.out.println("File not found!");
+        }   
     }
 }

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import sudoku.Difficulty;
-import sudoku.Users;
+import sudoku.models.Users;
 import sudoku.ui.controllers.GameController;
 import sudoku.ui.elements.MenuButton;
 

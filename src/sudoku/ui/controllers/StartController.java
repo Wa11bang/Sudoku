@@ -3,7 +3,7 @@ package sudoku.ui.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import sudoku.View;
-import sudoku.ViewEvent;
+import sudoku.events.ViewEvent;
 import sudoku.ui.models.StartModel;
 import sudoku.ui.views.StartView;
 
