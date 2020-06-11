@@ -1,5 +1,6 @@
 package sudoku;
 
+import javax.swing.SwingUtilities;
 import sudoku.misc.HibernateUtils;
 
 import org.hibernate.cfg.Configuration;
@@ -25,7 +26,12 @@ public class Sudoku {
     
     public static void MVCTest() {
         //Model myModel = new Model();
-        View myView = new View();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new View();
+            }
+        });
         HibernateUtils.getSession();
         //myModel.addObserver(myView);
         

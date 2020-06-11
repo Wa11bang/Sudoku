@@ -52,7 +52,7 @@ public class CreateUserView extends JPanel  implements Observer {
         cP = new LoginText();
         
         cU.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
-        cU.setPlaceholder("Username");
+        cU.setPlaceholder("Username (Max 12 Character)");
         cU.setOpaque(false);
         cU.setPreferredSize(new Dimension(200, 75));
         cU.setFont(new Font("Sans Serif", Font.PLAIN, 24));

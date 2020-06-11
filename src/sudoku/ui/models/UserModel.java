@@ -53,7 +53,7 @@ public class UserModel extends Observable {
     public boolean createUser(String username, String password)
     {
         this.setChanged();
-        if(username.isEmpty() || password.isEmpty())
+        if(username.isEmpty() || password.isEmpty() || username.length() > 12)
         {
             this.notifyObservers(new UserEvent(false, true));
             return false;

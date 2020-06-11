@@ -9,7 +9,9 @@ import sudoku.events.GameEvent;
 import sudoku.models.GameFactory;
 import sudoku.handlers.GameHandler;
 import sudoku.handlers.GameHandlerExec;
+import sudoku.handlers.ScoreHandlerExec;
 import sudoku.misc.BlockGenerator;
+import sudoku.models.Score;
 
 /**
  *
@@ -19,6 +21,7 @@ public class GameModel extends Observable {
     private Game game;
     private UserModel userModel;
     private final GameHandler gh = new GameHandlerExec(); //Business Layer
+    private double timer;
     
     public GameModel()
     {
@@ -47,6 +50,8 @@ public class GameModel extends Observable {
     {
         if(null != this.game)
         {
+            double newTime = game.getTime() + ((System.currentTimeMillis() - timer)/1000);
+            game.setTime(newTime);
             if(notify)
             {   
                 this.setChanged();
@@ -65,6 +70,7 @@ public class GameModel extends Observable {
         {
             this.setChanged();
             this.notifyObservers(game);
+            timer = System.currentTimeMillis();
         }
     }
     
@@ -104,6 +110,8 @@ public class GameModel extends Observable {
         
         this.game.setComplete(true);
         this.saveGame(false);
+        Score score = new Score(game);
+        new ScoreHandlerExec().addScore(score);
         
         return true;
     }

@@ -22,8 +22,8 @@ abstract public class Game implements Serializable {
     @Column(name="game_id")
     private int game_id;
     
-    @Column(name="moves")
-    private int moves;
+    @Column(name="time")
+    private double game_time;
     
     @Column(name="isComplete")
     private boolean complete;
@@ -45,7 +45,7 @@ abstract public class Game implements Serializable {
         super();
         this.user = user;
         this.blocks = blocks;
-        this.moves = 0;
+        this.game_time = 0;
         this.complete = false;
         this.diff = diff;
     }
@@ -63,17 +63,17 @@ abstract public class Game implements Serializable {
     }
 
     /**
-     * @return the moves
+     * @return the time
      */
-    public int getMoves() {
-        return moves;
+    public double getTime() {
+        return game_time;
     }
 
     /**
-     * @param moves the moves to set
+     * @param time the moves to set
      */
-    public void setMoves(int moves) {
-        this.moves = moves;
+    public void setTime(double time) {
+        this.game_time = time;
     }
 
     /**
@@ -132,34 +132,9 @@ abstract public class Game implements Serializable {
         this.diff = diff;
     }
     
-    public void displayGame()
+    @Override
+    public String toString()
     {
-        System.out.println("\nGame: " + this.game_id + " " + this.diff.toString() + "\n");
-        System.out.print("  ");
-        for(int i = 0; i < 9; ++i)
-        {
-            int c = (65 + i);
-            System.out.print("  " + (char)(c));
-        }
-        
-        System.out.print("\n");
-
-        int counter = 0;        
-        
-        Object[] bb = this.blocks.toArray();
-        
-        for(int i = 0; i < 9; ++i)
-        {
-            System.out.print((i + 1) + "| ");
-            for(int j = 0; j < 9; ++j)
-            {
-                System.out.print("[" + ((Block) bb[counter]).getValue() + "]");
-                counter++;
-            }
-            
-            System.out.print("\n");
-        }
-        
-        System.out.println("\n");
+        return ("Game: "+this.game_id + " User: "+this.user.getUsername());
     }
 }

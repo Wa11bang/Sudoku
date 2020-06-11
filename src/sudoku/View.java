@@ -41,7 +41,6 @@ public class View extends JFrame implements Observer {
     private UserController uc = new UserController();
     private ScoreboardController sbc = new ScoreboardController();
 
-    
     public View()
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +66,11 @@ public class View extends JFrame implements Observer {
         sc.addView(startView); 
         startView.addController(sc);  
         
+        sbc.addModel(sbm);
+        sbc.addView(scoreboardView);
+        sbm.addObserver(scoreboardView);
+        sbm.loadScores();
+        
         gc.addModel(gm);
         gc.addView(gameView);        
         gm.addObserver(gameView);
@@ -85,6 +89,7 @@ public class View extends JFrame implements Observer {
         loginView.addController(uc);
         createUserView.addController(uc);
         createGameView.addController(gc);
+        scoreboardView.addController(sbc);
         
         initExtControllers();       
         

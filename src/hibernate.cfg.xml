@@ -12,6 +12,7 @@
     <property name="show_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="sudoku.models.Users"/>
+    <mapping class="sudoku.models.Score"/>
     <mapping class="sudoku.models.Block"/>
     <mapping class="sudoku.models.Game"/>
     <mapping class="sudoku.models.Hard"/>

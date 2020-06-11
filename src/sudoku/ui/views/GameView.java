@@ -30,7 +30,7 @@ public class GameView extends JPanel implements Observer {
     private ControlButton check = new ControlButton();
     private JButton save = new JButton();
     private JButton back = new JButton();  
-    
+        
     public GameView()
     {
         GridLayout experimentLayout = new GridLayout(3,3);

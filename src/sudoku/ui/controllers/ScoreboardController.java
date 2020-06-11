@@ -38,10 +38,15 @@ public class ScoreboardController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("refresh"))
+        {
+            System.out.println("ScoreboardController(): Acting on ScoreboardModel()");
+            model.loadScores();
+        }
         if(e.getActionCommand().equals("back"))
         {
             System.out.println("ScoreboardController(): Acting on AppView()");
-            appView.changePane(new ViewEvent("scoreboard", "start"));
+            appView.changePane(new ViewEvent("scoreboard", appView.getPrevPane()));
         }
     }
 }
