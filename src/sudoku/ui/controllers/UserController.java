@@ -69,6 +69,7 @@ public class UserController implements ActionListener {
             }
         } else if(e.getActionCommand().equals("back")) {
             System.out.println("UserController(): Acting on UserView()");
+            model.getUserGames(true);
             model.logout();
             System.out.println("UserController(): Acting on AppView()");
             appView.changePane(new ViewEvent(e.getActionCommand(), "start"));

@@ -24,7 +24,7 @@ abstract public class Game implements Serializable {
     @Column(name="game_time")
     private double game_time;
     
-    @Column(name="isComplete")
+    @Column(name="is_complete")
     private boolean complete;
     
     @Column(name="difficulty")

@@ -108,7 +108,7 @@ public class GameHandlerExec implements GameHandler {
     }
 
     @Override
-    public List<Game> retrieveAllUserGames(Users user) {
+    public List<Game> retrieveAllUserGames(Users user, boolean completed) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         
@@ -119,6 +119,7 @@ public class GameHandlerExec implements GameHandler {
             Criteria crit = session.createCriteria(Game.class);            
             crit.setFetchMode("blocks", FetchMode.SELECT);
             crit.add(Restrictions.eq("user",user));
+            crit.add(Restrictions.eq("complete", completed));
             //crit.setMaxResults(1);
             List<Game> results = crit.list();
             

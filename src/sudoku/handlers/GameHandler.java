@@ -32,7 +32,7 @@ public interface GameHandler {
     /**
      * Retrieve all existing Users
      */
-    public List<Game> retrieveAllUserGames(Users user);
+    public List<Game> retrieveAllUserGames(Users user, boolean completed);
     
     /**
      * Check solution of existing Game

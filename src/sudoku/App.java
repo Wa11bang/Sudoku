@@ -89,6 +89,9 @@ public class App extends JFrame {
         um.addObserver(userView);
         um.addObserver(loginView);
         um.addObserver(createUserView);
+        
+        um.addObserver(uncompletedGameView);
+        um.addObserver(completedGameView);
     }
     
     public void initViews()
@@ -102,6 +105,9 @@ public class App extends JFrame {
         createUserView.addController(uc);
         createGameView.addController(gc);
         scoreboardView.addController(sbc);
+        
+        uncompletedGameView.addController(gc);
+        completedGameView.addController(gc);
     }
     
     public void initControllers()

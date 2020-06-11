@@ -39,7 +39,7 @@ public class GameModel extends Observable {
     
     public Game makeGame(String type)
     {
-        Game tempGame = GameFactory.create(Difficulty.valueOf(type));
+        Game tempGame = (new GameFactory().create(Difficulty.valueOf(type)));
         tempGame.setBlocks(BlockGenerator.generate(tempGame.getDifficulty()));
         tempGame.setUser(userModel.getUser());
         
