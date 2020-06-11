@@ -2,7 +2,7 @@ package sudoku.ui.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import sudoku.View;
+import sudoku.App;
 import sudoku.events.ViewEvent;
 import sudoku.ui.models.StartModel;
 import sudoku.ui.views.StartView;
@@ -12,7 +12,7 @@ import sudoku.ui.views.StartView;
  * @author Waldo
  */
 public class StartController implements ActionListener {
-    private View appView;
+    private App appView;
     private StartModel model;
     private StartView view;
     
@@ -27,7 +27,7 @@ public class StartController implements ActionListener {
         this.model = m;
     }
     
-    public void addAppView(View v) 
+    public void addAppView(App v) 
     {
         System.out.println("StartController: Adding AppView");
         this.appView = v;

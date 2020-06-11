@@ -1,14 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.elements;
+
+import java.awt.Font;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Waldo
  */
-public class MenuLabel {
+public class MenuLabel extends JLabel {
+    public MenuLabel(String labelText)
+    {
+        super(labelText);
+        setOpaque(false);
+        setBorder(null);
+        setHorizontalAlignment(JLabel.CENTER);
+        setFont(new Font("Helvetica", Font.PLAIN, 25));
+    }
     
+    public MenuLabel()
+    {
+        this("");
+    }
 }

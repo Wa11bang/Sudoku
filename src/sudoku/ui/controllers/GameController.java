@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import sudoku.models.Block;
-import sudoku.View;
+import sudoku.App;
 import sudoku.events.ViewEvent;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.views.GameView;
@@ -16,7 +16,7 @@ import sudoku.ui.views.GameView;
  * @author Waldo
  */
 public class GameController implements ActionListener {
-    private View appView;
+    private App appView;
     private GameModel model;
     private GameView view;
     
@@ -30,7 +30,7 @@ public class GameController implements ActionListener {
         this.model = m;
     }
     
-    public void addAppView(View v) {
+    public void addAppView(App v) {
         System.out.println("GameController: Adding AppView");
         this.appView = v;
     }

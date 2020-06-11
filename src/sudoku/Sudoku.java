@@ -31,16 +31,12 @@
     - StartModel
     - CompletedGameView
     - UncompletedGameView
-    - MenuLabel
 */
 
 package sudoku;
 
 import javax.swing.SwingUtilities;
 import sudoku.misc.HibernateUtils;
-
-import org.hibernate.cfg.Configuration;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
  *
@@ -56,20 +52,10 @@ public class Sudoku {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new View();
+                new App();
             }
         });
         
         HibernateUtils.getSession();
     }
-    
-    public static void exportDatabase() {
-        /**
-         * Read Hibernate XML File Initialize Database
-         */
-        Configuration cfg = new Configuration().configure();
-        SchemaExport export = new SchemaExport(cfg);
-        export.create(true, true);              
-        HibernateUtils.shutdown();
-    }    
 }

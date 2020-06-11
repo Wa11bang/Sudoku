@@ -2,7 +2,7 @@ package sudoku.ui.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import sudoku.View;
+import sudoku.App;
 import sudoku.events.ViewEvent;
 import sudoku.ui.models.ScoreboardModel;
 import sudoku.ui.views.ScoreboardView;
@@ -12,7 +12,7 @@ import sudoku.ui.views.ScoreboardView;
  * @author Waldo
  */
 public class ScoreboardController implements ActionListener {
-    private View appView;
+    private App appView;
     private ScoreboardModel model;
     private ScoreboardView view;
     
@@ -26,7 +26,7 @@ public class ScoreboardController implements ActionListener {
         this.model = m;
     }
     
-    public void addAppView(View v) {
+    public void addAppView(App v) {
         System.out.println("ScoreboardController: Adding ScoreboardView");
         this.appView = v;
     }

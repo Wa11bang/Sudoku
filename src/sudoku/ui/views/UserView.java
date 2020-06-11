@@ -1,18 +1,17 @@
 package sudoku.ui.views;
 
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import sudoku.events.UserEvent;
 import sudoku.models.Users;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
+import sudoku.ui.elements.MenuLabel;
 
 /**
  *
@@ -25,7 +24,7 @@ public class UserView extends JPanel implements Observer {
     private MenuButton completedGamesBtn = new MenuButton("View Completed Games");
     private MenuButton viewScoreboardBtn = new MenuButton("View Scoreboard");
     private MenuButton logoutBtn = new MenuButton("Logout");
-    private JTextField userWelcome = new JTextField();
+    private MenuLabel userWelcome = new MenuLabel();
     
     public UserView()
     {
@@ -44,12 +43,7 @@ public class UserView extends JPanel implements Observer {
         gbc2.weighty = 1.0;        
         
         userMenu.setLayout(new GridBagLayout());
-        userMenu.setOpaque(false);  
-        userWelcome.setOpaque(false);
-        userWelcome.setBorder(null);
-        userWelcome.setEditable(false);
-        userWelcome.setHorizontalAlignment(JTextField.CENTER);
-        userWelcome.setFont(new Font("Helvetica", Font.PLAIN, 25));
+        userMenu.setOpaque(false);          
         
         createGameBtn.setActionCommand("create_game");
         uncompletedGamesBtn.setActionCommand("uncompleted_games");
