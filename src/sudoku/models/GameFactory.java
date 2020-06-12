@@ -3,7 +3,7 @@ package sudoku.models;
 import sudoku.Difficulty;
 
 /**
- *
+ * Static Factory Method for Generating an instance of a game.
  * @author Waldo
  */
 public class GameFactory {

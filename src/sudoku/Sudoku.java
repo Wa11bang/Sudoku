@@ -4,21 +4,18 @@
     JPassword for Login and Create
     Comments   
 
-    Add Logger
+    Add Abstract Game Factory
+
+    Add Logger to important classes
 
     Store PREDOKUs in Database
     Make Score print out neater
     
     Make so that you cannot save game after completed
 
-    Make classes as direct access objects for all Handlers
-
     Create AppView abstract and then use a ViewFactory
 
-    replace userWelcome in userView with MenuLabel
     add MenuLabels to each view
-
-    Add styles from CreateUserView and LoginView to MenuField and Add MenuPasswordField
 
     EMPTY CLASSES:
     - StartModel
@@ -27,6 +24,8 @@
 package sudoku;
 
 import javax.swing.SwingUtilities;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import sudoku.misc.HibernateUtils;
 
 /**
@@ -34,11 +33,14 @@ import sudoku.misc.HibernateUtils;
  * @author Waldo
  */
 public class Sudoku {  
-    public final static String LOGO_PATH = "/sudoku/res/logo_c.png";
+    public final static String LOGO_PATH = "/sudoku/res/logo.png";
+    public static final double VERSION = 1.4;
+    private static final Logger LOGGER = LogManager.getLogger(Sudoku.class);
     public final static int PERMUTE_COUNT = 100;
     
     public static void main(String[] args) {  
-        RunGUI();
+        LOGGER.info("Starting Sudoku");
+        RunGUI();        
     }
     
     public static void RunGUI() {

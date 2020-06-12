@@ -88,7 +88,6 @@ public class ScoreboardView extends JPanel implements Observer {
         System.out.println("ScoreboardView():  Update received from ScoreboardModel()"); 
         if(arg instanceof ScoreEvent)
         {
-            System.out.println("OK");
             populate(((ScoreEvent) arg).getScores());
         }
     }

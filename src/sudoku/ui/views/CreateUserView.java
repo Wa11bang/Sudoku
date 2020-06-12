@@ -1,8 +1,5 @@
 package sudoku.ui.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Observable;
@@ -10,12 +7,12 @@ import java.util.Observer;
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
 import sudoku.events.UserEvent;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuField;
 import sudoku.ui.elements.MenuButton;
+import sudoku.ui.elements.MenuPasswordField;
 
 /**
  *
@@ -24,7 +21,7 @@ import sudoku.ui.elements.MenuButton;
 public class CreateUserView extends JPanel  implements Observer {
     private JPanel createForm = new JPanel();
     private MenuField createUsername = new MenuField();
-    private MenuField createPassword = new MenuField(); //CHANGE to JPasswordField 
+    private MenuPasswordField createPassword = new MenuPasswordField();
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton createBtn = new MenuButton("Create");
     
@@ -50,17 +47,8 @@ public class CreateUserView extends JPanel  implements Observer {
         createBtn.setActionCommand("user_create");
         backBtn.setActionCommand("start");
 
-        createUsername.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
         createUsername.setPlaceholder("Username (Max 12 Character)");
-        createUsername.setOpaque(false);
-        createUsername.setPreferredSize(new Dimension(200, 75));
-        createUsername.setFont(new Font("Sans Serif", Font.PLAIN, 24));
-        
-        createPassword.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
         createPassword.setPlaceholder("Password");
-        createPassword.setOpaque(false);
-        createPassword.setPreferredSize(new Dimension(200, 75));
-        createPassword.setFont(new Font("Sans Serif", Font.PLAIN, 24));
         
         createForm.add(createUsername, gbc);
         createForm.add(createPassword, gbc);

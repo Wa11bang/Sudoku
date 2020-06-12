@@ -66,7 +66,7 @@ public class UserView extends JPanel implements Observer {
         add(userMenu, gbc);       
     }
     
-    public void loadUser(Users user)
+    public void setUserWelcome(Users user)
     {
         userWelcome.setText("Welcome "+user.getUsername());
     }
@@ -79,7 +79,7 @@ public class UserView extends JPanel implements Observer {
             if(null != ((UserEvent) arg).getUser())
             {
                 System.out.println("UserView():  Loading User from UserModel()");
-                loadUser(((UserEvent) arg).getUser());
+                setUserWelcome(((UserEvent) arg).getUser());
             }
         }
     }

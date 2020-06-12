@@ -1,8 +1,5 @@
 package sudoku.ui.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Observable;
@@ -10,12 +7,12 @@ import java.util.Observer;
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
 import sudoku.events.UserEvent;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuField;
 import sudoku.ui.elements.MenuButton;
+import sudoku.ui.elements.MenuPasswordField;
 
 /**
  *
@@ -24,7 +21,7 @@ import sudoku.ui.elements.MenuButton;
 public class LoginView extends JPanel implements Observer {
     private JPanel loginForm = new JPanel();
     private MenuField loginUsername = new MenuField();
-    private MenuField loginPassword = new MenuField();
+    private MenuPasswordField loginPassword = new MenuPasswordField();
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton loginBtn = new MenuButton("Login");
     
@@ -48,19 +45,10 @@ public class LoginView extends JPanel implements Observer {
         loginForm.setOpaque(false);       
         
         loginBtn.setActionCommand("user_login");
-        backBtn.setActionCommand("back");
+        backBtn.setActionCommand("start");
         
-        loginUsername.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
-        loginUsername.setPlaceholder("Username");
-        loginUsername.setOpaque(false);
-        loginUsername.setPreferredSize(new Dimension(200, 75));
-        loginUsername.setFont(new Font("Sans Serif", Font.PLAIN, 24));
-        
-        loginPassword.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
+        loginUsername.setPlaceholder("Username");        
         loginPassword.setPlaceholder("Password");
-        loginPassword.setOpaque(false);
-        loginPassword.setPreferredSize(new Dimension(200, 75));
-        loginPassword.setFont(new Font("Sans Serif", Font.PLAIN, 24));
         
         loginForm.add(loginUsername, gbc);
         loginForm.add(loginPassword, gbc);

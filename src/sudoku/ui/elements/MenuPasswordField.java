@@ -6,36 +6,39 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import javax.swing.border.MatteBorder;
 
 /**
  *
  * @author Waldo
  */
-public class MenuField extends JTextField {
-    
+public class MenuPasswordField extends JPasswordField {
     private String placeholder;
     
-    public MenuField() {
+    public MenuPasswordField() {
         this(null);
     }
 
-    public MenuField(String inputText) {
-        this(inputText, null);
-    }
-    
-    public MenuField(String inputText, String placeholder) {
-        super(inputText);
-        this.placeholder = placeholder;
-        
+    public MenuPasswordField(String inputText, int columnWidth) {
+        super(inputText, columnWidth);
         setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
         setOpaque(false);
         setPreferredSize(new Dimension(200, 75));
-        setFont(new Font("Sans Serif", Font.PLAIN, 24));        
+        setFont(new Font("Sans Serif", Font.PLAIN, 24));
     }
     
-    public void setPlaceholder(String placeholder)
+    public MenuPasswordField(String inputText)
+    {
+        this(inputText, 0);
+    }
+    
+    public MenuPasswordField(int columnWidth)
+    {
+        this(null, columnWidth);
+    }
+    
+        public void setPlaceholder(String placeholder)
     {
         this.placeholder = placeholder;
     }
