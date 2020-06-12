@@ -120,14 +120,7 @@ public class GameDaoImpl implements GameDao {
             crit.setFetchMode("blocks", FetchMode.SELECT);
             crit.add(Restrictions.eq("user",user));
             crit.add(Restrictions.eq("complete", completed));
-            //crit.setMaxResults(1);
             List<Game> results = crit.list();
-            
-            /*String hql = "select a from Users as a where a.loginName =:loginName and a.password =:password";
-            Query query = session.createQuery(hql);
-            query.setString("username", username);
-            query.setString("password", password);
-            query.setMaxResults(1);*/
             
             tx = session.beginTransaction();
             gameList = results;
@@ -143,7 +136,7 @@ public class GameDaoImpl implements GameDao {
     }
 
     @Override
-    public boolean checkSolution(Game game, int row, int checkVal) {
+    public boolean checkRow(Game game, int row, int checkVal) {
         int count = 0;
             for(int i = 0; i < 9; ++i)
             {
@@ -152,15 +145,11 @@ public class GameDaoImpl implements GameDao {
                     count++;
                 }
             }            
-        if(count == 1)
-        {
-            return true;
-        }
-        return false;
+        return count == 1;
     }
     
     @Override
-    public boolean checkSolution1(Game game, int col, int checkVal) {
+    public boolean checkColumn(Game game, int col, int checkVal) {
         int count = 0;
             for(int i = 0; i < 9; ++i)
             {
@@ -169,11 +158,7 @@ public class GameDaoImpl implements GameDao {
                     count++;
                 }
             }
-        if(count == 1)
-        {
-            return true;
-        }
-        return false;
+        return count == 1;
     }
 
 }

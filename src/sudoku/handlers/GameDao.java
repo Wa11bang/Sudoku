@@ -37,7 +37,7 @@ public interface GameDao {
     /**
      * Check solution of existing Game
      */
-    public boolean checkSolution(Game game, int row, int checkVal);
+    public boolean checkRow(Game game, int row, int checkVal);
     
-    public boolean checkSolution1(Game game, int col, int checkVal);
+    public boolean checkColumn(Game game, int col, int checkVal);
 }

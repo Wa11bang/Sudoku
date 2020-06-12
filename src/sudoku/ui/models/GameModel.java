@@ -117,7 +117,7 @@ public class GameModel extends Observable {
         {
             for(int c = 0; c < 9; ++c)
             {
-            if(!gh.checkSolution1(game, c, i) || !gh.checkSolution(game, c, i))
+            if(!gh.checkColumn(game, c, i) || !gh.checkRow(game, c, i))
             {
                 return false;
             }

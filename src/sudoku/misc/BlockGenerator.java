@@ -1,6 +1,7 @@
 package sudoku.misc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import sudoku.models.Block;
@@ -37,14 +38,20 @@ public class BlockGenerator {
             }
         }
         
-        //removeNBlocks(blocks, d.getValue());
+        removeNBlocks(blocks, d.getValue());
+        permute(blocks);
         
         return blocks;
     }
     
+    public static void permute(List<Block> blocks)
+    {
+        permuteRow(blocks);
+        permuteColumn(blocks);
+    }
+    
     public static int[] getRandomElement(List<int[]> list) 
-    { 
-        
+    {         
         return list.get(rand.nextInt(list.size())); 
     } 
     
@@ -63,22 +70,29 @@ public class BlockGenerator {
         }
     }
     
-    public static void permute(List<Block> blocks)
-    {
-        permuteRow(blocks);
-        permuteColumn(blocks);
-    }
-
     public static void permuteRow(List<Block> blocks)
     {
         int row_a = rand.nextInt(9);
-        int row_b = row_a % 3;
+        int row_b = ((row_a / 3) * 3) + rand.nextInt(3);
         
         System.out.println(row_a + " " + row_b);
+       
+        for(int i = 0; i < 9; ++i)
+        {
+            Collections.swap(blocks, ((row_a + (i*9))), ((row_b + (i*9)))); // ROWS
+        } 
     }
     
     public static void permuteColumn(List<Block> blocks)
     {
+        int row_a = rand.nextInt(9);
+        int row_b = ((row_a / 3) * 3) + rand.nextInt(3);
         
+        System.out.println(row_a + " " + row_b);
+       
+        for(int i = 0; i < 9; ++i)
+        {
+            Collections.swap(blocks, ((row_a * 9) + i), ((row_b * 9) + i)); // COLUMNS
+        } 
     }
 }
