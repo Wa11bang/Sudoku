@@ -37,7 +37,7 @@ public class BlockGenerator {
             }
         }
         
-        removeNBlocks(blocks, d.getValue());
+        //removeNBlocks(blocks, d.getValue());
         
         return blocks;
     }
@@ -61,5 +61,24 @@ public class BlockGenerator {
                 counter++;
             }
         }
-    }    
+    }
+    
+    public static void permute(List<Block> blocks)
+    {
+        permuteRow(blocks);
+        permuteColumn(blocks);
+    }
+
+    public static void permuteRow(List<Block> blocks)
+    {
+        int row_a = rand.nextInt(9);
+        int row_b = row_a % 3;
+        
+        System.out.println(row_a + " " + row_b);
+    }
+    
+    public static void permuteColumn(List<Block> blocks)
+    {
+        
+    }
 }

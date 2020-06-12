@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -60,17 +61,13 @@ public class CompletedGameView extends JPanel implements Observer {
     
     public void populate(List<Game> games)
     {
-        System.out.println("ScoreboardView():  Populating Scoreboard"); 
+        System.out.println("CompletedGameView():  Populating Game List"); 
         board.removeAll();
         gameList.clear();
         for(Game game : games)
         {
             JPanel p = new JPanel();
-            MenuButton gBtn = new MenuButton("Select");
-            gBtn.addActionListener(controller);
-            gBtn.setActionCommand("play_"+game.getGame_id());
             p.add(new JLabel(game.toString()));
-            p.add(gBtn);
             gameList.add(p);
         }
         
@@ -89,7 +86,7 @@ public class CompletedGameView extends JPanel implements Observer {
     
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UncompletedGameView():  Update received from GameModel()"); 
+        System.out.println("UncompletedGameView():  Update received from UserModel()"); 
         if(arg instanceof GameEvent)
         {
             System.out.println("OK");

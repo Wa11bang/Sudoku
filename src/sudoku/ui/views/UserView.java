@@ -49,7 +49,7 @@ public class UserView extends JPanel implements Observer {
         uncompletedGamesBtn.setActionCommand("uncompleted_games");
         completedGamesBtn.setActionCommand("completed_games");
         viewScoreboardBtn.setActionCommand("scoreboard");
-        logoutBtn.setActionCommand("back");
+        logoutBtn.setActionCommand("start");
         
         userMenu.add(userWelcome, gbc);
         userMenu.add(Box.createVerticalStrut(50), gbc);

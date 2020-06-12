@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import sudoku.events.GameEvent;
 import sudoku.models.Game;
 import sudoku.ui.controllers.GameController;
+import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
 
 /**
@@ -88,7 +89,7 @@ public class UncompletedGameView extends JPanel implements Observer {
     
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UncompletedGameView():  Update received from GameModel()"); 
+        System.out.println("UncompletedGameView():  Update received from UserModel()"); 
         if(arg instanceof GameEvent)
         {
             System.out.println("OK");

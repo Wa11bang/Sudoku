@@ -15,7 +15,7 @@ import sudoku.models.Users;
  *
  * @author Waldo
  */
-public class ScoreHandlerExec implements ScoreHandler {
+public class ScoreDaoImpl implements ScoreDao {
 
     @Override
     public boolean addScore(Score score) {

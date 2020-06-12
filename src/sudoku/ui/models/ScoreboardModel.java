@@ -3,9 +3,9 @@ package sudoku.ui.models;
 import java.util.List;
 import java.util.Observable;
 import sudoku.events.ScoreEvent;
-import sudoku.handlers.ScoreHandler;
-import sudoku.handlers.ScoreHandlerExec;
+import sudoku.handlers.ScoreDaoImpl;
 import sudoku.models.Score;
+import sudoku.handlers.ScoreDao;
 
 /**
  *
@@ -13,7 +13,7 @@ import sudoku.models.Score;
  */
 public class ScoreboardModel extends Observable {
     private List<Score> scores;
-    private final ScoreHandler sh = new ScoreHandlerExec();
+    private final ScoreDao sh = new ScoreDaoImpl();
     
     public ScoreboardModel()
     {

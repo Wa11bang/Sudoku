@@ -7,7 +7,7 @@ import sudoku.models.Users;
  *
  * @author Waldo
  */
-public interface UserHandler {
+public interface UserDao {
     /**
      * Add a new User
      */

@@ -2,10 +2,12 @@ package sudoku.handlers;
 
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import sudoku.models.Game;
 import sudoku.misc.HibernateUtils;
 import sudoku.models.Users;
 
@@ -13,10 +15,10 @@ import sudoku.models.Users;
  *
  * @author Waldo
  */
-public class UserHandlerExec implements UserHandler {
+public class GameDaoImpl implements GameDao {
 
     @Override
-    public boolean addUser(Users user) {
+    public boolean addGame(Game game) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         
@@ -25,7 +27,7 @@ public class UserHandlerExec implements UserHandler {
         
         try {
             tx = session.beginTransaction();
-            session.save(user);
+            session.save(game);
             tx.commit();
             status = true;
         } catch (Exception e) {
@@ -39,7 +41,7 @@ public class UserHandlerExec implements UserHandler {
     }
 
     @Override
-    public boolean modifyUser(Users user) {
+    public boolean modifyGame(Game game) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         
@@ -48,7 +50,7 @@ public class UserHandlerExec implements UserHandler {
         
         try {
             tx = session.beginTransaction();
-            session.merge(user);
+            session.merge(game);
             tx.commit();
             status = true;
         } catch (Exception e) {
@@ -62,7 +64,7 @@ public class UserHandlerExec implements UserHandler {
     }
 
     @Override
-    public boolean deleteUser(Users user) {
+    public boolean deleteGame(Game game) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         
@@ -70,7 +72,7 @@ public class UserHandlerExec implements UserHandler {
         boolean status = false;
         try {
             tx = session.beginTransaction();
-            session.delete(user);
+            session.delete(game);
             tx.commit();
             status = true;
         } catch (Exception e) {
@@ -84,24 +86,51 @@ public class UserHandlerExec implements UserHandler {
     }
 
     @Override
-    public Users getUserByID(String username) {
+    public Game getGameByID(int game_id) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         
         Transaction tx = null;
-        Users user = null;
+        Game game = null;
+        
+        try {
+            tx = session.beginTransaction();
+            game = (Game) session.load(Game.class, game_id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        
+        return game;
+    }
+
+    @Override
+    public List<Game> retrieveAllUserGames(Users user, boolean completed) {
+        SessionFactory sessionFac = HibernateUtils.getSessionFactory();
+        Session session = sessionFac.openSession();
+        
+        List<Game> gameList = null;
+        Transaction tx = null;
 
         try {
-            Criteria crit = session.createCriteria(Users.class);
-            crit.add(Restrictions.eq("username", username));
-            crit.setMaxResults(1);
-            List<Users> results = crit.list();
+            Criteria crit = session.createCriteria(Game.class);            
+            crit.setFetchMode("blocks", FetchMode.SELECT);
+            crit.add(Restrictions.eq("user",user));
+            crit.add(Restrictions.eq("complete", completed));
+            //crit.setMaxResults(1);
+            List<Game> results = crit.list();
+            
+            /*String hql = "select a from Users as a where a.loginName =:loginName and a.password =:password";
+            Query query = session.createQuery(hql);
+            query.setString("username", username);
+            query.setString("password", password);
+            query.setMaxResults(1);*/
             
             tx = session.beginTransaction();
-            if(results.size() > 0)
-            {
-                user = (Users) results.get(0);
-            }
+            gameList = results;
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -110,63 +139,41 @@ public class UserHandlerExec implements UserHandler {
             e.printStackTrace();
         }
         
-        return user;
+        return gameList;
     }
 
     @Override
-    public List<Users> retrieveAllUsers() {        
-        SessionFactory sessionFac = HibernateUtils.getSessionFactory();
-        Session session = sessionFac.openSession();
-        
-        List<Users> usersList = null;
-        Transaction tx = null;
-
-        try {
-            Criteria crit = session.createCriteria(Users.class);
-            List<Users> results = crit.list();
-
-            tx = session.beginTransaction();
-            usersList = results;
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        }
-        
-        return usersList;
-    }
-
-    @Override
-    public Users login(String username, String password) {
-        SessionFactory sessionFac = HibernateUtils.getSessionFactory();
-        Session session = sessionFac.openSession();
-        
-        Transaction tx = null;
-        Users user = null;
-
-        try {
-            Criteria crit = session.createCriteria(Users.class);
-            crit.add(Restrictions.eq("username", username));
-            crit.add(Restrictions.eq("password", password));
-            crit.setMaxResults(1);
-            List<Users> results = crit.list();
-            
-            tx = session.beginTransaction();
-            if(results.size() > 0)
+    public boolean checkSolution(Game game, int row, int checkVal) {
+        int count = 0;
+            for(int i = 0; i < 9; ++i)
             {
-                user = (Users) results.get(0);
-            }
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
+                if(checkVal == game.getBlocks().get(i + (9 * row)).getValue())
+                {
+                    count++;
+                }
+            }            
+        if(count == 1)
+        {
+            return true;
         }
-        
-        return user;
+        return false;
     }
     
+    @Override
+    public boolean checkSolution1(Game game, int col, int checkVal) {
+        int count = 0;
+            for(int i = 0; i < 9; ++i)
+            {
+                if(checkVal == game.getBlocks().get((i * 9) + col).getValue())
+                {
+                    count++;
+                }
+            }
+        if(count == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

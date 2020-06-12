@@ -2,13 +2,14 @@ package sudoku.ui.models;
 
 import java.util.List;
 import java.util.Observable;
+import sudoku.events.GameEvent;
 import sudoku.events.UserEvent;
-import sudoku.handlers.GameHandler;
-import sudoku.handlers.GameHandlerExec;
+import sudoku.handlers.GameDaoImpl;
 import sudoku.models.Users;
-import sudoku.handlers.UserHandler;
-import sudoku.handlers.UserHandlerExec;
+import sudoku.handlers.UserDaoImpl;
 import sudoku.models.Game;
+import sudoku.handlers.GameDao;
+import sudoku.handlers.UserDao;
 
 /**
  *
@@ -16,8 +17,8 @@ import sudoku.models.Game;
  */
 public class UserModel extends Observable {
     private Users user;
-    private final UserHandler uh = new UserHandlerExec();
-    private final GameHandler gh = new GameHandlerExec();
+    private final UserDao uh = new UserDaoImpl();
+    private final GameDao gh = new GameDaoImpl();
     
     public UserModel()
     {
@@ -80,9 +81,10 @@ public class UserModel extends Observable {
         return false;
     }
     
-    public List<Game> getUserGames(boolean completed)
+    public void getUserGames(boolean completed)
     {      
-        return gh.retrieveAllUserGames(user, completed);
+        this.setChanged();
+        this.notifyObservers(new GameEvent(gh.retrieveAllUserGames(user, completed)));
     }
 
 }

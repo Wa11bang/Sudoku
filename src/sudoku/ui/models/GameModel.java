@@ -7,11 +7,11 @@ import sudoku.Difficulty;
 import sudoku.models.Game;
 import sudoku.events.GameEvent;
 import sudoku.models.GameFactory;
-import sudoku.handlers.GameHandler;
-import sudoku.handlers.GameHandlerExec;
-import sudoku.handlers.ScoreHandlerExec;
+import sudoku.handlers.GameDaoImpl;
+import sudoku.handlers.ScoreDaoImpl;
 import sudoku.misc.BlockGenerator;
 import sudoku.models.Score;
+import sudoku.handlers.GameDao;
 
 /**
  *
@@ -20,7 +20,7 @@ import sudoku.models.Score;
 public class GameModel extends Observable {
     private Game game;
     private UserModel userModel;
-    private final GameHandler gh = new GameHandlerExec();
+    private final GameDao gh = new GameDaoImpl();
     private double timer;
     
     public GameModel()
@@ -108,7 +108,7 @@ public class GameModel extends Observable {
     public void addScore()
     {
         Score score = new Score(game);        
-        new ScoreHandlerExec().addScore(score);
+        new ScoreDaoImpl().addScore(score);
     }
     
     public boolean check()
@@ -129,5 +129,10 @@ public class GameModel extends Observable {
         addScore();
         
         return true;
+    }
+
+    public void play(String id) {  
+        this.game = gh.getGameByID(Integer.parseInt(id));
+        initGame();
     }
 }

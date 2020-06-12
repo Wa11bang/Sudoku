@@ -13,7 +13,7 @@ import sudoku.models.Users;
  *
  * @author Waldo
  */
-public interface ScoreHandler {
+public interface ScoreDao {
         /**
      * Add a new Game
      */

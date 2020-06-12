@@ -8,7 +8,7 @@ import sudoku.models.Users;
  *
  * @author Waldo
  */
-public interface GameHandler {
+public interface GameDao {
         /**
      * Add a new Game
      */

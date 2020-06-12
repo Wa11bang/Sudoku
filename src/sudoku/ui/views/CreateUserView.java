@@ -48,7 +48,7 @@ public class CreateUserView extends JPanel  implements Observer {
         createForm.setOpaque(false);
         
         createBtn.setActionCommand("user_create");
-        backBtn.setActionCommand("back");
+        backBtn.setActionCommand("start");
 
         createUsername.setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
         createUsername.setPlaceholder("Username (Max 12 Character)");
