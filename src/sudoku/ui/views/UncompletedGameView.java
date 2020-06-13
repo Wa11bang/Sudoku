@@ -13,7 +13,6 @@ import javax.swing.border.EmptyBorder;
 import sudoku.events.GameEvent;
 import sudoku.models.Game;
 import sudoku.ui.controllers.GameController;
-import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
 
 /**
@@ -32,7 +31,7 @@ public class UncompletedGameView extends JPanel implements Observer {
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
         setLayout(new GridBagLayout());        
-        setOpaque(false);        
+        setOpaque(false);     
         
         GridBagConstraints gbc2 = new GridBagConstraints();
         
@@ -44,18 +43,16 @@ public class UncompletedGameView extends JPanel implements Observer {
         gbc2.weighty = 1.0;        
 
         scoreboardPanel.setLayout(new GridBagLayout());
-        scoreboardPanel.setOpaque(false);       
-
+        scoreboardPanel.setOpaque(false);             
         backBtn.setActionCommand("back");
-
         scoreboardPanel.add(board, gbc);
         scoreboardPanel.add(Box.createVerticalStrut(25), gbc);
         scoreboardPanel.add(backBtn, gbc2);
         
         board.setLayout(new GridBagLayout());
         board.setOpaque(false);        
-        
-        add(scoreboardPanel, gbc);                
+
+        add(scoreboardPanel, gbc);    
     }
     
     public void populate(List<Game> games)

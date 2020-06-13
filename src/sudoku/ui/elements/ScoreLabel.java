@@ -17,9 +17,9 @@ public class ScoreLabel extends JLabel {
         
         setBorder(null);
         setOpaque(false);
-        setBackground(Color.decode("#EAD5E6"));
+        setBackground(Color.decode("#E0DFD5"));
         setForeground(Color.decode("#685F74").darker().darker());
-        setBorder(new EmptyBorder(5,10,5,10));
+        setBorder(new EmptyBorder(10,10,10,10));
         setFont(new Font("Sans Serif", Font.BOLD, 15));
     }
     
@@ -30,7 +30,7 @@ public class ScoreLabel extends JLabel {
     @Override
     protected void paintComponent(final Graphics g) {
         g.setColor(getBackground());
-        g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+        g.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
         super.paintComponent(g);
     }
 }

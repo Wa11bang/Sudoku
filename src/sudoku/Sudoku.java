@@ -1,10 +1,7 @@
 /*
 
     TODO
-    JPassword for Login and Create
     Comments   
-
-    Add Abstract Game Factory
 
     Add Logger to important classes
 

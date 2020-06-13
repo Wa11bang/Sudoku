@@ -1,7 +1,7 @@
 package sudoku.models;
 
 import java.io.Serializable;
-import java.time.Duration;
+import java.text.DecimalFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -84,10 +84,11 @@ public class Score implements Serializable {
     @Override
     public String toString()
     {
-        Duration d = Duration.ofMillis((long) this.score_time) ;
-        int minutes = (int) d.toMinutes();
-        int seconds = (int) d.toMillis();
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        double min = (this.score_time - (this.score_time % 60)) / 60;
+        double secs = this.score_time - (60 * min);
         
-        return ("Game ID: "+this.game.getGame_id() + " Time: " + minutes + "Min "+ seconds + "s  Settings: " + this.game.getDifficulty() +" ("+ this.game.getDifficulty().getValue() + ") User: "+this.user.getUsername());
+        return ("Time: " + min + "Min "+ df.format(secs) + "s  Settings: " + this.game.getDifficulty() +" ("+ this.game.getDifficulty().getValue() + ") User: "+this.user.getUsername());
     }
 }
