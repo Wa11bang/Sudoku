@@ -5,6 +5,8 @@
 
     Add Logger to important classes
 
+    JUNIT TESTING
+
     Store PREDOKUs in Database
     Make Score print out neater
     
@@ -31,7 +33,7 @@ import sudoku.misc.HibernateUtils;
  */
 public class Sudoku {  
     public final static String LOGO_PATH = "/sudoku/res/logo.png";
-    public static final double VERSION = 1.4;
+    public static final double VERSION = 1.5;
     private static final Logger LOGGER = LogManager.getLogger(Sudoku.class);
     public final static int PERMUTE_COUNT = 100;
     

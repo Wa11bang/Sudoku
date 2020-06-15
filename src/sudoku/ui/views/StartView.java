@@ -36,7 +36,7 @@ public class StartView extends JPanel {
         cnu.setActionCommand("create_user");    
         login.setActionCommand("login");      
         vsb.setActionCommand("scoreboard");        
-        exit.setActionCommand("exit");               
+        exit.setActionCommand("exit");   
                 
         startButtons.setLayout(new GridLayout(0,1));
         startButtons.setOpaque(false);

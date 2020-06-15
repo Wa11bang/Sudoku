@@ -2,12 +2,6 @@ package sudoku.ui.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-import sudoku.models.Block;
-import sudoku.App;
-import sudoku.events.ViewEvent;
 import sudoku.ui.models.GameModel;
 import sudoku.ui.views.GameView;
 
@@ -15,8 +9,7 @@ import sudoku.ui.views.GameView;
  *
  * @author Waldo
  */
-public class GameController implements ActionListener {
-    private App appView;
+public class GameController extends IController implements ActionListener {
     private GameModel model;
     private GameView view;
     
@@ -29,30 +22,11 @@ public class GameController implements ActionListener {
         System.out.println("GameController: Adding GameModel");
         this.model = m;
     }
-    
-    public void addAppView(App v) {
-        System.out.println("GameController: Adding AppView");
-        this.appView = v;
-    }
 
     public void addView(GameView v) {
         System.out.println("GameController: Adding GameView");
         this.view = v;
     }   
-        
-    public List<Block> replaceBlockValue(List<Block> source, List<Block> newSet)
-    {
-        ListIterator li = newSet.listIterator();
-        
-        int count = 0;
-        
-        while(li.hasNext())
-        {
-            source.get(count).setValue(((Block)li.next()).getValue());
-            count++;
-        }        
-        return source;
-    }
     
     @Override
     public void actionPerformed(ActionEvent e) {   
@@ -60,33 +34,29 @@ public class GameController implements ActionListener {
         if (e.getActionCommand().equals("check")) {
             if(null != view.parseBlocks())
             {
-                model.setBlocks(replaceBlockValue(model.getBlocks(), view.parseBlocks()));
+                model.setBlocks(view.parseBlocks());
                 model.checkGame();
-            }
-            
+            }            
         } else if(e.getActionCommand().equals("save"))
         {            
             if(null != view.parseBlocks())
             {
-                model.setBlocks(replaceBlockValue(model.getBlocks(), view.parseBlocks()));
+                model.setBlocks(view.parseBlocks());
                 model.saveGame(true);
             }
-        } else if(e.getActionCommand().equals("back"))
-        {
-            System.out.println("GameController(): Acting on AppView()");
-            appView.changePane(new ViewEvent("game", "user"));
         } else if(e.getActionCommand().contains("create"))
         {            
-            model.create(e.getActionCommand().replace("_create", ""));            
-            System.out.println("GameController(): Acting on AppView()");
-            appView.changePane(new ViewEvent("create_game", "game"));
+            model.createGame(e.getActionCommand().replace("_create", ""));            
+            changeView("create_game", "game");
             
         } else if(e.getActionCommand().contains("play"))
         {            
-            model.play(e.getActionCommand().replace("play_", ""));            
-            System.out.println("GameController(): Acting on AppView()");
-            appView.changePane(new ViewEvent("play", "game"));
+            model.playGame(e.getActionCommand().replace("play_", ""));            
+            changeView("play", "game");
             
+        } else
+        {
+            changeView("game", "user");
         }
-    }    
+    }
 }

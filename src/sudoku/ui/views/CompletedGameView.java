@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import sudoku.events.GameEvent;
 import sudoku.models.Game;
 import sudoku.ui.controllers.GameController;
-import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuButton;
 
 /**
@@ -27,7 +25,6 @@ public class CompletedGameView extends JPanel implements Observer {
     private List<JPanel> gameList = new ArrayList();    
     private MenuButton backBtn = new MenuButton("Back");
     private GridBagConstraints gbc = new GridBagConstraints();
-    private GameController controller;
     
     public CompletedGameView()
     {
@@ -97,6 +94,5 @@ public class CompletedGameView extends JPanel implements Observer {
     public void addController(GameController controller) {
         System.out.println("UncompletedGameView: Adding GameController");
         backBtn.addActionListener(controller);
-        this.controller = controller;
     } 
 }

@@ -1,8 +1,5 @@
 package sudoku.models;
 
-import sudoku.models.Block;
-import sudoku.models.Game;
-import sudoku.models.Users;
 import java.util.List;
 import javax.persistence.Entity;
 import sudoku.Difficulty;

@@ -2,21 +2,16 @@ package sudoku.ui.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import sudoku.App;
-import sudoku.events.ViewEvent;
 import sudoku.ui.models.UserModel;
 import sudoku.ui.views.CreateUserView;
 import sudoku.ui.views.LoginView;
-import sudoku.ui.views.UserView;
 
 /**
  *
  * @author Waldo
  */
-public class UserController implements ActionListener {   
-    private App appView;
+public class UserController extends IController implements ActionListener {   
     private UserModel model;
-    private UserView view;
     private LoginView loginView;
     private CreateUserView createUserView;
     
@@ -29,11 +24,6 @@ public class UserController implements ActionListener {
         System.out.println("UserController: Adding UserModel");
         this.model = m;
     }
-    
-    public void addAppView(App v) {
-        System.out.println("GameController: Adding AppView");
-        this.appView = v;
-    }
 
     public void addLoginView(LoginView v)
     {
@@ -43,46 +33,34 @@ public class UserController implements ActionListener {
     public void addCreateUserView(CreateUserView v)
     {
         this.createUserView = v;
-    }
-    
-    public void addView(UserView v) {
-        System.out.println("UserController: Adding UserView");
-        this.view = v;
-    }    
+    }   
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("user_login")) {
-            
+        if(e.getActionCommand().equals("user_login")) {            
             System.out.println("UserController(): Acting on UserModel()");
             if(model.login(loginView.getLoginUsername(), loginView.getLoginPassword()))
             {
-                System.out.println("UserController(): Acting on AppView()");
-                appView.changePane(new ViewEvent("start", "user"));
+                changeView("start", "user");
             }
         } else if (e.getActionCommand().equals("user_create")) {            
             System.out.println("UserController(): Acting on UserModel()");            
             if(model.createUser(createUserView.getLoginUsername(), createUserView.getLoginPassword()))
             {
-                System.out.println("UserController(): Acting on AppView()");
-                appView.changePane(new ViewEvent("start", "user"));
+                changeView("start", "user");
             }
         } else if(e.getActionCommand().equals("logout")) {
             System.out.println("UserController(): Acting on UserView()");
             model.logout();
-            System.out.println("UserController(): Acting on AppView()");
-            appView.changePane(new ViewEvent("user", "start"));
+            changeView("start", "user");
         } else if(e.getActionCommand().equals("uncompleted_games")) {
             model.getUserGames(false);
-            System.out.println("UserController(): Acting on UncompletedGameView()");
-            appView.changePane(new ViewEvent("user", e.getActionCommand()));
+            changeView("user", e.getActionCommand());
         } else if(e.getActionCommand().equals("completed_games")) {
             model.getUserGames(true);
-            System.out.println("UserController(): Acting on UncompletedGameView()");
-            appView.changePane(new ViewEvent("user", e.getActionCommand()));
+            changeView("user", e.getActionCommand());
         } else {
-            System.out.println("UserController(): Acting on AppView()");
-            appView.changePane(new ViewEvent("user", e.getActionCommand()));
+            changeView("user", e.getActionCommand());
         }
     }
 }

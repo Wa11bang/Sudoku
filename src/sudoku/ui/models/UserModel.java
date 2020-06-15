@@ -1,13 +1,11 @@
 package sudoku.ui.models;
 
-import java.util.List;
 import java.util.Observable;
 import sudoku.events.GameEvent;
 import sudoku.events.UserEvent;
 import sudoku.handlers.GameDaoImpl;
 import sudoku.models.Users;
 import sudoku.handlers.UserDaoImpl;
-import sudoku.models.Game;
 import sudoku.handlers.GameDao;
 import sudoku.handlers.UserDao;
 
@@ -59,26 +57,35 @@ public class UserModel extends Observable {
     public boolean createUser(String username, String password)
     {
         setChanged();
-        if(username.isEmpty() || password.isEmpty() || username.length() > 12)
+        if(checkIsValid(username, password))
         {
             notifyObservers(new UserEvent(false, true));
             return false;
-        }
+        }        
         
-        Users tempUser = new Users(username, password);        
+        Users tempUserI = new Users(username, password);        
         
-        if(null == (uh.getUserByID(username))){
-            
-            if(uh.addUser(tempUser))
+        if(checkIfExists(username)){            
+            if(uh.addUser(tempUserI))
             {
                 user = uh.login(username, password);           
                 notifyObservers(new UserEvent(user));
                 return true;
             }               
-        }
+        }      
         
         notifyObservers(new UserEvent(true,false));
         return false;
+    }
+    
+    public boolean checkIsValid(String username, String password)
+    {
+        return (username.isEmpty() || password.isEmpty() || username.length() > 12);
+    }
+    
+    public boolean checkIfExists(String username)
+    {
+        return (null == (uh.getUserByID(username)));
     }
     
     public void getUserGames(boolean completed)
@@ -86,5 +93,4 @@ public class UserModel extends Observable {
         this.setChanged();
         this.notifyObservers(new GameEvent(gh.retrieveAllUserGames(user, completed)));
     }
-
 }

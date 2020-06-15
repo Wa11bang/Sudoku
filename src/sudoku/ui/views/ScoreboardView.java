@@ -51,6 +51,7 @@ public class ScoreboardView extends JPanel implements Observer {
         scoreboardPanel.add(board, gbc);
         scoreboardPanel.add(Box.createVerticalStrut(25), gbc);
         scoreboardPanel.add(backBtn, gbc2);
+        scoreboardPanel.add(Box.createHorizontalStrut(10), gbc2);
         scoreboardPanel.add(refreshBtn, gbc2);
         
         board.setLayout(new GridBagLayout());

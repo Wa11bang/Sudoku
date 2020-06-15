@@ -28,7 +28,7 @@ public class GameModel extends Observable {
         System.out.println("GameModel()");
     }
     
-    public void create(String type)
+    public void createGame(String type)
     {
         type = type.substring(0, 1).toUpperCase() + type.substring(1);               
         game = makeGame(type);
@@ -39,11 +39,11 @@ public class GameModel extends Observable {
     
     public Game makeGame(String type)
     {
-        Game tempGame = (new GameFactory().create(Difficulty.valueOf(type)));
-        tempGame.setBlocks(BlockGenerator.generate(tempGame.getDifficulty()));
-        tempGame.setUser(userModel.getUser());
+        Game tempGameI = GameFactory.create(Difficulty.valueOf(type));
+        tempGameI.setBlocks(BlockGenerator.generate(tempGameI.getDifficulty()));
+        tempGameI.setUser(userModel.getUser());
         
-        return tempGame;
+        return tempGameI;
     }
     
     public void addUserModel(UserModel m)
@@ -55,7 +55,7 @@ public class GameModel extends Observable {
     {
         if(null != game)
         {
-            calculateTime();
+            calculateGameTime();
             if(notify)
             {   
                 this.setChanged();
@@ -68,7 +68,7 @@ public class GameModel extends Observable {
         }
     }
     
-    public void calculateTime()
+    public void calculateGameTime()
     {
         double newTime = game.getTime() + ((System.currentTimeMillis() - timer)/1000);
         game.setTime(newTime);
@@ -102,7 +102,7 @@ public class GameModel extends Observable {
     public void checkGame()
     {             
         this.setChanged();
-        this.notifyObservers(new GameEvent(false, check()));
+        this.notifyObservers(new GameEvent(false, checkIfSolved()));
     }
     
     public void addScore()
@@ -111,7 +111,7 @@ public class GameModel extends Observable {
         new ScoreDaoImpl().addScore(score);
     }
     
-    public boolean check()
+    public boolean checkIfSolved()
     {
         for(int i = 1; i < 10; ++i)
         {
@@ -131,7 +131,7 @@ public class GameModel extends Observable {
         return true;
     }
 
-    public void play(String id) {  
+    public void playGame(String id) {  
         this.game = gh.getGameByID(Integer.parseInt(id));
         initGame();
     }

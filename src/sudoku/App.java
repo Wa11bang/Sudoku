@@ -35,7 +35,6 @@ public class App extends JFrame {
     private UserController uc = new UserController();
     private ScoreboardController sbc = new ScoreboardController();
     
-    private StartModel sm = new StartModel();
     private GameModel gm = new GameModel();
     private UserModel um = new UserModel();
     private ScoreboardModel sbm = new ScoreboardModel();     
@@ -74,7 +73,7 @@ public class App extends JFrame {
         setResizable(false);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
-        setUndecorated(true);
+        //setUndecorated(true);
         setVisible(true);
         setBackground(AppColour.APP_BACK);   
         getContentPane().setBackground(AppColour.APP_BACK);
@@ -112,14 +111,10 @@ public class App extends JFrame {
     
     public void initControllers()
     {
-        sc.addModel(sm);        
-        sc.addView(startView); 
         gc.addModel(gm);
         gc.addView(gameView);    
         sbc.addModel(sbm);
-        sbc.addView(scoreboardView);
-        uc.addModel(um);
-        uc.addView(userView);        
+        uc.addModel(um); 
         uc.addLoginView(loginView);
         uc.addCreateUserView(createUserView);
     }
