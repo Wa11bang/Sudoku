@@ -1,6 +1,7 @@
 package sudoku.ui.models;
 
 import java.util.Observable;
+import sudoku.Sudoku;
 import sudoku.events.GameEvent;
 import sudoku.events.UserEvent;
 import sudoku.handlers.GameDaoImpl;
@@ -80,7 +81,7 @@ public class UserModel extends Observable {
     
     public boolean checkIsValid(String username, String password)
     {
-        return (username.isEmpty() || password.isEmpty() || username.length() > 12);
+        return (username.isEmpty() || password.isEmpty() || username.length() > Sudoku.MAX_USERNAME_LEN);
     }
     
     public boolean checkIfExists(String username)
