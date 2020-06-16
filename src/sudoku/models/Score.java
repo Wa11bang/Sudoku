@@ -65,8 +65,8 @@ public class Score implements Serializable {
      */
     public double getScoreTime() {
         return score_time;
-    }
-
+    }   
+    
     /**
      * @return the game
      */
@@ -81,14 +81,18 @@ public class Score implements Serializable {
         return user;
     }
     
-    @Override
-    public String toString()
+    public String getFormattedScoreTime()
     {
-        DecimalFormat df = new DecimalFormat("0.00");
-
-        double min = (this.score_time - (this.score_time % 60)) / 60;
-        double secs = this.score_time - (60 * min);
-        
-        return ("Time: " + min + "Min "+ df.format(secs) + "s  Settings: " + this.game.getDifficulty() +" ("+ this.game.getDifficulty().getValue() + ") User: "+this.user.getUsername());
+        return getGame().getFormattedTime();
+    }
+    
+    public String getFormattedDifficulty()
+    {
+        return getGame().getFormattedDifficulty();
+    }
+    
+    public String getFormattedUsername()
+    {
+        return getGame().getFormattedUsername();
     }
 }

@@ -14,6 +14,9 @@ import sudoku.events.GameEvent;
 import sudoku.models.Game;
 import sudoku.ui.controllers.GameController;
 import sudoku.ui.elements.MenuButton;
+import sudoku.ui.elements.MenuLabel;
+import sudoku.ui.elements.MenuPanel;
+import sudoku.ui.elements.ScoreLabel;
 
 /**
  *
@@ -26,6 +29,7 @@ public class UncompletedGameView extends JPanel implements Observer {
     private MenuButton backBtn = new MenuButton("Back");
     private GridBagConstraints gbc = new GridBagConstraints();
     private GameController controller;
+    private MenuLabel uncompletedGameBanner = new MenuLabel("Uncompleted Games");
     
     public UncompletedGameView()
     {
@@ -41,10 +45,14 @@ public class UncompletedGameView extends JPanel implements Observer {
         gbc2.anchor = GridBagConstraints.NORTH;
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;        
-
+        
         scoreboardPanel.setLayout(new GridBagLayout());
         scoreboardPanel.setOpaque(false);             
         backBtn.setActionCommand("back");
+
+        scoreboardPanel.add(uncompletedGameBanner, gbc);
+        scoreboardPanel.add(Box.createVerticalStrut(50), gbc);
+        
         scoreboardPanel.add(board, gbc);
         scoreboardPanel.add(Box.createVerticalStrut(25), gbc);
         scoreboardPanel.add(backBtn, gbc2);
@@ -57,18 +65,22 @@ public class UncompletedGameView extends JPanel implements Observer {
     
     public void populate(List<Game> games)
     {
-        System.out.println("ScoreboardView():  Populating Scoreboard"); 
+        System.out.println("UncompletedGameView():  Populating GameBoard"); 
         board.removeAll();
         gameList.clear();
         for(Game game : games)
         {
-            JPanel p = new JPanel();
-            MenuButton gBtn = new MenuButton("Select");
+            JPanel panel = new MenuPanel();
+            MenuButton gBtn = new MenuButton("Play");
+            MenuButton dBtn = new MenuButton(	"\u2421");
             gBtn.addActionListener(controller);
             gBtn.setActionCommand("play_"+game.getGame_id());
-            p.add(new JLabel(game.toString()));
-            p.add(gBtn);
-            gameList.add(p);
+            dBtn.addActionListener(controller);
+            dBtn.setActionCommand("del_"+game.getGame_id());
+            panel.add(new ScoreLabel(game.toString()));
+            panel.add(gBtn);
+            panel.add(dBtn);
+            gameList.add(panel);
         }
         
         initComponents();
@@ -89,7 +101,6 @@ public class UncompletedGameView extends JPanel implements Observer {
         System.out.println("UncompletedGameView():  Update received from UserModel()"); 
         if(arg instanceof GameEvent)
         {
-            System.out.println("OK");
             populate(((GameEvent) arg).getGames());
         }
     }

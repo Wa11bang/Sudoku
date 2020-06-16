@@ -22,7 +22,7 @@ public interface GameDao {
     /**
      * Delete an existing user
      */
-    public boolean deleteGame(Game game);
+    public boolean deleteGame(int game_id);
     
     /**
      * Retrieve user by user_id

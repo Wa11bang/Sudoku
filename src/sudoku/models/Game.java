@@ -1,6 +1,7 @@
 package sudoku.models;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -131,9 +132,29 @@ abstract public class Game implements Serializable {
         this.diff = diff;
     }
     
+    public String getFormattedTime()
+    {
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        double min = (this.game_time - (this.game_time % 60)) / 60;
+        double secs = this.game_time - (60 * min);
+        
+        return ("Time: " + min + "min "+ df.format(secs) + "s");
+    }
+    
+    public String getFormattedDifficulty()
+    {
+        return (getDifficulty().name());
+    }
+    
+    public String getFormattedUsername()
+    {
+        return("User: " + getUser().getUsername());
+    }
+    
     @Override
     public String toString()
     {
-        return ("Game: "+this.game_id + " User: "+this.user.getUsername());
+        return (getFormattedDifficulty() + " -> " + getFormattedTime());
     }
 }

@@ -13,7 +13,9 @@ import sudoku.events.ScoreEvent;
 import sudoku.models.Score;
 import sudoku.ui.controllers.ScoreboardController;
 import sudoku.ui.elements.MenuButton;
+import sudoku.ui.elements.MenuLabel;
 import sudoku.ui.elements.ScoreLabel;
+import sudoku.ui.elements.MenuPanel;
 
 /**
  *
@@ -22,10 +24,11 @@ import sudoku.ui.elements.ScoreLabel;
 public class ScoreboardView extends JPanel implements Observer {
     private JPanel scoreboardPanel = new JPanel();
     private JPanel board = new JPanel();
-    private List<ScoreLabel> scoreList = new ArrayList();    
+    private List<JPanel> scoreList = new ArrayList();    
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton refreshBtn = new MenuButton("Refresh "+"\uD83D\uDDD8");
     private GridBagConstraints gbc = new GridBagConstraints();
+    private MenuLabel scoreboardBanner = new MenuLabel("Scoreboard");
     
     public ScoreboardView()
     {
@@ -48,6 +51,8 @@ public class ScoreboardView extends JPanel implements Observer {
         backBtn.setActionCommand("back");
         refreshBtn.setActionCommand("refresh");
 
+        scoreboardPanel.add(scoreboardBanner, gbc);
+        scoreboardPanel.add(Box.createVerticalStrut(50), gbc);
         scoreboardPanel.add(board, gbc);
         scoreboardPanel.add(Box.createVerticalStrut(25), gbc);
         scoreboardPanel.add(backBtn, gbc2);
@@ -67,8 +72,11 @@ public class ScoreboardView extends JPanel implements Observer {
         scoreList.clear();
         for(Score score : scores)
         {
-            scoreList.add(new ScoreLabel(score.toString()));
-            
+            JPanel panel = new MenuPanel();
+            panel.add(new ScoreLabel(score.getFormattedDifficulty()));
+            panel.add(new ScoreLabel(score.getFormattedScoreTime()));            
+            panel.add(new ScoreLabel(score.getFormattedUsername()));
+            scoreList.add(panel);            
         }
         
         initComponents();
@@ -76,9 +84,9 @@ public class ScoreboardView extends JPanel implements Observer {
     
     public void initComponents()
     {
-        for(ScoreLabel st : scoreList)
+        for(JPanel score : scoreList)
         {
-            board.add(st, gbc);
+            board.add(score, gbc);
             board.add(Box.createVerticalStrut(5), gbc);
         }
         updateUI();

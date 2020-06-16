@@ -8,9 +8,9 @@
     JUNIT TESTING
 
     Store PREDOKUs in Database
-    Make Score print out neater
-   
-    add MenuLabels to each view
+
+    scroll bar for viewing games and scoreboard
+
 
 */
 
@@ -29,7 +29,7 @@ public class Sudoku {
     public final static String LOGO_PATH = "/sudoku/res/logo.png";
     public static final double VERSION = 1.5;    
     public final static int PERMUTE_COUNT = 100;
-    public final static int MAX_USERNAME_LEN = 12;
+    public final static int MAX_USERNAME_LEN = 8;
     
     private static final Logger LOGGER = LogManager.getLogger(Sudoku.class);
     

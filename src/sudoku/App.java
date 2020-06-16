@@ -73,7 +73,7 @@ public class App extends JFrame {
         setResizable(false);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
-        //setUndecorated(true);
+        //etUndecorated(true);
         setVisible(true);
         setBackground(AppColour.APP_BACK);   
         getContentPane().setBackground(AppColour.APP_BACK);
@@ -154,6 +154,7 @@ public class App extends JFrame {
             public void run()
             {
                 HibernateUtils.shutdown();
+                System.out.println("\"to boldly go where no one has gone before\"");
             }
         }); 
     }

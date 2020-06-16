@@ -64,7 +64,7 @@ public class GameDaoImpl implements GameDao {
     }
 
     @Override
-    public boolean deleteGame(Game game) {
+    public boolean deleteGame(int game_id) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         
@@ -72,6 +72,7 @@ public class GameDaoImpl implements GameDao {
         boolean status = false;
         try {
             tx = session.beginTransaction();
+            Game game = (Game) session.load(Game.class, game_id);
             session.delete(game);
             tx.commit();
             status = true;

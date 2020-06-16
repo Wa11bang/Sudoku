@@ -12,6 +12,7 @@ import sudoku.events.UserEvent;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuField;
 import sudoku.ui.elements.MenuButton;
+import sudoku.ui.elements.MenuLabel;
 import sudoku.ui.elements.MenuPasswordField;
 
 /**

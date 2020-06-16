@@ -54,6 +54,9 @@ public class GameController extends IController implements ActionListener {
             model.playGame(e.getActionCommand().replace("play_", ""));            
             changeView("play", "game");
             
+        } else if(e.getActionCommand().contains("del"))
+        {            
+            model.deleteGame(Integer.parseInt(e.getActionCommand().replace("del_", "")));                        
         } else
         {
             changeView("game", "user");

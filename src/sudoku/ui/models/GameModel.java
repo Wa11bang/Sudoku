@@ -68,6 +68,12 @@ public class GameModel extends Observable {
         }
     }
     
+    public void deleteGame(int game_id)
+    {
+        gh.deleteGame(game_id);
+        userModel.getUserGames(false);
+    }
+    
     public void calculateGameTime()
     {
         double newTime = game.getTime() + ((System.currentTimeMillis() - timer)/1000);

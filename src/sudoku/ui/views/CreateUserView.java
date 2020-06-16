@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import sudoku.AppColour;
+import sudoku.Sudoku;
 import sudoku.events.UserEvent;
 import sudoku.ui.controllers.UserController;
 import sudoku.ui.elements.MenuField;
@@ -23,7 +24,7 @@ public class CreateUserView extends JPanel  implements Observer {
     private MenuField createUsername = new MenuField();
     private MenuPasswordField createPassword = new MenuPasswordField();
     private MenuButton backBtn = new MenuButton("Back");
-    private MenuButton createBtn = new MenuButton("Create");
+    private MenuButton createBtn = new MenuButton("Create");    
     
     public CreateUserView()
     {
@@ -47,7 +48,7 @@ public class CreateUserView extends JPanel  implements Observer {
         createBtn.setActionCommand("user_create");
         backBtn.setActionCommand("start");
 
-        createUsername.setPlaceholder("Username (Max 12 Character)");
+        createUsername.setPlaceholder("Username (Max "+Sudoku.MAX_USERNAME_LEN+" Character)");
         createPassword.setPlaceholder("Password");
         
         createForm.add(createUsername, gbc);
