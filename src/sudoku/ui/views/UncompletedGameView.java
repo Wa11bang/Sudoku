@@ -1,6 +1,5 @@
 package sudoku.ui.views;
 
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,51 +20,30 @@ import sudoku.ui.elements.ScoreLabel;
  *
  * @author Waldo
  */
-public class UncompletedGameView extends JPanel implements Observer {
-    private JPanel scoreboardPanel = new JPanel();
-    private JPanel board = new JPanel();
+public class UncompletedGameView extends IView implements Observer {
+    private JPanel gamesPanel = new JPanel();
     private List<JPanel> gameList = new ArrayList();    
-    private MenuButton backBtn = new MenuButton("Back");
-    private GridBagConstraints gbc = new GridBagConstraints();
-    private GameController controller;
+    private MenuButton backBtn = new MenuButton("Back");    
     private MenuLabel uncompletedGameBanner = new MenuLabel("Uncompleted Games");
+    private GameController controller;
     
     public UncompletedGameView()
     {
-        setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());        
-        setOpaque(false);     
+        setBorder(new EmptyBorder(30, 30, 30, 30));   
         
-        GridBagConstraints gbc2 = new GridBagConstraints();
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);          
         
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;        
-        
-        gbc2.anchor = GridBagConstraints.NORTH;
-        gbc2.weightx = 1.0;
-        gbc2.weighty = 1.0;        
-        
-        scoreboardPanel.setLayout(new GridBagLayout());
-        scoreboardPanel.setOpaque(false);             
-        backBtn.setActionCommand("back");
+        initComponents();        
+        addComponents();                
 
-        scoreboardPanel.add(uncompletedGameBanner, gbc);
-        scoreboardPanel.add(Box.createVerticalStrut(50), gbc);
-        
-        scoreboardPanel.add(board, gbc);
-        scoreboardPanel.add(Box.createVerticalStrut(25), gbc);
-        scoreboardPanel.add(backBtn, gbc2);
-        
-        board.setLayout(new GridBagLayout());
-        board.setOpaque(false);        
-
-        add(scoreboardPanel, gbc);    
+        add(contentPanel, gbc);    
     }
     
     public void populate(List<Game> games)
     {
-        System.out.println("UncompletedGameView():  Populating GameBoard"); 
-        board.removeAll();
+        System.out.println(getClass().getSimpleName()+":  Populating GameBoard"); 
+        gamesPanel.removeAll();
         gameList.clear();
         for(Game game : games)
         {
@@ -82,22 +60,22 @@ public class UncompletedGameView extends JPanel implements Observer {
             gameList.add(panel);
         }
         
-        initComponents();
+        initListComponents();
     }
     
-    public void initComponents()
+    public void initListComponents()
     {
-        for(JPanel gL : gameList)
+        for(JPanel game : gameList)
         {
-            board.add(gL, gbc);
-            board.add(Box.createVerticalStrut(5), gbc);
+            gamesPanel.add(game, gbc);
+            gamesPanel.add(Box.createVerticalStrut(5), gbc);
         }
         updateUI();
     }
     
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UncompletedGameView():  Update received from UserModel()"); 
+        System.out.println(getClass().getSimpleName()+":  Update received from UserModel()"); 
         if(arg instanceof GameEvent)
         {
             populate(((GameEvent) arg).getGames());
@@ -105,8 +83,22 @@ public class UncompletedGameView extends JPanel implements Observer {
     }
     
     public void addController(GameController controller) {
-        System.out.println("UncompletedGameView: Adding GameController");
+        System.out.println(getClass().getSimpleName()+": Adding "+controller.getClass().getSimpleName());
         backBtn.addActionListener(controller);
         this.controller = controller;
     } 
+    
+    private void initComponents() {
+        backBtn.setActionCommand("back");
+        gamesPanel.setLayout(new GridBagLayout());
+        gamesPanel.setOpaque(false);    
+    }
+    
+    private void addComponents() {
+        contentPanel.add(uncompletedGameBanner, gbc);
+        contentPanel.add(Box.createVerticalStrut(50), gbc);        
+        contentPanel.add(gamesPanel, gbc);
+        contentPanel.add(Box.createVerticalStrut(25), gbc);
+        contentPanel.add(backBtn, gbc2);  
+    }
 }

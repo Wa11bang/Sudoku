@@ -42,19 +42,19 @@ public class UserView extends IView implements Observer {
     
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UserView():  Update received from UserModel()");
+        System.out.println(getClass().getSimpleName()+":  Update received from UserModel()");
         if(arg instanceof UserEvent)
         {           
             if(null != ((UserEvent) arg).getUser())
             {
-                System.out.println("UserView():  Loading User from UserModel()");
+                System.out.println(getClass().getSimpleName()+":  Loading User from UserModel()");
                 setUserWelcome(((UserEvent) arg).getUser());
             }
         }
     }
     
     public void addController(UserController controller) {
-        System.out.println("UserView: Adding UserController");
+        System.out.println(getClass().getSimpleName()+": Adding "+controller.getClass().getSimpleName());
         createGameBtn.addActionListener(controller);
         uncompletedGamesBtn.addActionListener(controller);
         completedGamesBtn.addActionListener(controller);
@@ -71,8 +71,7 @@ public class UserView extends IView implements Observer {
         logoutBtn.setActionCommand("start");     
     }
     
-    @Override
-    protected void addComponents() {
+    private void addComponents() {
         contentPanel.add(userWelcome, gbc);
         contentPanel.add(Box.createVerticalStrut(50), gbc);
         contentPanel.add(createGameBtn, gbc);

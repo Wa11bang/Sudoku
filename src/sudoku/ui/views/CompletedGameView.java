@@ -1,6 +1,5 @@
 package sudoku.ui.views;
 
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,50 +20,29 @@ import sudoku.ui.elements.ScoreLabel;
  *
  * @author Waldo
  */
-public class CompletedGameView extends JPanel implements Observer {
-    private JPanel scoreboardPanel = new JPanel();
-    private JPanel board = new JPanel();
+public class CompletedGameView extends IView implements Observer {
+    private JPanel gamesPanel = new JPanel();
     private List<JPanel> gameList = new ArrayList();    
     private MenuButton backBtn = new MenuButton("Back");
-    private GridBagConstraints gbc = new GridBagConstraints();
     private MenuLabel completedGameBanner = new MenuLabel("Completed Games");
     
     public CompletedGameView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());        
-        setOpaque(false);     
         
-        GridBagConstraints gbc2 = new GridBagConstraints();
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);     
         
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;        
+        initComponents();
+        addComponents();
         
-        gbc2.anchor = GridBagConstraints.NORTH;
-        gbc2.weightx = 1.0;
-        gbc2.weighty = 1.0;        
-        
-        scoreboardPanel.setLayout(new GridBagLayout());
-        scoreboardPanel.setOpaque(false);             
-        backBtn.setActionCommand("back");
-
-        scoreboardPanel.add(completedGameBanner, gbc);
-        scoreboardPanel.add(Box.createVerticalStrut(50), gbc);
-        
-        scoreboardPanel.add(board, gbc);
-        scoreboardPanel.add(Box.createVerticalStrut(25), gbc);
-        scoreboardPanel.add(backBtn, gbc2);
-        
-        board.setLayout(new GridBagLayout());
-        board.setOpaque(false);        
-
-        add(scoreboardPanel, gbc);    
+        add(contentPanel, gbc);    
     }
     
     public void populate(List<Game> games)
     {
         System.out.println("CompletedGameView():  Populating GameBoard"); 
-        board.removeAll();
+        gamesPanel.removeAll();
         gameList.clear();
         for(Game game : games)
         {
@@ -73,15 +51,15 @@ public class CompletedGameView extends JPanel implements Observer {
             gameList.add(panel);
         }
         
-        initComponents();
+        initListComponents();
     }
     
-    public void initComponents()
+    public void initListComponents()
     {
         for(JPanel gL : gameList)
         {
-            board.add(gL, gbc);
-            board.add(Box.createVerticalStrut(5), gbc);
+            gamesPanel.add(gL, gbc);
+            gamesPanel.add(Box.createVerticalStrut(5), gbc);
         }
         updateUI();
     }
@@ -99,4 +77,19 @@ public class CompletedGameView extends JPanel implements Observer {
         System.out.println("CompletedGameView: Adding GameController");
         backBtn.addActionListener(controller);
     }  
+    
+    private void initComponents() {
+        backBtn.setActionCommand("back");               
+        gamesPanel.setLayout(new GridBagLayout());
+        gamesPanel.setOpaque(false);   
+    }
+    
+    private void addComponents() {
+        contentPanel.add(completedGameBanner, gbc);
+        contentPanel.add(Box.createVerticalStrut(50), gbc);
+        
+        contentPanel.add(gamesPanel, gbc);
+        contentPanel.add(Box.createVerticalStrut(25), gbc);
+        contentPanel.add(backBtn, gbc2);
+    }
 }

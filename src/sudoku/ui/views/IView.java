@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.views;
 
 import java.awt.GridBagConstraints;
@@ -30,6 +25,4 @@ abstract public class IView extends JPanel {
         gbc2.weightx = 1.0;
         gbc2.weighty = 1.0;       
     }
-    
-    abstract protected void addComponents();
 }
