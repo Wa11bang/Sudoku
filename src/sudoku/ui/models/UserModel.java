@@ -24,11 +24,6 @@ public class UserModel extends Observable {
         System.out.println("UserModel()");
     }
     
-    public String getUsername()
-    {
-        return user.getUsername();
-    }
-    
     public boolean login(String username, String password)
     {
         setChanged();

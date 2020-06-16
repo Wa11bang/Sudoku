@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.events;
 
 import sudoku.models.Users;
@@ -25,16 +20,12 @@ public class UserEvent {
     
     public UserEvent(boolean userExists, boolean invalidDetails)
     {
-        this.userExists = userExists;
-        this.invalidDetails = invalidDetails;
-        this.user = null;
+        this(userExists, invalidDetails, null);
     }
     
     public UserEvent(Users user)
     {
-        this.userExists = false;
-        this.invalidDetails = false;
-        this.user = user;
+        this(false, false, user);
     }
 
     /**

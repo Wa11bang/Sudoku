@@ -34,20 +34,6 @@ public class Block implements Serializable {
     {
         
     }
-    
-    /**
-     * @return the block_id
-     */
-    public int getBlock_id() {
-        return block_id;
-    }
-
-    /**
-     * @param block_id the block_id to set
-     */
-    public void setBlock_id(int block_id) {
-        this.block_id = block_id;
-    }
 
     /**
      * @return the value

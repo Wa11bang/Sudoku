@@ -1,11 +1,9 @@
 package sudoku.ui.views;
 
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import sudoku.events.UserEvent;
 import sudoku.models.Users;
@@ -17,8 +15,7 @@ import sudoku.ui.elements.MenuLabel;
  *
  * @author Waldo
  */
-public class UserView extends JPanel implements Observer {
-    private JPanel userMenu = new JPanel();    
+public class UserView extends IView implements Observer {
     private MenuButton createGameBtn = new MenuButton("Create a new Game");
     private MenuButton uncompletedGamesBtn = new MenuButton("View Uncompleted Games");
     private MenuButton completedGamesBtn = new MenuButton("View Completed Games");
@@ -29,41 +26,13 @@ public class UserView extends JPanel implements Observer {
     public UserView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());     
-        setOpaque(false);
         
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;        
-        
-        gbc2.anchor = GridBagConstraints.NORTH;
-        gbc2.weightx = 1.0;
-        gbc2.weighty = 1.0;        
-        
-        userMenu.setLayout(new GridBagLayout());
-        userMenu.setOpaque(false);          
-        
-        createGameBtn.setActionCommand("create_game");
-        uncompletedGamesBtn.setActionCommand("uncompleted_games");
-        completedGamesBtn.setActionCommand("completed_games");
-        viewScoreboardBtn.setActionCommand("scoreboard");
-        logoutBtn.setActionCommand("start");
-        
-        userMenu.add(userWelcome, gbc);
-        userMenu.add(Box.createVerticalStrut(50), gbc);
-        userMenu.add(createGameBtn, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(uncompletedGamesBtn, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(completedGamesBtn, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(viewScoreboardBtn, gbc);
-        userMenu.add(Box.createVerticalStrut(25), gbc);
-        userMenu.add(logoutBtn, gbc);             
-
-        add(userMenu, gbc);       
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);                  
+          
+        initComponents();          
+        addComponents();
+        add(contentPanel, gbc);       
     }
     
     public void setUserWelcome(Users user)
@@ -92,4 +61,28 @@ public class UserView extends JPanel implements Observer {
         viewScoreboardBtn.addActionListener(controller);
         logoutBtn.addActionListener(controller);
     } 
+
+    protected void initComponents()
+    {
+        createGameBtn.setActionCommand("create_game");
+        uncompletedGamesBtn.setActionCommand("uncompleted_games");
+        completedGamesBtn.setActionCommand("completed_games");
+        viewScoreboardBtn.setActionCommand("scoreboard");
+        logoutBtn.setActionCommand("start");     
+    }
+    
+    @Override
+    protected void addComponents() {
+        contentPanel.add(userWelcome, gbc);
+        contentPanel.add(Box.createVerticalStrut(50), gbc);
+        contentPanel.add(createGameBtn, gbc);
+        contentPanel.add(Box.createVerticalStrut(25), gbc);
+        contentPanel.add(uncompletedGamesBtn, gbc);
+        contentPanel.add(Box.createVerticalStrut(25), gbc);
+        contentPanel.add(completedGamesBtn, gbc);
+        contentPanel.add(Box.createVerticalStrut(25), gbc);
+        contentPanel.add(viewScoreboardBtn, gbc);
+        contentPanel.add(Box.createVerticalStrut(25), gbc);
+        contentPanel.add(logoutBtn, gbc);   
+    }
 }

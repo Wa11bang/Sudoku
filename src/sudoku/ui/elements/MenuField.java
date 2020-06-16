@@ -1,6 +1,5 @@
 package sudoku.ui.elements;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+import sudoku.AppColour;
 
 /**
  *
@@ -29,7 +29,7 @@ public class MenuField extends JTextField {
         super(inputText);
         this.placeholder = placeholder;
         
-        setBorder(new MatteBorder(0, 0, 2, 0, new Color(0, 0, 0, 100)));
+        setBorder(new MatteBorder(0, 0, 2, 0, AppColour.MENU_F_BORDER));
         setOpaque(false);
         setPreferredSize(new Dimension(200, 75));
         setFont(new Font("Sans Serif", Font.PLAIN, 24));        
@@ -55,7 +55,7 @@ public class MenuField extends JTextField {
 
         final Graphics2D g = (Graphics2D) pG;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(new Color(33, 33, 33, 100));
+        g.setColor(AppColour.MENU_F_PLACE);
         g.setFont(new Font("Sans Serif", Font.PLAIN, 12));
         g.drawString(placeholder, getInsets().left, this.getHeight() - 7);
     }

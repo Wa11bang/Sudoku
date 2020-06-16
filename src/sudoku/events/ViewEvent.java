@@ -27,23 +27,9 @@ public class ViewEvent {
     }
 
     /**
-     * @param currentPane the currentPane to set
-     */
-    public void setCurrentPane(String currentPane) {
-        this.currentPane = currentPane;
-    }
-
-    /**
      * @return the targetPane
      */
     public String getTargetPane() {
         return targetPane;
-    }
-
-    /**
-     * @param targetPane the targetPane to set
-     */
-    public void setTargetPane(String targetPane) {
-        this.targetPane = targetPane;
     }
 }

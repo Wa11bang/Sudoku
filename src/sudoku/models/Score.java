@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import sudoku.misc.TimeConverter;
 
 /**
  *
@@ -52,13 +53,6 @@ public class Score implements Serializable {
     {
         
     }
-    
-    /**
-     * @return the game_id
-     */
-    public int getScore_id() {
-        return score_id;
-    }
 
     /**
      * @return the moves
@@ -83,16 +77,19 @@ public class Score implements Serializable {
     
     public String getFormattedScoreTime()
     {
-        return getGame().getFormattedTime();
+        DecimalFormat df = new DecimalFormat("0.00");
+        TimeConverter tC = new TimeConverter(score_time);
+        
+        return ("Time: " + tC.getMins() + "min "+ df.format(tC.getSecs()) + "s");
     }
     
     public String getFormattedDifficulty()
     {
-        return getGame().getFormattedDifficulty();
+        return (getGame().getDifficulty().name());
     }
     
     public String getFormattedUsername()
     {
-        return getGame().getFormattedUsername();
+        return("User: " + getUser().getUsername());
     }
 }

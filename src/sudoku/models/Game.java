@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import sudoku.Difficulty;
+import sudoku.misc.TimeConverter;
 
 /**
  *
@@ -77,12 +78,12 @@ abstract public class Game implements Serializable {
     }
 
     /**
-     * @return the complete
+     * @param complete the complete to set
      */
     public boolean isComplete() {
-        return complete;
+        return this.complete;
     }
-
+    
     /**
      * @param complete the complete to set
      */
@@ -135,21 +136,14 @@ abstract public class Game implements Serializable {
     public String getFormattedTime()
     {
         DecimalFormat df = new DecimalFormat("0.00");
-
-        double min = (this.game_time - (this.game_time % 60)) / 60;
-        double secs = this.game_time - (60 * min);
+        TimeConverter tC = new TimeConverter(game_time);
         
-        return ("Time: " + min + "min "+ df.format(secs) + "s");
+        return ("Time: " + tC.getMins() + "min "+ df.format(tC.getSecs()) + "s");
     }
     
     public String getFormattedDifficulty()
     {
         return (getDifficulty().name());
-    }
-    
-    public String getFormattedUsername()
-    {
-        return("User: " + getUser().getUsername());
     }
     
     @Override

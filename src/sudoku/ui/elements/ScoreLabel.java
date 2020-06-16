@@ -1,10 +1,10 @@
 package sudoku.ui.elements;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
+import sudoku.AppColour;
 
 /**
  *
@@ -17,8 +17,8 @@ public class ScoreLabel extends JLabel {
         
         setBorder(null);
         setOpaque(false);
-        setBackground(Color.decode("#E0DFD5"));
-        setForeground(Color.decode("#685F74").darker().darker());
+        setBackground(AppColour.MENU_BACK);
+        setForeground(AppColour.SCORE_L_FORE);
         setBorder(new EmptyBorder(10,10,10,10));
         setFont(new Font("Helvetica", Font.BOLD, 15));
     }
