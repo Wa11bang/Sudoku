@@ -9,6 +9,7 @@ import sudoku.models.Users;
 import sudoku.handlers.UserDaoImpl;
 import sudoku.handlers.GameDao;
 import sudoku.handlers.UserDao;
+import sudoku.misc.Hash;
 
 /**
  *
@@ -59,7 +60,8 @@ public class UserModel extends Observable {
             return false;
         }        
         
-        Users tempUserI = new Users(username, password);        
+        Hash hash = new Hash("SHA-256");
+        Users tempUserI = new Users(username, hash.encode(password));        
         
         if(checkIfExists(username)){            
             if(uh.addUser(tempUserI))

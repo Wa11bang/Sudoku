@@ -1,11 +1,9 @@
 package sudoku.ui.views;
 
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import sudoku.AppColour;
 import sudoku.events.UserEvent;
@@ -18,8 +16,7 @@ import sudoku.ui.elements.MenuPasswordField;
  *
  * @author Waldo
  */
-public class LoginView extends JPanel implements Observer {
-    private JPanel loginForm = new JPanel();
+public class LoginView extends IView implements Observer {
     private MenuField loginUsername = new MenuField();
     private MenuPasswordField loginPassword = new MenuPasswordField();
     private MenuButton backBtn = new MenuButton("Back");
@@ -27,36 +24,15 @@ public class LoginView extends JPanel implements Observer {
     
     public LoginView()
     {
-        setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());        
-        setOpaque(false);
-        
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;        
-        
-        gbc2.anchor = GridBagConstraints.NORTH;
-        gbc2.weightx = 1.0;
-        gbc2.weighty = 1.0;        
+        setBorder(new EmptyBorder(30, 30, 30, 30));   
 
-        loginForm.setLayout(new GridBagLayout());
-        loginForm.setOpaque(false);       
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);       
         
-        loginBtn.setActionCommand("user_login");
-        backBtn.setActionCommand("start");
+        initComponents();       
+        addComponents();
         
-        loginUsername.setPlaceholder("Username");        
-        loginPassword.setPlaceholder("Password");
-        
-        loginForm.add(loginUsername, gbc);
-        loginForm.add(loginPassword, gbc);
-        loginForm.add(Box.createVerticalStrut(25), gbc);
-        loginForm.add(backBtn, gbc2);
-        loginForm.add(loginBtn, gbc2);
-        
-        add(loginForm, gbc);
+        add(contentPanel, gbConstraints);
     }
     
     public String getLoginUsername()
@@ -98,5 +74,22 @@ public class LoginView extends JPanel implements Observer {
     {
         loginUsername.setText("");
         loginPassword.setText("");
+    }
+    
+    private void initComponents()
+    {
+        loginBtn.setActionCommand("user_login");
+        backBtn.setActionCommand("start");        
+        loginUsername.setPlaceholder("Username");        
+        loginPassword.setPlaceholder("Password");
+    }
+    
+    private void addComponents()
+    {
+        contentPanel.add(loginUsername, gbConstraints);
+        contentPanel.add(loginPassword, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(backBtn, gbConstraints2);
+        contentPanel.add(loginBtn, gbConstraints2);
     }
 }

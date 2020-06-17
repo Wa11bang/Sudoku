@@ -1,6 +1,5 @@
 package sudoku.ui.views;
 
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,54 +20,30 @@ import sudoku.ui.elements.MenuPanel;
  *
  * @author Waldo
  */
-public class ScoreboardView extends JPanel implements Observer {
-    private JPanel scoreboardPanel = new JPanel();
-    private JPanel board = new JPanel();
+public class ScoreboardView extends IView implements Observer {
+    private JPanel scoresPanel = new JPanel();
     private List<JPanel> scoreList = new ArrayList();    
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton refreshBtn = new MenuButton("Refresh "+"\uD83D\uDDD8");
-    private GridBagConstraints gbc = new GridBagConstraints();
     private MenuLabel scoreboardBanner = new MenuLabel("Scoreboard");
     
     public ScoreboardView()
     {
-        setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());        
-        setOpaque(false);        
-        
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;        
-        
-        gbc2.anchor = GridBagConstraints.NORTH;
-        gbc2.weightx = 1.0;
-        gbc2.weighty = 1.0;        
+        setBorder(new EmptyBorder(30, 30, 30, 30));      
 
-        scoreboardPanel.setLayout(new GridBagLayout());
-        scoreboardPanel.setOpaque(false);       
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);       
 
-        backBtn.setActionCommand("back");
-        refreshBtn.setActionCommand("refresh");
-
-        scoreboardPanel.add(scoreboardBanner, gbc);
-        scoreboardPanel.add(Box.createVerticalStrut(50), gbc);
-        scoreboardPanel.add(board, gbc);
-        scoreboardPanel.add(Box.createVerticalStrut(25), gbc);
-        scoreboardPanel.add(backBtn, gbc2);
-        scoreboardPanel.add(Box.createHorizontalStrut(10), gbc2);
-        scoreboardPanel.add(refreshBtn, gbc2);
+        initComponents();
+        addComponents();
         
-        board.setLayout(new GridBagLayout());
-        board.setOpaque(false);        
-        
-        add(scoreboardPanel, gbc);                
+        add(contentPanel, gbConstraints);                
     }
     
     public void populate(List<Score> scores)
     {
         System.out.println("ScoreboardView():  Populating Scoreboard"); 
-        board.removeAll();
+        scoresPanel.removeAll();
         scoreList.clear();
         for(Score score : scores)
         {
@@ -79,15 +54,15 @@ public class ScoreboardView extends JPanel implements Observer {
             scoreList.add(panel);            
         }
         
-        initComponents();
+        initListComponents();
     }
     
-    public void initComponents()
+    public void initListComponents()
     {
         for(JPanel score : scoreList)
         {
-            board.add(score, gbc);
-            board.add(Box.createVerticalStrut(5), gbc);
+            scoresPanel.add(score, gbConstraints);
+            scoresPanel.add(Box.createVerticalStrut(5), gbConstraints);
         }
         updateUI();
     }
@@ -106,4 +81,23 @@ public class ScoreboardView extends JPanel implements Observer {
         backBtn.addActionListener(controller);
         refreshBtn.addActionListener(controller);
     } 
+    
+    private void initComponents()
+    {
+        backBtn.setActionCommand("back");
+        refreshBtn.setActionCommand("refresh");
+        scoresPanel.setLayout(new GridBagLayout());
+        scoresPanel.setOpaque(false);
+    }
+    
+    private void addComponents()
+    {
+        contentPanel.add(scoreboardBanner, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);
+        contentPanel.add(scoresPanel, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(backBtn, gbConstraints2);
+        contentPanel.add(Box.createHorizontalStrut(10), gbConstraints2);
+        contentPanel.add(refreshBtn, gbConstraints2);
+    }
 }

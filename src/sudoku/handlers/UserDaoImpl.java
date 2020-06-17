@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import sudoku.misc.Hash;
 import sudoku.misc.HibernateUtils;
 import sudoku.models.Users;
 
@@ -147,9 +148,12 @@ public class UserDaoImpl implements UserDao {
         Users user = null;
 
         try {
+            
+            Hash hash = new Hash("SHA-256");
+            
             Criteria crit = session.createCriteria(Users.class);
             crit.add(Restrictions.eq("username", username));
-            crit.add(Restrictions.eq("password", password));
+            crit.add(Restrictions.eq("password", hash.encode(password)));
             crit.setMaxResults(1);
             List<Users> results = crit.list();
             

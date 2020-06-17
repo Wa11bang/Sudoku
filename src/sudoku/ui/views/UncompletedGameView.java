@@ -37,7 +37,7 @@ public class UncompletedGameView extends IView implements Observer {
         initComponents();        
         addComponents();                
 
-        add(contentPanel, gbc);    
+        add(contentPanel, gbConstraints);    
     }
     
     public void populate(List<Game> games)
@@ -67,8 +67,8 @@ public class UncompletedGameView extends IView implements Observer {
     {
         for(JPanel game : gameList)
         {
-            gamesPanel.add(game, gbc);
-            gamesPanel.add(Box.createVerticalStrut(5), gbc);
+            gamesPanel.add(game, gbConstraints);
+            gamesPanel.add(Box.createVerticalStrut(5), gbConstraints);
         }
         updateUI();
     }
@@ -95,10 +95,10 @@ public class UncompletedGameView extends IView implements Observer {
     }
     
     private void addComponents() {
-        contentPanel.add(uncompletedGameBanner, gbc);
-        contentPanel.add(Box.createVerticalStrut(50), gbc);        
-        contentPanel.add(gamesPanel, gbc);
-        contentPanel.add(Box.createVerticalStrut(25), gbc);
-        contentPanel.add(backBtn, gbc2);  
+        contentPanel.add(uncompletedGameBanner, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);        
+        contentPanel.add(gamesPanel, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(backBtn, gbConstraints2);  
     }
 }

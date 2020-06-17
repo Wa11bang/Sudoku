@@ -32,7 +32,7 @@ public class UserView extends IView implements Observer {
           
         initComponents();          
         addComponents();
-        add(contentPanel, gbc);       
+        add(contentPanel, gbConstraints);       
     }
     
     public void setUserWelcome(Users user)
@@ -72,16 +72,16 @@ public class UserView extends IView implements Observer {
     }
     
     private void addComponents() {
-        contentPanel.add(userWelcome, gbc);
-        contentPanel.add(Box.createVerticalStrut(50), gbc);
-        contentPanel.add(createGameBtn, gbc);
-        contentPanel.add(Box.createVerticalStrut(25), gbc);
-        contentPanel.add(uncompletedGamesBtn, gbc);
-        contentPanel.add(Box.createVerticalStrut(25), gbc);
-        contentPanel.add(completedGamesBtn, gbc);
-        contentPanel.add(Box.createVerticalStrut(25), gbc);
-        contentPanel.add(viewScoreboardBtn, gbc);
-        contentPanel.add(Box.createVerticalStrut(25), gbc);
-        contentPanel.add(logoutBtn, gbc);   
+        contentPanel.add(userWelcome, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);
+        contentPanel.add(createGameBtn, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(uncompletedGamesBtn, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(completedGamesBtn, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(viewScoreboardBtn, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(logoutBtn, gbConstraints);   
     }
 }

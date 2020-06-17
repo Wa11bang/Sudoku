@@ -33,21 +33,9 @@ public class StartView extends JPanel {
         
         loadLogo(Sudoku.LOGO_PATH);
  
-        cnu.setActionCommand("create_user");    
-        login.setActionCommand("login");      
-        vsb.setActionCommand("scoreboard");        
-        exit.setActionCommand("exit");   
-                
-        startButtons.setLayout(new GridLayout(0,1));
-        startButtons.setOpaque(false);
-        startButtons.add(cnu);
-        startButtons.add(Box.createVerticalStrut(15));
-        startButtons.add(login);
-        startButtons.add(Box.createVerticalStrut(15));
-        startButtons.add(vsb);
-        startButtons.add(Box.createVerticalStrut(15));
-        startButtons.add(exit);        
-        
+        initComponents();
+        addComponents();              
+                             
         add(startButtons);
     }
     
@@ -68,5 +56,26 @@ public class StartView extends JPanel {
         } catch (IOException ex) {
             System.out.println("File not found!");
         }   
+    }
+    
+    private void initComponents()
+    {
+        startButtons.setLayout(new GridLayout(0,1));
+        startButtons.setOpaque(false);
+        cnu.setActionCommand("create_user");    
+        login.setActionCommand("login");      
+        vsb.setActionCommand("scoreboard");        
+        exit.setActionCommand("exit");   
+    }
+    
+    private void addComponents()
+    {
+        startButtons.add(cnu);
+        startButtons.add(Box.createVerticalStrut(15));
+        startButtons.add(login);
+        startButtons.add(Box.createVerticalStrut(15));
+        startButtons.add(vsb);
+        startButtons.add(Box.createVerticalStrut(15));
+        startButtons.add(exit);   
     }
 }

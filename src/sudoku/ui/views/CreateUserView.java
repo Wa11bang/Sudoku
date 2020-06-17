@@ -1,11 +1,9 @@
 package sudoku.ui.views;
 
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import sudoku.AppColour;
 import sudoku.Sudoku;
@@ -19,8 +17,7 @@ import sudoku.ui.elements.MenuPasswordField;
  *
  * @author Waldo
  */
-public class CreateUserView extends JPanel  implements Observer {
-    private JPanel createForm = new JPanel();
+public class CreateUserView extends IView implements Observer {
     private MenuField createUsername = new MenuField();
     private MenuPasswordField createPassword = new MenuPasswordField();
     private MenuButton backBtn = new MenuButton("Back");
@@ -29,35 +26,14 @@ public class CreateUserView extends JPanel  implements Observer {
     public CreateUserView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());      
-        setOpaque(false);      
-        
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-                
-        gbc2.anchor = GridBagConstraints.NORTH;
-        gbc2.weightx = 1.0;
-        gbc2.weighty = 1.0;      
-                     
-        createForm.setLayout(new GridBagLayout());
-        createForm.setOpaque(false);
-        
-        createBtn.setActionCommand("user_create");
-        backBtn.setActionCommand("start");
 
-        createUsername.setPlaceholder("Username (Max "+Sudoku.MAX_USERNAME_LEN+" Character)");
-        createPassword.setPlaceholder("Password");
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);
         
-        createForm.add(createUsername, gbc);
-        createForm.add(createPassword, gbc);
-        createForm.add(Box.createVerticalStrut(25), gbc);
-        createForm.add(backBtn, gbc2);
-        createForm.add(createBtn, gbc2);
-        
-        add(createForm, gbc);          
+        initComponents();
+        addComponents();       
+                
+        add(contentPanel, gbConstraints);          
     }
     
     public String getLoginUsername()
@@ -86,7 +62,7 @@ public class CreateUserView extends JPanel  implements Observer {
             }
             else
             {
-                createUsername.setPlaceholder("Username (Max 12 Character)");
+                createUsername.setPlaceholder("Username (Max "+Sudoku.MAX_USERNAME_LEN+" Character)");
                 createBtn.setBackground(AppColour.MENU_BACK);
             }
         }
@@ -103,5 +79,22 @@ public class CreateUserView extends JPanel  implements Observer {
     {
         createUsername.setText("");
         createPassword.setText("");
+    }
+    
+    private void initComponents()
+    {
+        createBtn.setActionCommand("user_create");
+        backBtn.setActionCommand("start");
+        createUsername.setPlaceholder("Username (Max "+Sudoku.MAX_USERNAME_LEN+" Character)");
+        createPassword.setPlaceholder("Password");
+    }
+    
+    private void addComponents()
+    {
+        contentPanel.add(createUsername, gbConstraints);
+        contentPanel.add(createPassword, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(backBtn, gbConstraints2);
+        contentPanel.add(createBtn, gbConstraints2);
     }
 }

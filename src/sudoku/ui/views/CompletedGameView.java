@@ -36,7 +36,7 @@ public class CompletedGameView extends IView implements Observer {
         initComponents();
         addComponents();
         
-        add(contentPanel, gbc);    
+        add(contentPanel, gbConstraints);    
     }
     
     public void populate(List<Game> games)
@@ -58,8 +58,8 @@ public class CompletedGameView extends IView implements Observer {
     {
         for(JPanel gL : gameList)
         {
-            gamesPanel.add(gL, gbc);
-            gamesPanel.add(Box.createVerticalStrut(5), gbc);
+            gamesPanel.add(gL, gbConstraints);
+            gamesPanel.add(Box.createVerticalStrut(5), gbConstraints);
         }
         updateUI();
     }
@@ -85,11 +85,11 @@ public class CompletedGameView extends IView implements Observer {
     }
     
     private void addComponents() {
-        contentPanel.add(completedGameBanner, gbc);
-        contentPanel.add(Box.createVerticalStrut(50), gbc);
+        contentPanel.add(completedGameBanner, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);
         
-        contentPanel.add(gamesPanel, gbc);
-        contentPanel.add(Box.createVerticalStrut(25), gbc);
-        contentPanel.add(backBtn, gbc2);
+        contentPanel.add(gamesPanel, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(backBtn, gbConstraints2);
     }
 }

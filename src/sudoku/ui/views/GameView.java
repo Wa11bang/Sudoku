@@ -28,9 +28,9 @@ public class GameView extends JPanel implements Observer {
     private JPanel gamePanel = new JPanel();
     private JPanel controls = new JPanel();
     private List<GameBlock> grid = new ArrayList();;
-    private GameButton check = new GameButton();
-    private JButton save = new JButton();
-    private JButton back = new JButton();  
+    private JButton check = new GameButton("Check Solution");
+    private JButton save = new GameButton("Save Progress");
+    private JButton back = new GameButton("Back");
         
     public GameView()
     {
@@ -38,20 +38,14 @@ public class GameView extends JPanel implements Observer {
         
         GridLayout gamePanelLayout = new GridLayout(3,3);
         gamePanelLayout.setHgap(15);
-        gamePanelLayout.setVgap(15);
-        
+        gamePanelLayout.setVgap(15);        
         
         gamePanel.setLayout(gamePanelLayout);
         gamePanel.setBorder(new EmptyBorder(30,30,15,30));             
         controls.setBorder(new EmptyBorder(15,30,15,30));
         
-        check = new GameButton("Check Solution");
-        check.setActionCommand("check");
-        
-        save = new GameButton("Save Progress");
-        save.setActionCommand("save");
-        
-        back = new GameButton("Back");
+        check.setActionCommand("check");        
+        save.setActionCommand("save");        
         back.setActionCommand("back");
 
         controls.add(back);
@@ -77,10 +71,9 @@ public class GameView extends JPanel implements Observer {
     public void drawSections()
     {
         int sectionColumnStart = 0;
-        int sectionColumnEnd = 3;
-        int gridSize = 3;
-        
+        int sectionColumnEnd = 3;       
         int sectionRowStart,sectionRowEnd;
+        int gridSize = 3;
         
         for(int x = 0; x < gridSize; ++x)
         {

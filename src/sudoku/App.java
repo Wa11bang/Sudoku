@@ -46,18 +46,9 @@ public class App extends JFrame {
         initViews();
         initControllers();
         initExtControllers();       
+        addComponents();            
         
-        cards.add(startView, "start");
-        cards.add(loginView, "login");
-        cards.add(createUserView, "create_user");
-        cards.add(scoreboardView, "scoreboard");
-        cards.add(userView, "user");
-        cards.add(completedGameView, "completed_games");
-        cards.add(uncompletedGameView, "uncompleted_games");      
-        cards.add(createGameView, "create_game");
-        cards.add(gameView, "game");      
         cards.setOpaque(false);
-
         add(cards, BorderLayout.CENTER);
                        
         //Handle Shutdown of Application
@@ -73,7 +64,7 @@ public class App extends JFrame {
         setResizable(false);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
-        //etUndecorated(true);
+        //setUndecorated(true);
         setVisible(true);
         setBackground(AppColour.APP_BACK);   
         getContentPane().setBackground(AppColour.APP_BACK);
@@ -125,6 +116,19 @@ public class App extends JFrame {
         gc.addAppView(this);
         uc.addAppView(this);
         sbc.addAppView(this);
+    }
+    
+    public void addComponents()
+    {
+        cards.add(startView, "start");
+        cards.add(loginView, "login");
+        cards.add(createUserView, "create_user");
+        cards.add(scoreboardView, "scoreboard");
+        cards.add(userView, "user");
+        cards.add(completedGameView, "completed_games");
+        cards.add(uncompletedGameView, "uncompleted_games");      
+        cards.add(createGameView, "create_game");
+        cards.add(gameView, "game");  
     }
     
     public void setCurrentPane(String pane)

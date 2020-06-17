@@ -1,81 +1,36 @@
 package sudoku.ui.views;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.Box;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import sudoku.Difficulty;
-import sudoku.models.Users;
 import sudoku.ui.controllers.GameController;
 import sudoku.ui.elements.MenuButton;
+import sudoku.ui.elements.MenuLabel;
 
 /**
  *
  * @author Waldo
  */
-public class CreateGameView extends JPanel implements Observer {
-    private JPanel gameSelection = new JPanel();    
+public class CreateGameView extends IView {  
     private MenuButton easyBtn = new MenuButton("Easy ("+Difficulty.Easy.getValue()+")");
     private MenuButton mediumBtn = new MenuButton("Medium ("+Difficulty.Medium.getValue()+")");
     private MenuButton hardBtn = new MenuButton("Hard ("+Difficulty.Hard.getValue()+")");
     private MenuButton backBtn = new MenuButton("Back");
-    private JTextField gameSelect = new JTextField();
+    private MenuLabel gameSelect = new MenuLabel("Please select a Game Difficulty");
     
     public CreateGameView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
-        setLayout(new GridBagLayout());        
-        setOpaque(false);
         
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;        
-        
-        gbc2.anchor = GridBagConstraints.NORTH;
-        gbc2.weightx = 1.0;
-        gbc2.weighty = 1.0;        
-
-        gameSelection.setLayout(new GridBagLayout());
-        gameSelection.setOpaque(false);     
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);     
            
-        gameSelect.setOpaque(false);
-        gameSelect.setBorder(null);
-        gameSelect.setEditable(false);
-        gameSelect.setHorizontalAlignment(JTextField.CENTER);
-        gameSelect.setFont(new Font("Helvetica", Font.PLAIN, 25));
-        gameSelect.setText("Please select a Game Difficulty");
-        
-        easyBtn.setActionCommand("easy_create");
-        mediumBtn.setActionCommand("medium_create");
-        hardBtn.setActionCommand("hard_create");
-        backBtn.setActionCommand("back");
+        initComponents();
+        addComponents();
 
-        gameSelection.add(Box.createVerticalStrut(25), gbc);
-        gameSelection.add(easyBtn, gbc);
-        gameSelection.add(Box.createVerticalStrut(10), gbc);
-        gameSelection.add(mediumBtn, gbc);
-        gameSelection.add(Box.createVerticalStrut(10), gbc);
-        gameSelection.add(hardBtn, gbc);
-        gameSelection.add(Box.createVerticalStrut(50), gbc);
-        gameSelection.add(backBtn);   
-
-        add(gameSelect, gbc);
-        add(gameSelection, gbc); 
-    }
-    
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("CreateGameView():  Update received from UserModel()");
-        if(arg instanceof Users)
-        {
-        }
+        add(gameSelect, gbConstraints);
+        add(contentPanel, gbConstraints); 
     }
     
     public void addController(GameController controller) {
@@ -85,4 +40,24 @@ public class CreateGameView extends JPanel implements Observer {
         hardBtn.addActionListener(controller);
         backBtn.addActionListener(controller);
     } 
+    
+    private void initComponents()
+    {
+        easyBtn.setActionCommand("easy_create");
+        mediumBtn.setActionCommand("medium_create");
+        hardBtn.setActionCommand("hard_create");
+        backBtn.setActionCommand("back");
+    }
+    
+    private void addComponents()
+    {
+        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(easyBtn, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(10), gbConstraints);
+        contentPanel.add(mediumBtn, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(10), gbConstraints);
+        contentPanel.add(hardBtn, gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);
+        contentPanel.add(backBtn);   
+    }
 }
