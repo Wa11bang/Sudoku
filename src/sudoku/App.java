@@ -4,6 +4,9 @@ import sudoku.events.ViewEvent;
 import sudoku.misc.HibernateUtils;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import sudoku.ui.controllers.*;
@@ -60,7 +63,6 @@ public class App extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 600);
         setTitle("Sudoku");   
-        getContentPane().validate();
         setResizable(false);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null);
@@ -68,6 +70,8 @@ public class App extends JFrame {
         setVisible(true);
         setBackground(AppColour.APP_BACK);   
         getContentPane().setBackground(AppColour.APP_BACK);
+        
+        playMenuTrack();
     }
     
     public void initModels()
@@ -148,6 +152,28 @@ public class App extends JFrame {
     public String getPrevPane()
     {
         return this.prevPane;
+    }
+    
+    public void playMenuTrack()
+    {
+        new Runnable(){
+            @Override
+            public void run() {
+                sound();
+            }
+            
+        }.run();
+    }
+    
+    public void sound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/sudoku/res/menu.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void handleGUIShutdown()

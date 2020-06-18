@@ -1,6 +1,7 @@
 package sudoku.handlers;
 
-import java.util.List;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,8 +17,7 @@ import sudoku.models.Users;
  */
 public class UserDaoImplTest {
     private UserDao uh = new UserDaoImpl();
-    private final static String USERNAME = "system_test";
-    private final static String PASSWORD = "system_test";
+    private Users user = new Users();
     
     public UserDaoImplTest() {
     }
@@ -33,6 +33,10 @@ public class UserDaoImplTest {
     
     @Before
     public void setUp() {
+        Configuration cfg = new Configuration().configure();
+        SchemaExport export = new SchemaExport(cfg);
+        export.create(true, true);
+        user = new Users("system", "system");
     }
     
     @After
@@ -44,35 +48,25 @@ public class UserDaoImplTest {
      */
     @Test
     public void testAddUser() {
-        Users user = new Users(USERNAME, PASSWORD);
-        if(null != uh.getUserByUsername(USERNAME))
-        {
-            uh.deleteUser(user);
-        }
+        boolean result = uh.addUser(this.user);
+        boolean expResult = true;
 
-        Users result = uh.getUserByUsername(USERNAME);
-        
-        assertEquals(user.getUsername(), result.getUsername());
+        assertEquals(expResult, result);
     }    
-
+    
     /**
      * Test of getUserByID method, of class UserDaoImpl.
      */
     @Test
-    public void testGetUserByID() {
-        UserDaoImpl instance = new UserDaoImpl();
-        Users result = instance.getUserByUsername(USERNAME);
-        assertEquals(USERNAME, result.getUsername());
-    }
+    public void testGetUserByUsername() {
+        uh.addUser(this.user);
 
-    /**
-     * Test of retrieveAllUsers method, of class UserDaoImpl.
-     */
-    @Test
-    public void testRetrieveAllUsers() {
-        System.out.println("retrieveAllUsers");
-        UserDaoImpl instance = new UserDaoImpl();
-        List<Users> result = instance.retrieveAllUsers();
-        assertEquals(USERNAME, result.get(0).getUsername());
-    }  
+        Users result = uh.getUserByUsername("system");
+        if(null != result)
+        {        
+            assertEquals(user.getUsername(), result.getUsername());
+        } else {
+            fail();
+        }
+    }
 }

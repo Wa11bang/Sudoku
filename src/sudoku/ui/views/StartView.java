@@ -36,7 +36,7 @@ public class StartView extends JPanel {
         initComponents();
         addComponents();              
                              
-        add(startButtons);
+        add(startButtons);                
     }
     
     public void addController(StartController controller)
@@ -77,5 +77,5 @@ public class StartView extends JPanel {
         startButtons.add(vsb);
         startButtons.add(Box.createVerticalStrut(15));
         startButtons.add(exit);   
-    }
+    }        
 }
