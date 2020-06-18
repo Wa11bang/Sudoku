@@ -85,7 +85,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Users getUserByID(String username) {
+    public Users getUserByUsername(String username) {
         SessionFactory sessionFac = HibernateUtils.getSessionFactory();
         Session session = sessionFac.openSession();
         

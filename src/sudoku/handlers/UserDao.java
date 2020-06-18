@@ -26,7 +26,7 @@ public interface UserDao {
     /**
      * Retrieve user by user_id
      */
-    public Users getUserByID(String username);
+    public Users getUserByUsername(String username);
     
     /**
      * Retrieve all existing Users

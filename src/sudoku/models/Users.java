@@ -39,6 +39,11 @@ public class Users implements Serializable {
         return username;
     }
     
+    public int getUserID()
+    {
+        return user_id;
+    }
+    
     @Override
     public String toString()
     {

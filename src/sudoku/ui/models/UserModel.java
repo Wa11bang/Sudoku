@@ -83,7 +83,7 @@ public class UserModel extends Observable {
     
     public boolean checkIfExists(String username)
     {
-        return (null == (uh.getUserByID(username)));
+        return (null == (uh.getUserByUsername(username)));
     }
     
     public void getUserGames(boolean completed)

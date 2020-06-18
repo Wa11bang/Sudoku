@@ -107,9 +107,12 @@ public class GameModel extends Observable {
     
     public void checkGame()
     {             
+        boolean status = checkIfSolved();
         this.setChanged();
-        this.notifyObservers(new GameEvent(false, checkIfSolved()));
-        createGame(game.getDifficulty().toString());
+        this.notifyObservers(new GameEvent(false, status));
+        if(status){
+            createGame(game.getDifficulty().toString());
+        }
     }
     
     public void addScore()
