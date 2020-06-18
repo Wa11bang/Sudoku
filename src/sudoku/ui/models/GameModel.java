@@ -109,6 +109,7 @@ public class GameModel extends Observable {
     {             
         this.setChanged();
         this.notifyObservers(new GameEvent(false, checkIfSolved()));
+        createGame(game.getDifficulty().toString());
     }
     
     public void addScore()
@@ -132,7 +133,7 @@ public class GameModel extends Observable {
         
         game.setComplete(true);
         saveGame(false); 
-        addScore();
+        addScore();    
         
         return true;
     }

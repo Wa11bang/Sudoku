@@ -37,51 +37,107 @@ public class UserModelTest {
     @After
     public void tearDown() {
     }
-    
+
     /**
-     * Test of checkIsValid method, of class UserModel. True test case
+     * Test of login method, of class UserModel.
      */
     @Test
-    public void testCheckIsValidValid() {
-        System.out.println("checkIsValid - username not empty, username less than 12 and password set");
-        String username = "JohnDoe10";
-        String password = "IamJoHnDoE01";
-        
-        UserModel instance = new UserModel();
-        boolean expResult = false;
-        boolean result = instance.checkIsValid(username, password);
-        
-        assertEquals(expResult, result);
-    }    
-    
-    /**
-     * Test of checkIsValid method, of class UserModel. False test case
-     */
-    @Test
-    public void testCheckIsValidInvalid() {
-        System.out.println("checkIsValid - password empty");
-        String username = "JohnDoe10";
+    public void testLogin() {
+        System.out.println("login");
+        String username = "";
         String password = "";
-        
         UserModel instance = new UserModel();
-        boolean expResult = true;
-        boolean result = instance.checkIsValid(username, password);
-        
+        boolean expResult = false;
+        boolean result = instance.login(username, password);
         assertEquals(expResult, result);
-    }  
-    
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
     /**
-     * Test of checkIsValid method, of class UserModel. Maximum boundary test case
+     * Test of logout method, of class UserModel.
      */
     @Test
-    public void testCheckIsValidMax() {
-        System.out.println("checkIsValid - username has 12 characters (boundary)");
-        String username = "MyNameHas12C";
-        String password = "WhatAPassword";
+    public void testLogout() {
+        System.out.println("logout");
+        UserModel instance = new UserModel();
+        instance.logout();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getUser method, of class UserModel.
+     */
+    @Test
+    public void testGetUser() {
+        System.out.println("getUser");
+        UserModel instance = new UserModel();
+        Users expResult = null;
+        Users result = instance.getUser();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createUser method, of class UserModel.
+     */
+    @Test
+    public void testCreateUser() {
+        System.out.println("createUser");
+        String username = "";
+        String password = "";
+        UserModel instance = new UserModel();
+        boolean expResult = false;
+        boolean result = instance.createUser(username, password);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of checkIsValid method, of class UserModel.
+     */
+    @Test
+    public void testCheckIsValid() {
+        System.out.println("checkIsValid");
+        String username = "";
+        String password = "";
         UserModel instance = new UserModel();
         boolean expResult = false;
         boolean result = instance.checkIsValid(username, password);
-        
         assertEquals(expResult, result);
-    }  
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of checkIfExists method, of class UserModel.
+     */
+    @Test
+    public void testCheckIfExists() {
+        System.out.println("checkIfExists");
+        String username = "";
+        UserModel instance = new UserModel();
+        boolean expResult = false;
+        boolean result = instance.checkIfExists(username);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getUserGames method, of class UserModel.
+     */
+    @Test
+    public void testGetUserGames() {
+        System.out.println("getUserGames");
+        boolean completed = false;
+        UserModel instance = new UserModel();
+        instance.getUserGames(completed);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+    
 }

@@ -33,7 +33,6 @@ public class BlockGenerator {
             for(int j = 0; j < 9; ++j)
             {
                 blocks.add(new Block(selected[counter]));
-                System.out.print(selected[counter]);
                 counter++;
             }
         }
@@ -75,7 +74,7 @@ public class BlockGenerator {
         int row_a = rand.nextInt(9);
         int row_b = ((row_a / 3) * 3) + rand.nextInt(3);
         
-        System.out.println(row_a + " " + row_b);
+        //System.out.println(row_a + " " + row_b);
        
         for(int i = 0; i < 9; ++i)
         {
@@ -85,14 +84,14 @@ public class BlockGenerator {
     
     public static void permuteColumn(List<Block> blocks)
     {
-        int row_a = rand.nextInt(9);
-        int row_b = ((row_a / 3) * 3) + rand.nextInt(3);
+        int col_a = rand.nextInt(9);
+        int col_b = ((col_a / 3) * 3) + rand.nextInt(3);
         
-        System.out.println(row_a + " " + row_b);
+        //System.out.println(col_a + " " + col_b);
        
         for(int i = 0; i < 9; ++i)
         {
-            Collections.swap(blocks, ((row_a * 9) + i), ((row_b * 9) + i)); // COLUMNS
+            Collections.swap(blocks, ((col_a * 9) + i), ((col_b * 9) + i)); // COLUMNS
         } 
     }
 }

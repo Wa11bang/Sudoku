@@ -3,7 +3,6 @@ package sudoku.ui.views;
 import java.awt.GridBagLayout;
 import javax.swing.Box;
 import javax.swing.border.EmptyBorder;
-import sudoku.Difficulty;
 import sudoku.ui.controllers.GameController;
 import sudoku.ui.elements.MenuButton;
 import sudoku.ui.elements.MenuLabel;
@@ -13,9 +12,9 @@ import sudoku.ui.elements.MenuLabel;
  * @author Waldo
  */
 public class CreateGameView extends IView {  
-    private MenuButton easyBtn = new MenuButton("Easy ("+Difficulty.Easy.getValue()+")");
-    private MenuButton mediumBtn = new MenuButton("Medium ("+Difficulty.Medium.getValue()+")");
-    private MenuButton hardBtn = new MenuButton("Hard ("+Difficulty.Hard.getValue()+")");
+    private MenuButton easyBtn = new MenuButton("Easy");
+    private MenuButton mediumBtn = new MenuButton("Medium");
+    private MenuButton hardBtn = new MenuButton("Hard");
     private MenuButton backBtn = new MenuButton("Back");
     private MenuLabel gameSelect = new MenuLabel("Please select a Game Difficulty");
     

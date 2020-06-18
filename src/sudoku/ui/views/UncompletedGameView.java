@@ -26,7 +26,7 @@ public class UncompletedGameView extends IView implements Observer {
     private MenuButton backBtn = new MenuButton("Back");    
     private MenuLabel uncompletedGameBanner = new MenuLabel("Uncompleted Games");
     private GameController controller;
-    
+
     public UncompletedGameView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));   
@@ -58,8 +58,8 @@ public class UncompletedGameView extends IView implements Observer {
             panel.add(gBtn);
             panel.add(dBtn);
             gameList.add(panel);
-        }
-        
+        }        
+                
         initListComponents();
     }
     
@@ -91,14 +91,14 @@ public class UncompletedGameView extends IView implements Observer {
     private void initComponents() {
         backBtn.setActionCommand("back");
         gamesPanel.setLayout(new GridBagLayout());
-        gamesPanel.setOpaque(false);    
+        gamesPanel.setOpaque(false); 
     }
     
     private void addComponents() {
         contentPanel.add(uncompletedGameBanner, gbConstraints);
         contentPanel.add(Box.createVerticalStrut(50), gbConstraints);        
         contentPanel.add(gamesPanel, gbConstraints);
-        contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
+        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);
         contentPanel.add(backBtn, gbConstraints2);  
     }
 }

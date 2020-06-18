@@ -87,7 +87,7 @@ public class ScoreboardView extends IView implements Observer {
         backBtn.setActionCommand("back");
         refreshBtn.setActionCommand("refresh");
         scoresPanel.setLayout(new GridBagLayout());
-        scoresPanel.setOpaque(false);
+        scoresPanel.setOpaque(false);        
     }
     
     private void addComponents()
