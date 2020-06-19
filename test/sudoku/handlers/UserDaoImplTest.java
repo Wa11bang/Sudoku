@@ -27,7 +27,7 @@ import sudoku.models.Users;
 
 /**
  * Tests important functionalities of the User Direct-Access-Object Implementation
- * @author Waldo
+ * @author Waldo Theron 18033655
  */
 public class UserDaoImplTest {
     private UserDao uh = new UserDaoImpl();

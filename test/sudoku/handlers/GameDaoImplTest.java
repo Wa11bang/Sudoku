@@ -31,7 +31,7 @@ import sudoku.models.Users;
 
 /**
  * Tests important functionalities of the Game Direct-Access-Object Implementation
- * @author Waldo
+ * @author Waldo Theron 18033655
  */
 public class GameDaoImplTest {
     private GameDao gh = new GameDaoImpl();

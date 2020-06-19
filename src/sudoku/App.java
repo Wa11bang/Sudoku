@@ -79,7 +79,7 @@ public class App extends JFrame {
         setBackground(AppColour.APP_BACK);   
         getContentPane().setBackground(AppColour.APP_BACK);
         
-        playMenuTrack();
+        //playMenuTrack();      // PLEASE READ Advanced Features.pdf (Num. 5)
     }
     
     /**
@@ -189,6 +189,9 @@ public class App extends JFrame {
         return this.prevPane;
     }
     
+    /**
+     * Starts playing the main menu track
+     */
     public void playMenuTrack()
     {
         new Runnable(){
@@ -200,6 +203,9 @@ public class App extends JFrame {
         }.run();
     }
     
+    /**
+     * Initializes the sound track for the main menu
+     */
     public void sound() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/sudoku/res/menu.wav"));
