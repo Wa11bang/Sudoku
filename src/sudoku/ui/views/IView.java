@@ -5,8 +5,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Waldo
+ * Abstract Class for Views adds pre-initialized GridBag Constraints
+ * @author Waldo Theron 18033655
  */
 abstract public class IView extends JPanel {
     protected JPanel contentPanel = new JPanel();    

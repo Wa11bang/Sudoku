@@ -13,8 +13,8 @@ import sudoku.ui.elements.MenuButton;
 import sudoku.ui.elements.MenuPasswordField;
 
 /**
- *
- * @author Waldo
+ * A menu for logging into an existing User
+ * @author Waldo Theron 18033655
  */
 public class LoginView extends IView implements Observer {
     private MenuField loginUsername = new MenuField();
@@ -22,6 +22,9 @@ public class LoginView extends IView implements Observer {
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton loginBtn = new MenuButton("Login");
     
+    /**
+     * Constructor for a LoginView Object
+     */
     public LoginView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));   
@@ -35,16 +38,30 @@ public class LoginView extends IView implements Observer {
         add(contentPanel, gbConstraints);
     }
     
+    /**
+     * Returns the login username from the JComponent
+     * @return username
+     */
     public String getLoginUsername()
     {
         return loginUsername.getText();
     }
     
+    /**
+     * Returns the login password from the JComponent
+     * @return password
+     */
     public String getLoginPassword()
     {
         return loginPassword.getText();
     }
     
+    /**
+     * Listens for Updates from the Observable. Informs the User of invalid login
+     * attempts
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("LoginView():  Update received from UserModel()");
@@ -54,6 +71,7 @@ public class LoginView extends IView implements Observer {
             if(((UserEvent) arg).isInvalidDetails())
             {
                 loginBtn.setBackground(AppColour.ERROR);
+                loginUsername.setPlaceholder("Invalid Credentials");
             }
             else
             {
@@ -74,6 +92,9 @@ public class LoginView extends IView implements Observer {
         loginBtn.addActionListener(controller);
     } 
     
+    /**
+     * Removes all content from the username and password TextFields
+     */
     public void resetText()
     {
         loginUsername.setText("");

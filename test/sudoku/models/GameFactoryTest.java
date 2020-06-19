@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 import sudoku.Difficulty;
 
 /**
- *
- * @author Waldo
+ * Tests full functionality of the GameFactory
+ * @author Waldo Theron 18033655
  */
 public class GameFactoryTest {
     

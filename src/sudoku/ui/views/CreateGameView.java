@@ -8,8 +8,8 @@ import sudoku.ui.elements.MenuButton;
 import sudoku.ui.elements.MenuLabel;
 
 /**
- * Create Game View 
- * @author Waldo
+ * A menu for creating a new Game 
+ * @author Waldo Theron 18033655
  */
 public class CreateGameView extends IView {  
     private MenuButton easyBtn = new MenuButton("Easy");
@@ -18,6 +18,9 @@ public class CreateGameView extends IView {
     private MenuButton backBtn = new MenuButton("Back");
     private MenuLabel gameSelect = new MenuLabel("Please select a Game Difficulty");
     
+    /**
+     * Constructor for a CreateGameView Object
+     */
     public CreateGameView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));

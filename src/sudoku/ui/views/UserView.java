@@ -12,8 +12,8 @@ import sudoku.ui.elements.MenuButton;
 import sudoku.ui.elements.MenuLabel;
 
 /**
- *
- * @author Waldo
+ * User Menu View
+ * @author Waldo Theron 18033655
  */
 public class UserView extends IView implements Observer {
     private MenuButton createGameBtn = new MenuButton("New Game");
@@ -23,6 +23,9 @@ public class UserView extends IView implements Observer {
     private MenuButton logoutBtn = new MenuButton("Logout");
     private MenuLabel userWelcome = new MenuLabel();
     
+    /**
+     * Constructor for a UserView Object
+     */
     public UserView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
@@ -35,11 +38,21 @@ public class UserView extends IView implements Observer {
         add(contentPanel, gbConstraints);       
     }
     
+    /**
+     * Updates the user welcome label with a username
+     * @param user 
+     */
     public void setUserWelcome(Users user)
     {
         userWelcome.setText("Welcome "+user.getUsername());
     }
     
+    /**
+     * Listens for Updates from the Observable. Sets the username to the Welcome
+     * banner
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println(getClass().getSimpleName()+":  Update received from UserModel()");

@@ -30,7 +30,7 @@ import sudoku.models.GameFactory;
 import sudoku.models.Users;
 
 /**
- *
+ * Tests important functionalities of the Game Direct-Access-Object Implementation
  * @author Waldo
  */
 public class GameDaoImplTest {

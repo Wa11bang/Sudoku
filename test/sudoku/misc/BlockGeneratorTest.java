@@ -13,8 +13,8 @@ import sudoku.Difficulty;
 import sudoku.models.Block;
 
 /**
- *
- * @author Waldo
+ * Tests the functionality of the BlockGenerator
+ * @author Waldo Theron 18033655
  */
 public class BlockGeneratorTest {
     
@@ -85,13 +85,17 @@ public class BlockGeneratorTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Converts a List of Blocks, into a list of Block values
+     * @param blocks
+     * @return 
+     */
     public List<Integer> convertBlockToInt(List<Block> blocks)
     {
         List<Integer> blockValue = new ArrayList();
-        for(Block b : blocks)
-        {
+        blocks.forEach((b) -> {
             blockValue.add(b.getValue());
-        }
+        });
         return blockValue;
     }
 }

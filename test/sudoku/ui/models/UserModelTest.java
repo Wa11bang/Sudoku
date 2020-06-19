@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.ui.models;
 
 import org.junit.After;
@@ -17,8 +12,8 @@ import sudoku.misc.HibernateUtils;
 import sudoku.models.Users;
 
 /**
- *
- * @author Waldo
+ * Tests unique important UserModel functionality
+ * @author Waldo Theron 18033655
  */
 public class UserModelTest {
     private UserDao uh = new UserDaoImpl();

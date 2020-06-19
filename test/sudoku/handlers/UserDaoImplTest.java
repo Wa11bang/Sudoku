@@ -1,3 +1,17 @@
+/*
+    __          __     _____  _   _ _____ _   _  _____ 
+    \ \        / /\   |  __ \| \ | |_   _| \ | |/ ____|
+     \ \  /\  / /  \  | |__) |  \| | | | |  \| | |  __ 
+      \ \/  \/ / /\ \ |  _  /| . ` | | | | . ` | | |_ |
+       \  /\  / ____ \| | \ \| |\  |_| |_| |\  | |__| |
+        \/  \/_/    \_\_|  \_\_| \_|_____|_| \_|\_____|
+
+DO NOT RUN THIS TEST IF THERE IS IMPORT DATA IN THE DATABASE. 
+UPON RUNNING THIS TEST, ALL DATA WILL BE ERASED FROM THE DATABASE.
+
+- Waldo Theron
+
+ */
 package sudoku.handlers;
 
 import org.hibernate.cfg.Configuration;
@@ -12,7 +26,7 @@ import sudoku.misc.HibernateUtils;
 import sudoku.models.Users;
 
 /**
- *
+ * Tests important functionalities of the User Direct-Access-Object Implementation
  * @author Waldo
  */
 public class UserDaoImplTest {
@@ -55,7 +69,7 @@ public class UserDaoImplTest {
     }    
     
     /**
-     * Test of getUserByID method, of class UserDaoImpl.
+     * Test of getUserByUsername method, of class UserDaoImpl.
      */
     @Test
     public void testGetUserByUsername() {

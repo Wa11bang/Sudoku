@@ -21,8 +21,8 @@ import sudoku.ui.elements.RoundedPanel;
 import sudoku.ui.controllers.GameController;
 
 /**
- *
- * @author Waldo
+ * Represents a Sudoku Game using JComponents
+ * @author Waldo Theron 18033655
  */
 public class GameView extends JPanel implements Observer {    
     private JPanel gamePanel = new JPanel();
@@ -32,34 +32,31 @@ public class GameView extends JPanel implements Observer {
     private JButton save = new GameButton("Save Progress");
     private JButton back = new GameButton("Back");
         
+    /**
+     * Constructor for a GameView Object
+     */
     public GameView()
     {
-        setLayout(new BorderLayout());
-        
+        setLayout(new BorderLayout());        
         GridLayout gamePanelLayout = new GridLayout(3,3);
         gamePanelLayout.setHgap(15);
-        gamePanelLayout.setVgap(15);        
-        
+        gamePanelLayout.setVgap(15);               
         gamePanel.setLayout(gamePanelLayout);
         gamePanel.setBorder(new EmptyBorder(30,30,15,30));             
         controls.setBorder(new EmptyBorder(15,30,15,30));
         
-        check.setActionCommand("check");        
-        save.setActionCommand("save");        
-        back.setActionCommand("back");
-
-        controls.add(back);
-        controls.add(check);
-        controls.add(save);                   
+        initComponents();
+        addComponents();
         
         add(gamePanel, BorderLayout.CENTER);
         add(controls, BorderLayout.PAGE_END);               
     }
     
     /**
-     * Initializes all JComponents before being added to the main panel
+     * Initializes all GameBlock components before being
+     * added to the main panel
      */
-    public void initComponents()
+    public void initGBlockComponents()
     {
         for(int i = 0; i < 81; ++i)
         {
@@ -112,6 +109,11 @@ public class GameView extends JPanel implements Observer {
         }
     }
     
+    /**
+     * Displays a Thread-safe status on the Game Grid.
+     * Shows for Saving Games and Checking the solution of a Game
+     * @param e 
+     */
     public void gameStatus(GameEvent e)
     {        
         new SwingWorker<Void, String>(){
@@ -145,6 +147,11 @@ public class GameView extends JPanel implements Observer {
         }.execute();
     }
     
+    /**
+     * Replace GameBlock text contents with the given Block Values of the Game
+     * Object
+     * @param game 
+     */
     public void loadGame(Object game)
     {
         ListIterator<GameBlock> li = grid.listIterator();
@@ -164,6 +171,10 @@ public class GameView extends JPanel implements Observer {
         }       
     }
     
+    /**
+     * Retrieves Block Objects from the View by converting each GameBlock.
+     * @return List of Blocks
+     */
     public List<Block> parseBlocks()
     {
         ListIterator<GameBlock> li = grid.listIterator();
@@ -184,6 +195,25 @@ public class GameView extends JPanel implements Observer {
         
         return blocks;
     }    
+    
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
+    public void initComponents(){
+        check.setActionCommand("check");        
+        save.setActionCommand("save");        
+        back.setActionCommand("back");
+    }
+    
+    /**
+     * Adds JComponents to main panel
+     */
+    public void addComponents()
+    {
+        controls.add(back);
+        controls.add(check);
+        controls.add(save);     
+    }
        
     /**
      * Adds the relevant controller to handle user interactions with this view
@@ -196,6 +226,12 @@ public class GameView extends JPanel implements Observer {
         back.addActionListener(controller);
     } 
     
+    /**
+     * Listens for Updates from the Observable. Initializes a Game object or 
+     * displays the status of a current Game.
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("GameView():  Update received from GameModel()");
@@ -206,6 +242,11 @@ public class GameView extends JPanel implements Observer {
         }
     }  
     
+    /**
+     * Checks if the input string can be represented as an Integer
+     * @param str
+     * @return 
+     */
     public static boolean isInteger(String str) {               
         for(char c : str.toCharArray())
         {

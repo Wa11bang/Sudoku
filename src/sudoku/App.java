@@ -106,7 +106,7 @@ public class App extends JFrame {
     {        
         startView.addController(sc);          
         gameView.addController(gc);  
-        gameView.initComponents();  
+        gameView.initGBlockComponents();  
         
         userView.addController(uc);   
         loginView.addController(uc);

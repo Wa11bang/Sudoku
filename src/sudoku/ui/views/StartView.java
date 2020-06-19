@@ -15,8 +15,8 @@ import sudoku.ui.elements.MenuButton;
 import sudoku.ui.controllers.StartController;
 
 /**
- *
- * @author Waldo
+ * StartView: Shows the initial main menu view
+ * @author Waldo Theron 18033655
  */
 public class StartView extends JPanel {
     private JPanel startButtons = new JPanel();
@@ -25,6 +25,9 @@ public class StartView extends JPanel {
     private MenuButton vsb = new MenuButton("View Scoreboard");
     private MenuButton exit = new MenuButton("Exit");
     
+    /**
+     * Constructor for a StartView Object
+     */
     public StartView()
     {
         setBorder(new EmptyBorder(45, 10, 10, 10));
@@ -51,6 +54,10 @@ public class StartView extends JPanel {
         this.exit.addActionListener(controller);
     }
     
+    /**
+     * Adds a Logo element to the main panel from a given path 
+     * @param path 
+     */
     public void loadLogo(String path)
     {       
         try {

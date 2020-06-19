@@ -17,8 +17,8 @@ import sudoku.ui.elements.MenuPanel;
 import sudoku.ui.elements.ScoreLabel;
 
 /**
- *
- * @author Waldo
+ * Show a List of the User's Completed Games
+ * @author Waldo Theron 18033655
  */
 public class CompletedGameView extends IView implements Observer {
     private JPanel gamesPanel = new JPanel();
@@ -26,6 +26,9 @@ public class CompletedGameView extends IView implements Observer {
     private MenuButton backBtn = new MenuButton("Back");
     private MenuLabel completedGameBanner = new MenuLabel("Completed Games");
     
+    /**
+     * Constructor for a CompletedGameView Object
+     */
     public CompletedGameView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
@@ -39,6 +42,10 @@ public class CompletedGameView extends IView implements Observer {
         add(contentPanel, gbConstraints);    
     }
     
+    /**
+     * Creates a JComponent for each element in the given List of Games
+     * @param games 
+     */
     public void populate(List<Game> games)
     {
         System.out.println("CompletedGameView():  Populating GameBoard"); 
@@ -54,6 +61,9 @@ public class CompletedGameView extends IView implements Observer {
         initListComponents();
     }
     
+    /**
+     * Initializes a JComponent for each element in the gameList
+     */
     public void initListComponents()
     {
         for(JPanel gL : gameList)
@@ -64,6 +74,11 @@ public class CompletedGameView extends IView implements Observer {
         updateUI();
     }
     
+    /**
+     * Listens for Updates from the Observable. Re-populates the View
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("CompletedGameView():  Update received from UserModel()"); 
@@ -96,8 +111,7 @@ public class CompletedGameView extends IView implements Observer {
      */
     private void addComponents() {
         contentPanel.add(completedGameBanner, gbConstraints);
-        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);
-        
+        contentPanel.add(Box.createVerticalStrut(50), gbConstraints);        
         contentPanel.add(gamesPanel, gbConstraints);
         contentPanel.add(Box.createVerticalStrut(25), gbConstraints);
         contentPanel.add(backBtn, gbConstraints2);

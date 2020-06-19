@@ -8,8 +8,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Waldo
+ * Tests full functionality of a Hash Object
+ * @author Waldo Theron 18033655
  */
 public class HashTest {
     

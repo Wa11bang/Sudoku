@@ -12,8 +12,8 @@ import sudoku.models.Game;
 import sudoku.models.GameFactory;
 
 /**
- *
- * @author Waldo
+ * Tests unique important GameModel functionality
+ * @author Waldo Theron 18033655
  */
 public class GameModelTest {
     private Game game = GameFactory.create(Difficulty.Hard);
@@ -54,6 +54,26 @@ public class GameModelTest {
         instance.calculateGameTime();  
         
         double expResult = 52;
+        double result = game.getTime();
+        System.out.println("Game time: "+result);
+        
+        assertEquals(expResult, result, 0.01);
+    }  
+    
+    /**
+     * Test of calculateGameTime method, of class GameModel. New Values
+     */
+    @Test
+    public void testCalculateGameTime_2() throws InterruptedException {
+        System.out.println("calculateGameTime");
+        System.out.println("Game time: "+game.getTime());
+        GameModel instance = new GameModel();
+        instance.setGame(game);
+        instance.initGame();
+        Thread.sleep(500);
+        instance.calculateGameTime();  
+        
+        double expResult = 50.5;
         double result = game.getTime();
         System.out.println("Game time: "+result);
         

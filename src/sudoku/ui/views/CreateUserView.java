@@ -14,8 +14,8 @@ import sudoku.ui.elements.MenuButton;
 import sudoku.ui.elements.MenuPasswordField;
 
 /**
- *
- * @author Waldo
+ * A menu for creating a new User
+ * @author Waldo Theron 18033655
  */
 public class CreateUserView extends IView implements Observer {
     private MenuField createUsername = new MenuField();
@@ -23,6 +23,9 @@ public class CreateUserView extends IView implements Observer {
     private MenuButton backBtn = new MenuButton("Back");
     private MenuButton createBtn = new MenuButton("Create");    
     
+    /**
+     * Constructor for a CreateUserView Object
+     */
     public CreateUserView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));
@@ -36,16 +39,29 @@ public class CreateUserView extends IView implements Observer {
         add(contentPanel, gbConstraints);          
     }
     
+    /**
+     * Returns the login username from the JComponent
+     * @return username
+     */
     public String getLoginUsername()
     {
         return createUsername.getText();
     }
     
+    /**
+     * Returns the login password from the JComponent
+     * @return password
+     */
     public String getLoginPassword()
     {
         return createPassword.getText();
     }
     
+    /**
+     * Listens for Updates from the Observable. Informs the User of invalid inputs
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("CreateUserView():  Update received from UserModel()");
@@ -54,6 +70,7 @@ public class CreateUserView extends IView implements Observer {
             System.out.println("CreateUserView():  Checking User Details from UserModel()");
             if(((UserEvent) arg).isInvalidDetails())
             {
+                createUsername.setPlaceholder("Invalid Input");
                 createBtn.setBackground(AppColour.ERROR);
             }
             else if (((UserEvent) arg).isUserExists()) {
@@ -79,6 +96,9 @@ public class CreateUserView extends IView implements Observer {
         createBtn.addActionListener(controller);
     } 
     
+    /**
+     * Removes all content from the username and password TextFields
+     */
     public void resetText()
     {
         createUsername.setText("");

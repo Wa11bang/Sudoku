@@ -17,8 +17,8 @@ import sudoku.ui.elements.ScoreLabel;
 import sudoku.ui.elements.MenuPanel;
 
 /**
- *
- * @author Waldo
+ * Shows a List of all the Game Scores
+ * @author Waldo Theron 18033655
  */
 public class ScoreboardView extends IView implements Observer {
     private JPanel scoresPanel = new JPanel();
@@ -27,6 +27,9 @@ public class ScoreboardView extends IView implements Observer {
     private MenuButton refreshBtn = new MenuButton("Refresh "+"\uD83D\uDDD8");
     private MenuLabel scoreboardBanner = new MenuLabel("Scoreboard");
     
+    /**
+     * Constructor for a ScoreboardView Object
+     */
     public ScoreboardView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));      
@@ -40,6 +43,10 @@ public class ScoreboardView extends IView implements Observer {
         add(contentPanel, gbConstraints);                
     }
     
+    /**
+     * Creates a JComponent for each element in the given List of Scores
+     * @param scores
+     */
     public void populate(List<Score> scores)
     {
         System.out.println("ScoreboardView():  Populating Scoreboard"); 
@@ -57,6 +64,9 @@ public class ScoreboardView extends IView implements Observer {
         initListComponents();
     }
     
+    /**
+     * Initializes a JComponent for each element in the scoreList
+     */
     public void initListComponents()
     {
         for(JPanel score : scoreList)
@@ -67,6 +77,12 @@ public class ScoreboardView extends IView implements Observer {
         updateUI();
     }
     
+    /**
+     * Listens for Updates from the Observable. Populates the Scoreboard View
+     * received Scores
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("ScoreboardView():  Update received from ScoreboardModel()"); 

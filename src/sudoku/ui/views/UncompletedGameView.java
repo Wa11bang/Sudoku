@@ -17,8 +17,8 @@ import sudoku.ui.elements.MenuPanel;
 import sudoku.ui.elements.ScoreLabel;
 
 /**
- *
- * @author Waldo
+ * Shows a List of the Users Uncompleted Games
+ * @author Waldo Theron 18033655
  */
 public class UncompletedGameView extends IView implements Observer {
     private JPanel gamesPanel = new JPanel();
@@ -27,6 +27,9 @@ public class UncompletedGameView extends IView implements Observer {
     private MenuLabel uncompletedGameBanner = new MenuLabel("Uncompleted Games");
     private GameController controller;
 
+    /**
+     * Constructor for an UncompletedGameView Object
+     */
     public UncompletedGameView()
     {
         setBorder(new EmptyBorder(30, 30, 30, 30));   
@@ -40,6 +43,10 @@ public class UncompletedGameView extends IView implements Observer {
         add(contentPanel, gbConstraints);    
     }
     
+    /**
+     * Creates a JComponent for each element in the given List of Games
+     * @param games 
+     */
     public void populate(List<Game> games)
     {
         System.out.println(getClass().getSimpleName()+":  Populating GameBoard"); 
@@ -63,6 +70,9 @@ public class UncompletedGameView extends IView implements Observer {
         initListComponents();
     }
     
+    /**
+     * Initializes a JComponent for each element in the gameList
+     */
     public void initListComponents()
     {
         for(JPanel game : gameList)
@@ -73,6 +83,12 @@ public class UncompletedGameView extends IView implements Observer {
         updateUI();
     }
     
+    /**
+     * Listens for Updates from the Observable. Re-populates the View with new
+     * uncompleted user games
+     * @param o
+     * @param arg 
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println(getClass().getSimpleName()+":  Update received from UserModel()"); 
