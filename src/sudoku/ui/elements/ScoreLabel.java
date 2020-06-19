@@ -7,11 +7,15 @@ import javax.swing.border.EmptyBorder;
 import sudoku.AppColour;
 
 /**
- *
- * @author Waldo
+ * Custom JLabel, used for displaying Score details
+ * @author Waldo Theron 18033655
  */
 public class ScoreLabel extends JLabel {   
     
+    /**
+     * Constructor for a ScoreLabel Object
+     * @param inputText 
+     */
     public ScoreLabel(String inputText) {
         super(inputText);
         
@@ -23,6 +27,9 @@ public class ScoreLabel extends JLabel {
         setFont(new Font("Helvetica", Font.BOLD, 15));
     }
     
+    /**
+     * Constructor for a ScoreLabel Object
+     */
     public ScoreLabel() {
         this(null);
     }

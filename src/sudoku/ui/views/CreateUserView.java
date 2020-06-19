@@ -69,6 +69,10 @@ public class CreateUserView extends IView implements Observer {
         resetText();
     }
     
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(UserController controller) {
         System.out.println("CreateUserView: Adding UserController");
         backBtn.addActionListener(controller);
@@ -81,6 +85,9 @@ public class CreateUserView extends IView implements Observer {
         createPassword.setText("");
     }
     
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     private void initComponents()
     {
         createBtn.setActionCommand("user_create");
@@ -89,6 +96,9 @@ public class CreateUserView extends IView implements Observer {
         createPassword.setPlaceholder("Password");
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     private void addComponents()
     {
         contentPanel.add(createUsername, gbConstraints);

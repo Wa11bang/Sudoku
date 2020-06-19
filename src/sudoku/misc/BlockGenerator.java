@@ -9,25 +9,27 @@ import sudoku.Difficulty;
 import static sudoku.Sudoku.PERMUTE_COUNT;
 
 /**
- *
- * @author Waldo
+ * Generates a Random Sudoku Block list from pre-defined "solved" grids.
+ * @author Waldo Theron 18033655
  */
 public class BlockGenerator {   
     private static Random rand = new Random(); 
     
+    /**
+     * Returns a List of Blocks for a Sudoku game with a given difficulty
+     * @param d
+     * @return List of Block
+     */
     public static List<Block> generate(Difficulty d)
     {
         List<Block> blocks = new ArrayList();        
         int[] selected = getRandomElement(getPreDokus());
         
         int counter = 0;      
-        for(int i = 0; i < 9; ++i)
+        for(int i = 0; i < selected.length; ++i)
         {
-            for(int j = 0; j < 9; ++j)
-            {
-                blocks.add(new Block(selected[counter]));
-                counter++;
-            }
+            blocks.add(new Block(selected[counter]));
+            counter++;
         }
         
         removeNBlocks(blocks, d.getValue());
@@ -36,6 +38,11 @@ public class BlockGenerator {
         return blocks;
     }
     
+    /**
+     * Handles the permutation functions, and ensures a specific level of
+     * randomness is achieved.
+     * @param blocks 
+     */
     public static void permute(List<Block> blocks)
     {
         for(int i = 0; i < PERMUTE_COUNT; ++i)
@@ -45,11 +52,21 @@ public class BlockGenerator {
         }
     }
     
+    /**
+     * Returns a random list of Sudoku numbers from pre-defined lists.
+     * @param list
+     * @return int[]
+     */
     public static int[] getRandomElement(List<int[]> list) 
     {         
         return list.get(rand.nextInt(list.size())); 
     } 
     
+    /**
+     * Removes a specific number of blocks from a given Block List.
+     * @param blocks
+     * @param n 
+     */
     public static void removeNBlocks(List<Block> blocks, int n)
     {
         int counter = 0;
@@ -65,6 +82,11 @@ public class BlockGenerator {
         }
     }
     
+    /**
+     * Randomly swaps two rows within a 3 by 9 section while still maintaining
+     * solvability
+     * @param blocks 
+     */
     public static void permuteRow(List<Block> blocks)
     {
         int row_a = rand.nextInt(9);
@@ -76,6 +98,11 @@ public class BlockGenerator {
         } 
     }
     
+    /**
+     * Randomly swaps two columns within a 9 by 3 section while still maintaining
+     * solvability
+     * @param blocks 
+     */
     public static void permuteColumn(List<Block> blocks)
     {
         int col_a = rand.nextInt(9);
@@ -87,6 +114,10 @@ public class BlockGenerator {
         } 
     }
     
+    /**
+     * Returns a List of Integer one-dimensional arrays
+     * @return 
+     */
     public static List<int[]> getPreDokus()
     {
         List<int[]> preDokus = new ArrayList();

@@ -12,8 +12,8 @@ import sudoku.misc.HibernateUtils;
 import sudoku.models.Users;
 
 /**
- *
- * @author Waldo
+ * Game Direct-Access-Object, implements database functionality
+ * @@author Waldo Theron 18033655
  */
 public class GameDaoImpl implements GameDao {
 

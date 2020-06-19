@@ -4,8 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- *
- * @author Waldo
+ * Users Object, contains username and password
+ * @author Waldo Theron 18033655
  */
 @Entity(name="users")
 @Table(name = "users")
@@ -22,28 +22,45 @@ public class Users implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
     
+    /**
+     * Constructor for Users Object
+     * @param username
+     * @param password 
+     */
     public Users(String username, String password) {
         super();
         this.username = username;
         this.password = password;
     }
 
+    /**
+     * Constructor for Users Object
+     */
     public Users() {
 
     }   
 
     /**
-     * @return the username
+     * Returns the username of the User
+     * @return username
      */
     public String getUsername() {
         return username;
     }
     
+    /**
+     * Returns the user ID of the User (only after existing in database)
+     * @return 
+     */
     public int getUserID()
     {
         return user_id;
     }
     
+    /**
+     * Returns a String representation of a Users Object
+     * @return 
+     */
     @Override
     public String toString()
     {

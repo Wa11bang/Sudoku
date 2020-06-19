@@ -1,10 +1,3 @@
-/*
-
-    TODO
-    Comments   
-
-*/
-
 package sudoku;
 
 import javax.swing.SwingUtilities;
@@ -12,8 +5,8 @@ import sudoku.misc.Log;
 import sudoku.misc.HibernateUtils;
 
 /**
- *
- * @author Waldo
+ * Main Class for Sudoku
+ * @author Waldo Theron 18033655
  */
 public class Sudoku extends Log {  
     public final static String LOGO_PATH = "/sudoku/res/logo.png";
@@ -26,6 +19,9 @@ public class Sudoku extends Log {
         RunGUI();        
     }
     
+    /**
+     * Invokes GUI
+     */
     public static void RunGUI() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

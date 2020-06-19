@@ -10,21 +10,33 @@ import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
 
 /**
- *
- * @author Waldo
+ * Custom JTextField element for User Inputs
+ * @author Waldo Theron 18033655
  */
 public class MenuField extends JTextField {
     
     private String placeholder;
     
+    /**
+     * Constructor for a MenuField Object
+     */
     public MenuField() {
         this(null);
     }
 
+    /**
+     * Constructor for a MenuField Object
+     * @param inputText 
+     */
     public MenuField(String inputText) {
         this(inputText, null);
     }
     
+    /**
+     * Constructor for a MenuField Object
+     * @param inputText
+     * @param placeholder 
+     */
     public MenuField(String inputText, String placeholder) {
         super(inputText);
         this.placeholder = placeholder;
@@ -35,11 +47,19 @@ public class MenuField extends JTextField {
         setFont(new Font("Sans Serif", Font.PLAIN, 24));        
     }
     
+    /**
+     * Sets the placeholder value
+     * @param placeholder 
+     */
     public void setPlaceholder(String placeholder)
     {
         this.placeholder = placeholder;
     }
     
+    /**
+     * Gets the placeholder value
+     * @return 
+     */
     public String getPlaceholder()
     {
         return this.placeholder;

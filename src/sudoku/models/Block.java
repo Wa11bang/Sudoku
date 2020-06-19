@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- *
- * @author Waldo
+ * Block Object Class, stores an Integer value
+ * @author Waldo Theron 18033655
  */
 
 @Entity(name="block")
@@ -24,26 +24,35 @@ public class Block implements Serializable {
     @Column(name="block_value")
     private int value;
 
+    /**
+     * Constructor for a Block Object
+     * @param value 
+     */
     public Block(int value)
     {
         super();
         this.value = value;
     }
     
+    /**
+     * Constructor for a Block Object
+     */
     public Block()
     {
         
     }
 
     /**
-     * @return the value
+     * Returns the Block's value
+     * @return value
      */
     public int getValue() {
         return value;
     }
 
     /**
-     * @param value the value to set
+     * Sets the Blocks value
+     * @param value
      */
     public void setValue(int value) {
         this.value = value;

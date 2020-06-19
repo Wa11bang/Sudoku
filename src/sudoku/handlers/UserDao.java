@@ -4,8 +4,8 @@ import java.util.List;
 import sudoku.models.Users;
 
 /**
- *
- * @author Waldo
+ * User Direct-Access-Object Interface Class
+ * @author Waldo Theron 18033655
  */
 public interface UserDao {
     /**
@@ -14,17 +14,17 @@ public interface UserDao {
     public boolean addUser(Users user);
     
     /**
-     * Modify an existing user
+     * Modify an existing User
      */
     public boolean modifyUser(Users user);
     
     /**
-     * Delete an existing user
+     * Delete an existing User
      */
     public boolean deleteUser(Users user);
     
     /**
-     * Retrieve user by user_id
+     * Retrieve User by user_id
      */
     public Users getUserByUsername(String username);
     

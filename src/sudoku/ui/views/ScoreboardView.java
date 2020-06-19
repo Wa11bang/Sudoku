@@ -76,12 +76,19 @@ public class ScoreboardView extends IView implements Observer {
         }
     }
     
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(ScoreboardController controller) {
         System.out.println("ScoreboardView: Adding ScoreboardController");
         backBtn.addActionListener(controller);
         refreshBtn.addActionListener(controller);
     } 
     
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     private void initComponents()
     {
         backBtn.setActionCommand("back");
@@ -90,6 +97,9 @@ public class ScoreboardView extends IView implements Observer {
         scoresPanel.setOpaque(false);        
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     private void addComponents()
     {
         contentPanel.add(scoreboardBanner, gbConstraints);

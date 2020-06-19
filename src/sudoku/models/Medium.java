@@ -20,6 +20,9 @@ public class Medium extends Game {
         super(user, blocks, Difficulty.Medium);
     }
     
+    /**
+     * Constructor for Hard object
+     */
     public Medium()
     {
         super.setDifficulty(Difficulty.Medium);

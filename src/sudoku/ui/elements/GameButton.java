@@ -6,32 +6,38 @@ import javax.swing.JButton;
 import sudoku.AppColour;
 
 /**
- *
- * @author Waldo
+ * Custom JButton element to represent the GameView control buttons
+ * @author Waldo Theron 18033655
  */
 public class GameButton extends JButton {
-    private Color hoverBackgroundColor;
-    private Color pressedBackgroundColor;
+    private Color hoverBackgroundColour;
+    private Color pressedBackgroundColour;
     
-    public GameButton() {
-        this(null);
-    }
-
+    /**
+     * Constructor for a GameButton Object
+     */
     public GameButton(String buttonText) {
         super(buttonText);
         super.setContentAreaFilled(false);
-        setHoverBackgroundColor(AppColour.CONTROL_HOVER);
-        setPressedBackgroundColor(AppColour.CONTROL_PRESS);
+        setHoverBackgroundColour(AppColour.CONTROL_HOVER);
+        setPressedBackgroundColour(AppColour.CONTROL_PRESS);
         setBorderPainted(false);
         setFocusPainted(false);
     }
     
+    /**
+     * Constructor for a GameButton Object
+     */
+    public GameButton() {
+        this(null);
+    }   
+    
     @Override
     protected void paintComponent(Graphics g) {
         if (getModel().isPressed()) {
-            g.setColor(pressedBackgroundColor);
+            g.setColor(pressedBackgroundColour);
         } else if (getModel().isRollover()) {
-            g.setColor(hoverBackgroundColor);
+            g.setColor(hoverBackgroundColour);
         } else {
             g.setColor(getBackground());
         }
@@ -39,19 +45,35 @@ public class GameButton extends JButton {
         super.paintComponent(g);
     }
     
-    public Color getHoverBackgroundColor() {
-        return hoverBackgroundColor;
+    /**
+     * Returns the background color set for the when the user presses the button
+     * @return pressedBackgroundColour;
+     */
+    public Color getPressedBackgroundColour() {
+        return pressedBackgroundColour;
     }
 
-    public void setHoverBackgroundColor(Color hoverBackgroundColor) {
-        this.hoverBackgroundColor = hoverBackgroundColor;
+    /**
+     * Sets the pressedBackgroundColour
+     * @param pressedBackgroundColour 
+     */
+    public void setPressedBackgroundColour(Color pressedBackgroundColour) {
+        this.pressedBackgroundColour = pressedBackgroundColour;
+    }   
+        
+    /**
+     * Returns the background color set for the when the user hovers over the button
+     * @return hoverBackgroundColour;
+     */
+    public Color getHoverBackgroundColour() {
+        return hoverBackgroundColour;
     }
 
-    public Color getPressedBackgroundColor() {
-        return pressedBackgroundColor;
-    }
-
-    public void setPressedBackgroundColor(Color pressedBackgroundColor) {
-        this.pressedBackgroundColor = pressedBackgroundColor;
-    }    
+    /**
+     * Sets the hoverBackgroundColour
+     * @param hoverBackgroundColour 
+     */
+    public void setHoverBackgroundColour(Color hoverBackgroundColour) {
+        this.hoverBackgroundColour = hoverBackgroundColour;
+    }     
 }

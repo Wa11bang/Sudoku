@@ -16,7 +16,7 @@ import sudoku.ui.elements.MenuLabel;
  * @author Waldo
  */
 public class UserView extends IView implements Observer {
-    private MenuButton createGameBtn = new MenuButton("Create a new Game");
+    private MenuButton createGameBtn = new MenuButton("New Game");
     private MenuButton uncompletedGamesBtn = new MenuButton("View Uncompleted Games");
     private MenuButton completedGamesBtn = new MenuButton("View Completed Games");
     private MenuButton viewScoreboardBtn = new MenuButton("View Scoreboard");
@@ -53,6 +53,10 @@ public class UserView extends IView implements Observer {
         }
     }
     
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(UserController controller) {
         System.out.println(getClass().getSimpleName()+": Adding "+controller.getClass().getSimpleName());
         createGameBtn.addActionListener(controller);
@@ -62,6 +66,9 @@ public class UserView extends IView implements Observer {
         logoutBtn.addActionListener(controller);
     } 
 
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     protected void initComponents()
     {
         createGameBtn.setActionCommand("create_game");
@@ -71,6 +78,9 @@ public class UserView extends IView implements Observer {
         logoutBtn.setActionCommand("start");     
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     private void addComponents() {
         contentPanel.add(userWelcome, gbConstraints);
         contentPanel.add(Box.createVerticalStrut(50), gbConstraints);

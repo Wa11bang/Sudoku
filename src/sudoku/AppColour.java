@@ -3,8 +3,9 @@ package sudoku;
 import java.awt.Color;
 
 /**
- *
- * @author Waldo
+ * Static Storage for all colors used in the application. Allows for easy
+ * modification across all views.
+ * @author Waldo Theron 18033655
  */
 public class AppColour {
     public static final Color ERROR = Color.decode("#DD1C1A");//Color.RED;

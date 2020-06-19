@@ -2,25 +2,33 @@ package sudoku.misc;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
- * @author Waldo
+ * Hashing Implementation of the Java MessageDigest Package. Allows for messages
+ * to be encoded in any compatible algorithm.
+ * @author Waldo Theron 18033655
  */
-public class Hash {
+public class Hash extends Log {
     private MessageDigest md;
     
+    /**
+     * Constructor for a Hash Object, sets the required algorithm.
+     * @param algo 
+     */
     public Hash(String algo)
     {
         try {
             md = MessageDigest.getInstance(algo);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Hash.class.getName()).log(Level.SEVERE, null, ex);
+            log.warn(ex);
         }
     }
     
+    /**
+     * Converts a byte[] array to Hexadecimal
+     * @param result
+     * @return hexadecimal representation
+     */
     public String bytesToHex(byte[] result) {
         StringBuilder sb = new StringBuilder();
         for (byte b : result) {
@@ -29,6 +37,11 @@ public class Hash {
         return sb.toString();
     }
     
+    /**
+     * Encodes a given string with the set algorithm.
+     * @param password
+     * @return encoded hexadecimal
+     */
     public String encode(String password)
     {
         byte[] result = md.digest(password.getBytes());

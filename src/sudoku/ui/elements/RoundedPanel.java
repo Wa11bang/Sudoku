@@ -4,12 +4,16 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Waldo
+ * Rounded JPanel Component
+ * @author Waldo Theron 18033655
  */
 public class RoundedPanel extends JPanel { 
     private int roundingRadius;
     
+    /**
+     * Constructor for RoundedPanel Object
+     * @param radius 
+     */
     public RoundedPanel(int radius)
     {
         super();

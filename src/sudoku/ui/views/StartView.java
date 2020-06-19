@@ -39,6 +39,10 @@ public class StartView extends JPanel {
         add(startButtons);                
     }
     
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(StartController controller)
     {
         this.login.addActionListener(controller);
@@ -58,6 +62,9 @@ public class StartView extends JPanel {
         }   
     }
     
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     private void initComponents()
     {
         startButtons.setLayout(new GridLayout(0,1));
@@ -68,6 +75,9 @@ public class StartView extends JPanel {
         exit.setActionCommand("exit");   
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     private void addComponents()
     {
         startButtons.add(cnu);

@@ -5,12 +5,16 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 /**
- *
- * @author Waldo
+ * A document that limits the maximum length of content
+ * @author Waldo Theron 18033655
  */
 public class TextLimitDocument extends PlainDocument {
     private int maxLength = 0;
     
+    /**
+     * Constructor for TextLimitDocument
+     * @param maxLength 
+     */
     public TextLimitDocument(int maxLength)
     {
         this.maxLength = maxLength;

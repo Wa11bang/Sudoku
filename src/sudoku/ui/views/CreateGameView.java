@@ -8,7 +8,7 @@ import sudoku.ui.elements.MenuButton;
 import sudoku.ui.elements.MenuLabel;
 
 /**
- *
+ * Create Game View 
  * @author Waldo
  */
 public class CreateGameView extends IView {  
@@ -32,6 +32,10 @@ public class CreateGameView extends IView {
         add(contentPanel, gbConstraints); 
     }
     
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(GameController controller) {
         System.out.println("CreateGameView: Adding GameController");
         easyBtn.addActionListener(controller);
@@ -40,6 +44,9 @@ public class CreateGameView extends IView {
         backBtn.addActionListener(controller);
     } 
     
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     private void initComponents()
     {
         easyBtn.setActionCommand("easy_create");
@@ -48,6 +55,9 @@ public class CreateGameView extends IView {
         backBtn.setActionCommand("back");
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     private void addComponents()
     {
         contentPanel.add(Box.createVerticalStrut(25), gbConstraints);

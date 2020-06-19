@@ -14,8 +14,8 @@ import sudoku.ui.models.*;
 import sudoku.ui.views.*;
 
 /**
- *
- * @author Waldo
+ * Main GUI Application
+ * @author Waldo Theron 18033655
  */
 public class App extends JFrame {
     private String currentPane;
@@ -42,9 +42,11 @@ public class App extends JFrame {
     private UserModel um = new UserModel();
     private ScoreboardModel sbm = new ScoreboardModel();     
 
+    /**
+     * Constructor for Application Object
+     */
     public App()
-    {
-        initFrame();
+    {        
         initModels();
         initViews();
         initControllers();
@@ -52,12 +54,18 @@ public class App extends JFrame {
         addComponents();            
         
         cards.setOpaque(false);
-        add(cards, BorderLayout.CENTER);
+        add(cards, BorderLayout.CENTER);    
+        
+        // Load Frame after Components Loaded
+        initFrame();
                        
         //Handle Shutdown of Application
         handleGUIShutdown();
     }
     
+    /**
+     * Initializes the Frame of the Java Swing Application
+     */
     public void initFrame()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +82,9 @@ public class App extends JFrame {
         playMenuTrack();
     }
     
+    /**
+     * Initializes the Models used in the GUI Application (M- VC)
+     */
     public void initModels()
     {
         sbm.addObserver(scoreboardView);
@@ -88,6 +99,9 @@ public class App extends JFrame {
         um.addObserver(completedGameView);
     }
     
+    /**
+     * Initializes the Views used in the GUI Application (M -V- C)
+     */
     public void initViews()
     {        
         startView.addController(sc);          
@@ -104,6 +118,9 @@ public class App extends JFrame {
         completedGameView.addController(gc);
     }
     
+    /**
+     * Initializes the Controllers used in the GUI Application (MV -C)
+     */
     public void initControllers()
     {
         gc.addModel(gm);
@@ -114,6 +131,9 @@ public class App extends JFrame {
         uc.addCreateUserView(createUserView);
     }
     
+    /**
+     * Passes the Application Frame to the Controllers
+     */
     public void initExtControllers()
     {
         sc.addAppView(this);
@@ -122,6 +142,9 @@ public class App extends JFrame {
         sbc.addAppView(this);
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     public void addComponents()
     {
         cards.add(startView, "start");
@@ -135,20 +158,32 @@ public class App extends JFrame {
         cards.add(gameView, "game");  
     }
     
+    /**
+     * Transitions current view to a target view panel
+     * @param pane 
+     */
     public void setCurrentPane(String pane)
     {
         ((CardLayout)cards.getLayout()).show(cards, pane);
     }
 
+    /**
+     * Handles ViewEvents to modify current view panel
+     * @param e
+     */
     public void changePane(ViewEvent e)
     {        
         prevPane = e.getCurrentPane();
         currentPane = e.getTargetPane();
         System.out.println("\nPrevious View: " +prevPane);
         System.out.println("Current View: "+currentPane);
-        ((CardLayout)cards.getLayout()).show(cards, e.getTargetPane());
+        setCurrentPane(currentPane);
     }
     
+    /**
+     * Returns the previous view panel from a previous user interaction
+     * @return prevPane
+     */
     public String getPrevPane()
     {
         return this.prevPane;
@@ -176,6 +211,9 @@ public class App extends JFrame {
         }
     }
     
+    /**
+     * Self-explanatory, makes sure the database is properly shutdown
+     */
     public void handleGUIShutdown()
     {
         Runtime.getRuntime().addShutdownHook(new Thread()

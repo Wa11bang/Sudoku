@@ -12,8 +12,8 @@ import sudoku.models.Score;
 import sudoku.models.Users;
 
 /**
- *
- * @author Waldo
+ * Score Direct-Access-Object, implements database functionality
+ * @author Waldo Theron 18033655
  */
 public class ScoreDaoImpl implements ScoreDao {
 

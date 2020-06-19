@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sudoku.handlers;
 
 import java.util.List;
@@ -10,22 +5,22 @@ import sudoku.models.Score;
 import sudoku.models.Users;
 
 /**
- *
- * @author Waldo
+ * Score Direct-Access-Object Interface Class
+ * @author Waldo Theron 18033655
  */
 public interface ScoreDao {
-        /**
-     * Add a new Game
+    /**
+     * Add a new Score
      */
     public boolean addScore(Score score);
     
     /**
-     * Retrieve user by user_id
+     * Retrieve all scores from a specific User
      */
     public List<Score> getScoresByUser(Users user);
     
     /**
-     * Retrieve all existing Users
+     * Retrieve all existing Scores
      */
     public List<Score> retrieveAllScores();
     

@@ -73,17 +73,27 @@ public class CompletedGameView extends IView implements Observer {
         }
     }
     
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(GameController controller) {
         System.out.println("CompletedGameView: Adding GameController");
         backBtn.addActionListener(controller);
     }  
     
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     private void initComponents() {
         backBtn.setActionCommand("back");               
         gamesPanel.setLayout(new GridBagLayout());
         gamesPanel.setOpaque(false);   
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     private void addComponents() {
         contentPanel.add(completedGameBanner, gbConstraints);
         contentPanel.add(Box.createVerticalStrut(50), gbConstraints);

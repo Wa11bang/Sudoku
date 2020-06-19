@@ -20,12 +20,11 @@ public class Easy extends Game {
         super(user, blocks, Difficulty.Easy);
     }
     
+    /**
+     * Constructor for Easy object
+     */
     public Easy()
     {
         super.setDifficulty(Difficulty.Easy);
     }
-    
-    /**
-     * Initialize the game object by permuting the grid
-     */
 }

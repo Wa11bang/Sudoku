@@ -10,16 +10,24 @@ import javax.swing.border.MatteBorder;
 import sudoku.AppColour;
 
 /**
- *
- * @author Waldo
+ * Custom JPasswordField element stylized for the Login/Create User menus.
+ * @author Waldo Theron 18033655
  */
 public class MenuPasswordField extends JPasswordField {
     private String placeholder;
     
+    /**
+     * Constructor for a MenuPasswordField Object
+     */
     public MenuPasswordField() {
         this(null);
     }
 
+    /**
+     * Constructor for a MenuPasswordField Object
+     * @param inputText
+     * @param columnWidth 
+     */
     public MenuPasswordField(String inputText, int columnWidth) {
         super(inputText, columnWidth);
         setBorder(new MatteBorder(0, 0, 2, 0, AppColour.MENU_F_BORDER));
@@ -28,21 +36,37 @@ public class MenuPasswordField extends JPasswordField {
         setFont(new Font("Sans Serif", Font.PLAIN, 24));
     }
     
+    /**
+     * Constructor for a MenuPasswordField Object
+     * @param inputText 
+     */
     public MenuPasswordField(String inputText)
     {
         this(inputText, 0);
     }
     
+    /**
+     * Constructor for a MenuPasswordField Object
+     * @param columnWidth 
+     */
     public MenuPasswordField(int columnWidth)
     {
         this(null, columnWidth);
     }
     
-        public void setPlaceholder(String placeholder)
+    /**
+     * Sets the placeholder value
+     * @param placeholder 
+     */
+    public void setPlaceholder(String placeholder)
     {
         this.placeholder = placeholder;
     }
     
+    /**
+     * Gets the placeholder value
+     * @return 
+     */
     public String getPlaceholder()
     {
         return this.placeholder;
@@ -51,7 +75,6 @@ public class MenuPasswordField extends JPasswordField {
     @Override
     protected void paintComponent(final Graphics pG) {
         super.paintComponent(pG);
-
         if (placeholder == null || placeholder.length() == 0 || getText().length() > 0) {
             return;
         }

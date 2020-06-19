@@ -8,11 +8,23 @@ import javax.swing.JTextField;
 import sudoku.AppColour;
 
 /**
- *
- * @author Waldo
+ * Custom JTextField element to represent a single block in the Sudoku Grid
+ * @author Waldo Theron 18033655
  */
 public class GameBlock extends JTextField {
+          
+    /**
+     * Constructor for a GameBlock Object
+     */
+    public GameBlock()
+    {
+        this(null);
+    }
     
+    /**
+     * Constructor for a GameBlock Object
+     * @param inputText 
+     */
     public GameBlock(String inputText)
     {
         super(inputText);    
@@ -26,11 +38,9 @@ public class GameBlock extends JTextField {
         initFocusListener();
     }
     
-    public GameBlock()
-    {
-        this(null);
-    }
-    
+    /**
+     * Initializes the listeners that detect when the focus changes
+     */
     public void initFocusListener()
     {
         addFocusListener(new FocusListener() {

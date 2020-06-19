@@ -64,6 +64,10 @@ public class LoginView extends IView implements Observer {
         resetText();
     }
     
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(UserController controller) {
         System.out.println("LoginView: Adding UserController");
         backBtn.addActionListener(controller);
@@ -76,6 +80,9 @@ public class LoginView extends IView implements Observer {
         loginPassword.setText("");
     }
     
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     private void initComponents()
     {
         loginBtn.setActionCommand("user_login");
@@ -84,6 +91,9 @@ public class LoginView extends IView implements Observer {
         loginPassword.setPlaceholder("Password");
     }
     
+    /**
+     * Adds JComponents to main panel
+     */
     private void addComponents()
     {
         contentPanel.add(loginUsername, gbConstraints);

@@ -56,6 +56,9 @@ public class GameView extends JPanel implements Observer {
         add(controls, BorderLayout.PAGE_END);               
     }
     
+    /**
+     * Initializes all JComponents before being added to the main panel
+     */
     public void initComponents()
     {
         for(int i = 0; i < 81; ++i)
@@ -182,6 +185,10 @@ public class GameView extends JPanel implements Observer {
         return blocks;
     }    
        
+    /**
+     * Adds the relevant controller to handle user interactions with this view
+     * @param controller 
+     */
     public void addController(GameController controller) {
         System.out.println("GameView: Adding GameController");
         check.addActionListener(controller);

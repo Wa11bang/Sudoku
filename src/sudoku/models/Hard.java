@@ -20,6 +20,9 @@ public class Hard extends Game {
         super(user, blocks, Difficulty.Hard);
     }
     
+    /**
+     * Constructor for Hard object
+     */
     public Hard()
     {
         super.setDifficulty(Difficulty.Hard);
